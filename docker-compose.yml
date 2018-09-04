@@ -19,12 +19,12 @@ services:
       - "1024:1024"
       - "1025:1025"
     volumes:
-      - $PWD/S3R/config:/sipi/config
-      - $PWD/S3R/scripts:/sipi/scripts
-      - $PWD/S3R/images:/sipi/images
-      - $PWD/S3R/server:/sipi/server
-      - $PWD/S3R/testDB:/sipi/testDB
-      - $PWD/S3R/data:/sipi/data
+      - $PWD/config:/sipi/config
+      - $PWD/scripts:/sipi/scripts
+      - $PWD/images:/sipi/images
+      - $PWD/server:/sipi/server
+      - $PWD/testDB:/sipi/testDB
+      - $PWD/data:/sipi/data
     restart: unless-stopped
     networks:
       - s3r-net
