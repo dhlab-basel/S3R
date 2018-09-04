@@ -1,0 +1,21 @@
+<lua>
+
+success,token = authorize_page('admin.sipi.org', 'administrator', config.adminuser, config.password)
+if not success then
+    return
+end
+
+</lua>
+<html>
+<head>
+	<title>Send Form</title>
+</head>
+<body>
+	<h1>Upload files....</h1>
+	<hr/>
+	<form action="do-upload.elua" method="POST" enctype="multipart/form-data">
+		<input name="Datei" type="file" size="50" accept="image/*" multiple><br/>
+		<input type="submit" value="UPLOAD">
+	</form>
+</body>
+</html>
