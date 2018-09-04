@@ -1,0 +1,45 @@
+.detail-result-container {
+    margin: 0 10px;
+    /*max-width: 700px;*/
+}
+
+.card-header {
+    background-color: rgb(232,232,232);
+    height: 4rem;
+}
+
+.back-link {
+    cursor: pointer;
+}
+
+form {
+    margin:10px 10px;
+}
+
+.detail-metadata {
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+.detail-item-name {
+    text-align: left;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.detail-file-type-img {
+    height: 8rem;
+    cursor: pointer;
+}
+
+.button-icon {
+    height: 1rem;
+}
+
+mat-card-header {
+    margin-bottom: 20px;
+}
+
+.card-subtitle-container {
+    margin: 10px 0 10px;
+}

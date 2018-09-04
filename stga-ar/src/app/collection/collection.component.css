@@ -1,0 +1,35 @@
+.collection {
+    margin:10px 10px;
+}
+
+.collect {
+    margin: 0 20px;
+    display: grid;
+    /*grid-template-columns: repeat(2, minmax(300px, 2fr));*/
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.collection > mat-card-header {
+    cursor: pointer;
+}
+
+.button-icon {
+    height: 1rem;
+}
+
+.edit-collect {
+    margin: 0 30px 30px;
+}
+
+mat-card {
+    background-color: rgb(232,232,232);
+    /*padding: 0 0 0 0;*/
+}
+
+mat-card-actions {
+    /*margin: 0 0 0 0!important;*/
+}
+
+/*.mat-button {*/
+    /*font-size: 10px;*/
+/*}*/

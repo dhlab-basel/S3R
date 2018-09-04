@@ -1,0 +1,33 @@
+<article class="edit-collect">
+    <h1>{{collectionName}}</h1>
+    <div *ngIf="isLoggedIn">
+        <button mat-button (click)="createRes()" *ngIf="isLeaf">
+            <img class="button-icon" src="./assets/add.png">Resource erstellen
+        </button>
+
+        <button mat-button (click)="createCol()" *ngIf="!containsRes">
+            <img class="button-icon" src="./assets/add.png">Collection erstellen
+        </button>
+    </div>
+</article>
+
+<article class="collect" *ngIf="foundChildren != null">
+    <mat-card class="collection" fxLayout="column" *ngFor="let collection of foundChildren">
+        <mat-card-header fxFlex [routerLink]="['/collections', collection.id]">
+            <h3>{{collection.name}}</h3>
+        </mat-card-header>
+        <mat-card-actions>
+            <mat-divider *ngIf="isLoggedIn" [inset]="true"></mat-divider>
+            <div *ngIf="isLoggedIn" class="button-container" fxLayout="row">
+                <button mat-button (click)="editCol(collection)"><img class="button-icon" src="./assets/edit.png"/>Bearbeiten
+                </button>
+                <button mat-button (click)="deleteCol(collection)"><img class="button-icon" src="./assets/trash.png"/>Löschen
+                </button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</article>
+
+<div *ngIf="containsRes">
+    <app-search-results [resultsOfSearch]="resources" [sort]="sort" [filter]="filter"></app-search-results>
+</div>

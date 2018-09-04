@@ -1,0 +1,35 @@
+.button-icon {
+    height: 1rem;
+}
+
+.no-result-container {
+    margin: 20px 0;
+    /*max-width: 700px;*/
+}
+
+.card-header {
+    background-color: rgb(232,232,232);
+    height: 50px;
+    font-size: 15px;
+    line-height: 50px;
+    padding: 0 24px;
+}
+
+.mat-flat-button{
+    /*Stiftungsbibliothek*/
+    /*background-color: rgb(255, 183, 86);*/
+    background-color: rgb(249, 190, 148);
+    color: black;
+
+    /*Kantonsbibliothek*/
+    /*background-color: rgb(207, 46, 40);*/
+    /*color: whitesmoke;*/
+}
+
+.search-input {
+    padding-left: 1rem;
+}
+
+.search-bar {
+    margin-bottom: 2rem;
+}

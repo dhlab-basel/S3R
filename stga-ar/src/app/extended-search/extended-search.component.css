@@ -1,0 +1,42 @@
+.extended-container {
+    margin: 0 15px;
+}
+
+.card-header {
+    background-color: rgb(232,232,232);
+    height: 50px;
+    font-size: 15px;
+    line-height: 50px;
+    padding: 0 24px;
+}
+
+.button-icon {
+    height: 15px;
+}
+
+mat-form-field {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+/*div, mat-form-field, mat-radio-button {*/
+    /*border: 1px solid red;*/
+/*}*/
+
+.comparison-row {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.form-field-row {
+    /*border: 2px solid rgb(223, 223, 223);*/
+}
+
+.no-result-container {
+    margin: 20px 0;
+    /*max-width: 700px;*/
+}
+
+.extended-search-bar {
+    margin-bottom: 2rem;
+}

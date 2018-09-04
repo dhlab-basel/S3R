@@ -1,0 +1,51 @@
+<nav class="menu-bar mat-typography" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between">
+    <div class="menu-bar-item" fxLayout="row">
+        <div fxShow.gt-xs="false">
+            <img class="hamburger" (click)="actionMenu()" fxFlexAlign="start" src="./assets/hamburger.png"/>
+        </div>
+        <div class="container-logo" fxFlex=" 1 1 auto">
+            <img class="logo" src="./assets/dhlab-logo.png"/>
+        </div>
+        <div fxShow.gt-xs="false">
+            <a [routerLink]="['/login']">
+                <img class="login" fxFlexAlign="end" src="./assets/login.png"/>
+            </a>
+        </div>
+    </div>
+    <div *ngIf="menuIsOpen" class="middle-link" fxFlex="40%" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center">
+        <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/search']">Suche</a></div>
+        <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/collections']">Sammlung</a></div>
+        <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/help']">Hilfe</a></div>
+        <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/contact']">Kontakt</a></div>
+        <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/libraries']">Bibliotheken</a></div>
+    </div>
+    <div class="login-screen" fxHide.lt-sm="true">
+        <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto" fxShow.lt-sm="false">
+            <a [routerLink]="['/login']">Login:
+                <span>&nbsp;{{loggedInAs()}}</span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+
+<article class="container-main-logo">
+    <img class="main-logo" src="./assets/stga-logo.png"/>
+</article>
+
+
+<main class="container">
+    <router-outlet></router-outlet>
+</main>
+
+
+
+<!--<br>-->
+<!--<article>-->
+    <!--<div fxShow.gt-xs="false">This is xs</div>-->
+    <!--<div fxShow.gt-sm="false" fxHide.lt-sm="true">[size = SM]</div>-->
+    <!--<div fxShow.gt-md="false" fxHide.lt-md="true">[size = MD]</div>-->
+    <!--<div fxShow.gt-lg="false" fxHide.lt-lg="true">[size = LG]</div>-->
+    <!--<div fxHide.lt-xl="true">This is xl</div>-->
+<!--</article>-->
+

@@ -1,0 +1,62 @@
+<section *ngIf="!isLoggedIn" fxLayout="row">
+    <div fxFlex="1 1 auto" fxHide.lt-md="true"></div>
+
+    <article fxFlex.lt-md="1 1 auto" class="extended-container" fxLayout="column">
+
+        <mat-card class="card-header">
+            <div>
+                <label>Login</label>
+            </div>
+        </mat-card>
+
+        <mat-card>
+            <div class="extended-row form-field-row" fxLayout="row" fxLayout.lt-md="column">
+                <mat-form-field fxFlex>
+                    <input [(ngModel)]="name" matInput placeholder="Name" type="text"/>
+                </mat-form-field>
+            </div>
+            <div class="extended-row form-field-row" fxLayout="row" fxLayout.lt-md="column">
+                <mat-form-field fxFlex>
+                    <input [(ngModel)]="password" matInput placeholder="Password" type="password"/>
+                </mat-form-field>
+
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end">
+                <button mat-button (click)="login()">Einloggen</button>
+            </div>
+        </mat-card>
+
+    </article>
+
+    <div fxFlex="1 1 auto" fxHide.lt-md="true"></div>
+
+</section>
+
+<section *ngIf="isLoggedIn" fxLayout="row">
+    <div fxFlex="1 1 auto" fxHide.lt-md="true"></div>
+
+    <article fxFlex.lt-md="1 1 auto" class="extended-container" fxLayout="column">
+
+        <mat-card class="card-header">
+            <div>
+                <label>Loginstatus</label>
+            </div>
+        </mat-card>
+
+        <mat-card>
+            <mat-card-content>
+                <div class="extended-row form-field-row" style="text-align: center">
+                    Sie sind als Admin angemeldet.
+                </div>
+            </mat-card-content>
+
+            <div fxLayout="row" fxLayoutAlign="end">
+                <button mat-button (click)="logout()">Ausloggen</button>
+            </div>
+        </mat-card>
+
+    </article>
+
+    <div fxFlex="1 1 auto" fxHide.lt-md="true"></div>
+
+</section>

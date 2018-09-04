@@ -1,0 +1,97 @@
+<h2 mat-dialog-title>Neue Resource erstellen in {{data["colName"]}}</h2>
+
+<mat-dialog-content>
+
+    <div>
+        <h4 mat-subheader>Datei Upload</h4>
+        <div style="border: 2px dashed darkgray; padding: 20px">
+            <!--<h3 mat-subheader>Informationen</h3>-->
+            <div *ngIf="!selectedFile">
+                Keine Datei hinzugefügt
+            </div>
+            <div *ngIf="selectedFile">
+                Name: <label>{{selectedFile.name}}</label>
+            </div>
+            <div *ngIf="selectedFile">
+                Grösse: <label>{{fileSize}}</label>
+            </div>
+            <div *ngIf="selectedFile">
+                Mimetype: <label>{{selectedFile.type}}</label>
+            </div>
+
+            <button style="margin-top:20px" class="mat-raised-button" onclick="document.getElementById('file').click();">Durchsuchen</button>
+        </div>
+    </div>
+
+    <input type="file" style="display:none;" id="file" name="file" (change)="onFileSelect($event)"/>
+
+
+    <h4 mat-subheader>Dublin Core Felder</h4>
+    <!--<div style="border: 1px solid darkgray; padding: 20px">-->
+        <mat-form-field class="example-full-width">
+            <input [(ngModel)]="title" matInput placeholder="Titel">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input [(ngModel)]="creator" matInput placeholder="Urheberin / Urheber">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input [(ngModel)]="subject" matInput placeholder="Thema z.B. muster1, muster2, usw.">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input [(ngModel)]="description" matInput placeholder="Beschreibung">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input [(ngModel)]="publisher" matInput placeholder="Verlegerin / Verleger">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input [(ngModel)]="contributor" matInput placeholder="Mitwirkende / Mitwirkender">
+        </mat-form-field>
+
+        <mat-form-field class="example-half-width">
+            <input [(ngModel)]="date_start" matInput type="number" min="1000" max="9999" placeholder="Jahresbeginn">
+        </mat-form-field>
+
+        <mat-form-field class="example-half-width">
+            <input [(ngModel)]="date_end" matInput type="number" min="1000" max="9999" placeholder="Jahresende">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input [(ngModel)]="format" matInput placeholder="Format">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input [(ngModel)]="identifier" matInput placeholder="Identifikator">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input [(ngModel)]="source" matInput placeholder="Quelle">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input [(ngModel)]="language" matInput placeholder="Sprache">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input [(ngModel)]="relation" matInput placeholder="Beziehung">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input [(ngModel)]="coverage" matInput placeholder="Geltungsbereich">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input [(ngModel)]="rights" matInput placeholder="Rechte">
+        </mat-form-field>
+    <!--</div>-->
+
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between">
+    <button mat-raised-button (click)="cancel()">Abbrechen</button>
+    <button class="create-button" mat-raised-button (click)="create()">Erstellen</button>
+</mat-dialog-actions>

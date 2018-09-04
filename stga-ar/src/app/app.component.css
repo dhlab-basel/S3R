@@ -1,0 +1,73 @@
+.logo {
+    height: 50px;
+    padding: 0 5px;
+}
+
+.container-logo {
+    text-align: center;
+}
+
+.hamburger, .login {
+    height: 48px;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.menu-bar {
+    /*Stiftunsbibliothek*/
+    /*background-color: rgb(255, 183, 86);*/
+    /*background-color: rgb(255, 204, 153);*/
+    /*background-color: rgb(255, 217, 179);*/
+
+    /*Kantonsbiblithek*/
+    /*background-color: rgb(207, 46, 40);*/
+
+    background-color: black;
+}
+
+.menu-bar-item {
+    padding: 0 10px;
+    text-align: center;
+    height: 48px;
+    line-height: 48px;
+    vertical-align: middle;
+}
+
+.menu-link > a:hover {
+    /*Stiftunsbibliothek*/
+    /*color: rgb(186, 93, 0);*/
+
+    /*color: rgb(231, 153, 76);*/
+
+    /*Kantonsbiblithek*/
+    color: whitesmoke;
+}
+
+.menu-link > a {
+    text-decoration: none;
+
+    /*Stiftunsbibliothek*/
+    /*color: rgb(231, 153, 76);*/
+
+    /*Kantonsbiblithek*/
+    color: grey;
+}
+
+.container-main-logo {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.middle-link a {
+    display: block;
+}
+
+.login-screen a {
+    display: flex;
+
+    /*Stiftunsbibliothek*/
+    /*color: rgb(231, 153, 76);*/
+
+    /*Kantonsbiblithek*/
+    color: grey;
+}

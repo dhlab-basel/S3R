@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Collection editieren</h2>
+
+<mat-dialog-content>
+
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="name" matInput placeholder="Name">
+    </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between">
+    <button mat-raised-button (click)="cancel()">Abbrechen</button>
+    <button class="save-button" mat-raised-button (click)="save()">Speichern</button>
+</mat-dialog-actions>

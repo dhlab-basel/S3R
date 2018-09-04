@@ -1,0 +1,159 @@
+<section class="extended-search-bar" fxLayout="row">
+    <div fxFlex="1 1 auto" fxHide.lt-md="true"></div>
+
+    <article fxFlex.lt-md="1 1 auto" class="extended-container" fxLayout="column" (keyup.enter)="startExtendedSearch()">
+
+        <mat-card class="card-header">
+            <div>
+                <label>Erweiterte Suche</label>
+            </div>
+        </mat-card>
+
+        <mat-card>
+
+        <div class="extended-row form-field-row" fxLayout="row" fxLayout.lt-md="column">
+            <mat-form-field fxFlex>
+                <mat-select [(ngModel)]="dublinField1" placeholder="Feld" (selectionChange)="updateSelection('dc1')">
+                    <mat-option *ngFor="let attribute of dublinCoreList" [value]="attribute.value" [disabled]="attribute.disabled">
+                        {{attribute.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+                <mat-select [(ngModel)]="compare1">
+                    <ng-container *ngFor="let attribute of comparisonOp1">
+                        <mat-option *ngIf="attribute.show" [value]="attribute.value">
+                            {{attribute.viewValue}}
+                        </mat-option>
+                    </ng-container>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field fxFlex *ngIf="(dublinField1 !== 'date')">
+                <input [(ngModel)]="searchWord1" matInput placeholder="Suchbegriff" type="text" [disabled]="(compare1 === 'null') || (compare1 === '!null')"/>
+            </mat-form-field>
+
+            <mat-form-field fxFlex *ngIf="(dublinField1 === 'date')">
+                <input [(ngModel)]="field1Year1" matInput placeholder="Jahreszahl" type="number" [disabled]="(compare1 === 'null') || (compare1 === '!null')"/>
+            </mat-form-field>
+
+            <mat-form-field fxFlex *ngIf="(dublinField1 === 'date') && (compare1 === 'between')">
+                <input [(ngModel)]="field1Year2" matInput placeholder="Jahreszahl" type="number"/>
+            </mat-form-field>
+
+        </div>
+
+        <div class="extended-row comparison-row">AND</div>
+
+        <div class="extended-row form-field-row" fxLayout="row" fxLayout.lt-md="column">
+            <mat-form-field fxFlex>
+                <mat-select [(ngModel)]="dublinField2" placeholder="Feld" (selectionChange)="updateSelection('dc2')">
+                    <mat-option *ngFor="let attribute of dublinCoreList" [value]="attribute.value" [disabled]="attribute.disabled">
+                        {{attribute.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+                <mat-select [(ngModel)]="compare2">
+                    <ng-container *ngFor="let attribute of comparisonOp2">
+                        <mat-option *ngIf="attribute.show" [value]="attribute.value">
+                            {{attribute.viewValue}}
+                        </mat-option>
+                    </ng-container>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field fxFlex *ngIf="dublinField2 !== 'date'">
+                <input [(ngModel)]="searchWord2" matInput placeholder="Suchbegriff" type="text" [disabled]="(compare2 === 'null') || (compare2 === '!null')"/>
+            </mat-form-field>
+
+            <mat-form-field fxFlex *ngIf="(dublinField2 === 'date')">
+                <input matInput [(ngModel)]="field2Year1" placeholder="Jahreszahl" type="number" [disabled]="(compare2 === 'null') || (compare2 === '!null')"/>
+            </mat-form-field>
+
+            <mat-form-field fxFlex *ngIf="(dublinField2 === 'date') && (compare2 === 'between')">
+                <input matInput [(ngModel)]="field2Year2" placeholder="Jahreszahl" type="number"/>
+            </mat-form-field>
+
+        </div>
+
+        <div class="extended-row comparison-row">AND</div>
+
+        <div class="extended-row form-field-row" fxLayout="row" fxLayout.lt-md="column">
+            <mat-form-field fxFlex>
+                <mat-select [(ngModel)]="dublinField3" placeholder="Feld" (selectionChange)="updateSelection('dc3')">
+                    <mat-option *ngFor="let attribute of dublinCoreList" [value]="attribute.value" [disabled]="attribute.disabled">
+                        {{attribute.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+                <mat-select [(ngModel)]="compare3">
+                    <ng-container *ngFor="let attribute of comparisonOp3">
+                        <mat-option *ngIf="attribute.show" [value]="attribute.value">
+                            {{attribute.viewValue}}
+                        </mat-option>
+                    </ng-container>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field fxFlex *ngIf="dublinField3 !== 'date'">
+                <input [(ngModel)]="searchWord3" matInput placeholder="Suchbegriff" type="text" [disabled]="(compare3 === 'null') || (compare3 === '!null')"/>
+            </mat-form-field>
+
+            <mat-form-field fxFlex *ngIf="(dublinField3 === 'date')">
+                <input matInput [(ngModel)]="field3Year1" placeholder="Jahreszahl" type="number" [disabled]="(compare3 === 'null') || (compare3 === '!null')"/>
+            </mat-form-field>
+
+            <mat-form-field fxFlex *ngIf="(dublinField3 === 'date') && (compare3 === 'between')">
+                <input matInput [(ngModel)]="field3Year2" placeholder="Jahreszahl" type="number"/>
+            </mat-form-field>
+
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between">
+            <button mat-button [routerLink]="['/search']">Einfache Suche</button>
+            <button mat-button (click)="startExtendedSearch()"><img class="button-icon" src="./assets/search.png"/>Suche</button>
+        </div>
+
+        </mat-card>
+
+    </article>
+
+    <div fxFlex="1 1 auto" fxHide.lt-md="true"></div>
+
+</section>
+
+<div *ngIf="data != null">
+    <app-search-results [resultsOfSearch]="data" [sort]="sort" [filter]="filter"></app-search-results>
+</div>
+
+<div *ngIf="noResult">
+    <section fxLayout="row">
+        <div fxFlex="1 1 auto" fxHide.lt-md="true"></div>
+
+        <article fxFlex.lt-md="1 1 auto" class="no-result-container" fxLayout="column">
+
+            <mat-card class="card-header">
+                <div>
+                    <label>Ergebnisse</label>
+                </div>
+            </mat-card>
+
+            <mat-card>
+
+                Es wurden keine Treffer zu Ihrer Suche gefunden!
+
+            </mat-card>
+
+        </article>
+
+        <div fxFlex="1 1 auto" fxHide.lt-md="true"></div>
+
+    </section>
+
+</div>
+

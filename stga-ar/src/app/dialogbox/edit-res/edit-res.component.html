@@ -1,0 +1,126 @@
+<h2 mat-dialog-title>Resource editieren</h2>
+
+<mat-dialog-content>
+
+        <div style="border: 1px solid darkgray; background: whitesmoke">
+
+            <div style="padding: 0 20px 20px 20px">
+                <div style="margin: 20px 0; font-weight: bolder">Aktuelle Datei</div>
+                <div fxLayout="row">
+                    <img style="height:3rem;" class="detail-file-type-img" src={{picturePath}}/>
+                    <div style="margin-left: 1rem">
+                        <div>
+                            Name: <label>{{resource["generated_filename"]}}</label>
+                        </div>
+                        <div>
+                            Grösse: <label>{{fileSize}}</label>
+                        </div>
+                        <div>
+                            Mimetype: <label>{{resource["mimetype"]}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div style="padding: 0 20px 20px 20px; border-top: 1px solid darkgray">
+                <div style="margin: 20px 0; font-weight: bolder" *ngIf="selectedFile">Neue Datei</div>
+                <div *ngIf="selectedFile">
+                    Name: <label>{{selectedFile.name}}</label>
+                </div>
+                <div *ngIf="selectedFile">
+                    Grösse: <label>{{selectedFileSize}}</label>
+                </div>
+                <div *ngIf="selectedFile">
+                    Mimetype: <label>{{selectedFile.type}}</label>
+                </div>
+
+                <button style="margin-top:20px" class="mat-raised-button" onclick="document.getElementById('file').click();">Datei ersetzen</button>
+            </div>
+        </div>
+
+    <input type="file" style="display:none;" id="file" name="file" (change)="onFileSelect($event)"/>
+
+
+    <!--<div>-->
+        <!--<img class="detail-file-type-img" src={{picturePath}}/>-->
+    <!--</div>-->
+
+    <h4 mat-subheader>Dublin Core Felder</h4>
+
+    <mat-form-field>
+        <mat-select placeholder="Collection" [(ngModel)]="selectedValue">
+            <mat-option *ngFor="let collection of collections" [value]="collection.value">{{collection.viewValue}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="title" matInput placeholder="Titel">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="creator" matInput placeholder="Urheberin / Urheber">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="subject" matInput placeholder="Thema">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="description" matInput placeholder="Beschreibung">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="publisher" matInput placeholder="Verlegerin / Verleger">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="contributor" matInput placeholder="Mitwirkende / Mitwirkender">
+    </mat-form-field>
+
+    <mat-form-field class="example-half-width">
+        <input [(ngModel)]="date_start" matInput type="number" min="1" placeholder="Jahresbeginn">
+    </mat-form-field>
+
+    <mat-form-field class="example-half-width">
+        <input [(ngModel)]="date_end" matInput type="number" min="1" placeholder="Jahresende">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="type" matInput placeholder="Typ">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="format" matInput placeholder="Format">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="identifier" matInput placeholder="Identifikator">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="source" matInput placeholder="Quelle">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="language" matInput placeholder="Sprache">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="relation" matInput placeholder="Beziehung">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="coverage" matInput placeholder="Geltungsbereich">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="rights" matInput placeholder="Rechte">
+    </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between">
+    <button mat-raised-button (click)="cancel()">Abbrechen</button>
+    <button class="save-button" mat-raised-button (click)="save()">Speichern</button>
+</mat-dialog-actions>

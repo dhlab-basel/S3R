@@ -1,0 +1,14 @@
+.example-full-width {
+    width: 100%;
+}
+
+.save-button{
+    /*Stiftungsbibliothek*/
+    /*background-color: rgb(255, 183, 86);*/
+    background-color: rgb(249, 190, 148);
+    color: black;
+
+    /*Kantonsbibliothek*/
+    /*background-color: rgb(207, 46, 40);*/
+    /*color: whitesmoke;*/
+}
