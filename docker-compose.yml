@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  stga1:
+    build:
+      context: ./s3r-stga-ar
+      dockerfile: Dockerfile
+    image: stga1
+    ports:
+      - "8080:8080"
+    networks:
+      - s3r-net
+    container_name: stga1
+
+  sipi:
+    image: dhlabbasel/sipi:develop
+    container_name: sipi
+    ports:
+      - "1024:1024"
+      - "1025:1025"
+    volumes:
+      - $PWD/Sipi/config:/sipi/config
+      - $PWD/Sipi/scripts:/sipi/scripts
+      - $PWD/Sipi/images:/sipi/images
+      - $PWD/Sipi/server:/sipi/server
+      - $PWD/Sipi/testDB:/sipi/testDB
+      - $PWD/Sipi/data:/sipi/data
+    restart: unless-stopped
+    networks:
+      - s3r-net
+
+networks:
+  s3r-net:
