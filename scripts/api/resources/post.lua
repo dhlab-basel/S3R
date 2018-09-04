@@ -4,6 +4,7 @@ print("---- POST resources script ----")
 require "./model/resource"
 require "./model/parameter"
 require "./model/file"
+require "./model/collection"
 
 local uriPattern = "api/resources$"
 
@@ -16,13 +17,35 @@ if (string.match(server.uri, uriPattern) == nil) then
 end
 
 -- Gets parameters
-local parameters = getResParams(server.post)
+local parameters, errMsg = getResParams(server.post)
 
 -- Checks if parameters were given
-if (parameters == nil) then
+if (errMsg ~= nil) then
     local table = {}
     table["data"] = { }
-    table["status"] = "no parameter given"
+    table["status"] = "not all parameters given"
+
+    local success, jsonstr = server.table_to_json(table)
+    if not success then
+        server.sendStatus(500)
+        server.log(jsonstr, server.loglevel.err)
+        return false
+    end
+
+    server.sendHeader('Content-type', 'application/json')
+    server.sendStatus(errMsg)
+    server.print(jsonstr)
+    return
+end
+
+-- Gets collection ID of resource
+local col_id = parameters["collection_id"]
+
+-- Checks if parameters "title" and "collection_id" are given
+if ((col_id == nil) or (parameters["title"] == nil)) then
+    local table = {}
+    table["data"] = {}
+    table["status"] = "parameter title and collection_id not given"
 
     local success, jsonstr = server.table_to_json(table)
     if not success then
@@ -34,6 +57,22 @@ if (parameters == nil) then
     server.sendHeader('Content-type', 'application/json')
     server.sendStatus(400)
     server.print(jsonstr)
+    return
+end
+
+local collection = readCol(col_id)
+
+-- Checks if collection exists
+if (collection == nil) then
+    server.sendHeader('Content-type', 'application/json')
+    server.sendStatus(404)
+    return
+end
+
+-- Checks if collection is a Leaf
+if (collection["isLeaf"] ~= 1) then
+    server.sendHeader('Content-type', 'application/json')
+    server.sendStatus(402)
     return
 end
 
@@ -78,7 +117,5 @@ if not success then
 end
 
 server.sendHeader('Content-type', 'application/json')
---server.sendHeader('Access-Control-Allow-Origin', '*')
---server.sendHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, DELETE')
 server.sendStatus(201)
 server.print(jsonstr)

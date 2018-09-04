@@ -25,12 +25,19 @@ if (data == nil) then
 end
 
 -- Gets parameters
-local parameters = getColParams(server.post)
+local parameters, errMsg = getColParams(server.post)
+
+-- Checks if all params are included
+if (errMsg ~= nil) then
+    server.sendHeader('Content-type', 'application/json')
+    server.sendStatus(errMsg)
+    return
+end
 
 local oldParentID = data["collection_id"]["id"]
 local newParentID = parameters["collection_id"]
 
-print(oldParentID, newParentID, parameters["collection_id"])
+print(oldParentID, newParentID)
 
 -- Check if newParentID exists
 if (readCol(newParentID) == nil) then

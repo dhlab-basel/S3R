@@ -1,5 +1,5 @@
 
-path = "./data/tmp/"
+path = "./data/"
 
 -------------------------------------------------------------------------------
 --|                           CRUD Operations                               |--
@@ -16,15 +16,15 @@ function createFile(parameters)
         local startPos, endPos = string.find(fileParam["origname"], "%.")
         local fileEnding = string.sub(fileParam["origname"], endPos+1, string.len(fileParam["origname"]))
 
-        local tmpdir = 'data/tmp/'
-        local success, exists = server.fs.exists(tmpdir)
+        local fileDir = 'data/'
+        local success, exists = server.fs.exists(fileDir)
 
         if not success then
             -- Was ist das für ein Fall?
         end
 
         if not exists then
-            local success, errmsg = server.fs.mkdir(tmpdir, 511)
+            local success, errmsg = server.fs.mkdir(fileDir, 511)
             if not success then
                 --            server.print("<br> Directory couldn't be created <br>")
             end
@@ -39,10 +39,11 @@ function createFile(parameters)
         -- print(uuid62 .. '_' .. string.gsub(parameters['title'], " ", "-"))
 
         parameters["filename"] = uuid62 .. '.' .. fileEnding
+        parameters["type"] = fileParam["mimetype"]
         parameters["mimetype"] = fileParam["mimetype"]
         parameters["filesize"] = fileParam["filesize"]
 
-        local tmppath =  tmpdir .. parameters["filename"]
+        local tmppath =  fileDir .. parameters["filename"]
 
         local success, errmsg = server.copyTmpfile(fileIndex, tmppath)
         if not success then
@@ -57,14 +58,21 @@ end
 -- Reads the content of the file
 -- @param   'filename' (string):  name of the file with the file ending
 -- @return  'content': content of the file
+-- @return  'errMsg': Error if file does not exists
 -------------------------------------------------------------------------------
 function readFile(filename)
+    local content, errMsg
     local file = io.open(path .. filename)
-    io.input(file)
-    local content = io.read("*a")
-    io.close(file)
 
-    return content
+    if (file) then
+        io.input(file)
+        content = io.read("*a")
+        io.close(file)
+    else
+        errMsg = 500
+    end
+
+    return content, errMsg
 end
 
 -------------------------------------------------------------------------------
@@ -89,4 +97,40 @@ function deleteFile(fileName)
     else
         print("file could not be deleted")
     end
+end
+
+-------------------------------------------------------------------------------
+--|                             Other Function                              |--
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+-- Generates the file name
+-- @param   'data' (table): data of a resource
+-- @return  (string): generated file name
+-- @return  (errMsg): error if file name could not be generated
+-------------------------------------------------------------------------------
+function generateFileName(data)
+    local year, title, identifier, ending, dump, errMsg
+
+    if (data["date_start"] == data["date_end"]) then
+        year = data["date_start"]
+    else
+        year = data["date_start"] .. "-" .. data["date_end"]
+    end
+
+    title, dump = string.gsub(data["title"], " ", "-")
+    title, dump = string.gsub(title, "%.", "")
+    title, dump = string.gsub(title, "ä", "ae")
+    title, dump = string.gsub(title, "ö", "oe")
+    title, dump = string.gsub(title, "ü", "ue")
+    title = title:sub(1,1):upper()..title:sub(2)
+
+    local startVal, endVal = string.find(data["filename"], "%.")
+    if (startVal ~= nil) and (endVal ~= nil) then
+        ending = string.sub(data["filename"], endVal+1, #data["filename"])
+    else
+        errMsg = 500
+    end
+
+    return year .. "_" .. title .. "." .. ending, errMsg
 end

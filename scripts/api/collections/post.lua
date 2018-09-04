@@ -3,6 +3,7 @@ print("---- POST collections script ----")
 -- Required external script files
 require "./model/parameter"
 require "./model/collection"
+require "./model/resource"
 
 local uriPattern = "api/collections$"
 
@@ -14,23 +15,13 @@ if (string.match(server.uri, uriPattern) == nil) then
     return
 end
 
--- Gets parameters
-local parameters = getColParams(server.post)
-local parent = parameters["collection_id"]
-
--- Check if parent exists
-if (readCol(parent) == nil) then
-    print("Parent ID does not exist")
-    server.sendHeader('Content-type', 'application/json')
-    server.sendStatus(404)
-    return
-end
+local parameters, errMsg = getColParams(server.post)
 
 -- Checks if parameters were given
-if (parameters == nil) then
+if (errMsg ~= nil) then
     local table = {}
     table["data"] = { }
-    table["status"] = "no parameter given"
+    table["status"] = "not all parameters given"
 
     local success, jsonstr = server.table_to_json(table)
     if not success then
@@ -40,15 +31,35 @@ if (parameters == nil) then
     end
 
     server.sendHeader('Content-type', 'application/json')
-    server.sendStatus(400)
+    server.sendStatus(errMsg)
     server.print(jsonstr)
     return
 end
 
+-- Get parent collection
+local parent = readCol(parameters['collection_id'])
+
+-- Check if parent exists
+if (parent == nil) then
+    print("Parent ID does not exist")
+    server.sendHeader('Content-type', 'application/json')
+    server.sendStatus(404)
+    return
+end
+
+local p1 = { "collection_id", "EQ", parameters['collection_id'], nil }
+local resChildren = readAllRes({ p1 })
+
+if (#resChildren > 0) then
+    server.sendHeader('Content-type', 'application/json')
+    server.sendStatus(403)
+    return
+end
+
+
 local newID = createCol(parameters)
 
 -- Corrects isLeaf of parent
-local parent = readCol(parameters['collection_id'])
 if (parent['isLeaf'] == 1) then
     local params = {}
     params['isLeaf'] = 0
