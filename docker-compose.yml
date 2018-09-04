@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  stga1:
+  stga:
     build:
       context: ./s3r-stga-ar
       dockerfile: Dockerfile
@@ -19,7 +19,7 @@ services:
       - "1024:1024"
       - "1025:1025"
     volumes:
-      - $PWD/S3R/config/sipi.config.lua:/sipi/config/sipi.config.lua
+      - $PWD/S3R/config:/sipi/config
       - $PWD/S3R/scripts:/sipi/scripts
       - $PWD/S3R/images:/sipi/images
       - $PWD/S3R/server:/sipi/server

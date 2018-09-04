@@ -41,7 +41,7 @@ sipi = {
     -- If compiled with SSL support, the port the server is listening for secure connections.
     -- If SIPI is running on a dedicated system, this should be set to 443
     --
-    --- ssl_port = 1025,
+    -- ssl_port = 1025,
 
     --
     -- Number of threads to use
