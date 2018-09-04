@@ -9,6 +9,6 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to s3r-stga-ar!');
+    expect(page.getParagraphText()).toEqual('Welcome to s3r-s3r-stga-ar!');
   });
 });

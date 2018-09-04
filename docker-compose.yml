@@ -3,7 +3,7 @@ version: '3'
 services:
   stga1:
     build:
-      context: ./s3r-stga-ar
+      context: ./s3r-s3r-stga-ar
       dockerfile: Dockerfile
     image: stga1
     ports:
