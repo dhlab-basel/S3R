@@ -32,9 +32,9 @@ import {CreateColComponent} from "./dialogbox/create-col/create-col.component";
 import {HttpClientModule} from "@angular/common/http";
 import {LoginDialogComponent} from "./dialogbox/login-dialog/login-dialog.component";
 import {LoginService} from "./services/login.service";
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
-    {path: "", redirectTo: "search", pathMatch: "full"},
     {path: "search", component: SearchComponent},
     {path: "search/:word", component: SearchComponent},
     {path: "extended-search", component: ExtendedSearchComponent},
@@ -44,8 +44,9 @@ const routes: Routes = [
     {path: "help", component: HelpComponent},
     {path: "contact", component: ContactComponent},
     {path: "libraries", component: ContactComponent},
-    {path: "login", component: LoginComponent}
-    // {path: "**", component: PageNotFoundComponent}
+    {path: "login", component: LoginComponent},
+    {path: "", redirectTo: "search", pathMatch: "full"},
+    {path: "**", component: PageNotFoundComponent}
 ];
 
 @NgModule({
@@ -65,7 +66,8 @@ const routes: Routes = [
         EditColComponent,
         DeleteColComponent,
         CreateColComponent,
-        LoginDialogComponent
+        LoginDialogComponent,
+        PageNotFoundComponent
     ],
     imports: [
         RouterModule.forRoot(routes),
