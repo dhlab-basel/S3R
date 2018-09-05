@@ -1,5 +1,5 @@
 
-path = "./data/"
+path = "./files/"
 
 -------------------------------------------------------------------------------
 --|                           CRUD Operations                               |--
@@ -132,5 +132,5 @@ function generateFileName(data)
         errMsg = 500
     end
 
-    return year .. "_" .. title .. "." .. ending, errMsg
+    return year .. "_" .. title ..  "_" .. identifier .. "." .. ending, errMsg
 end
