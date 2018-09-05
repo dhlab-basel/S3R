@@ -1,14 +1,15 @@
 <nav class="menu-bar mat-typography" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between">
     <div class="menu-bar-item" fxLayout="row">
         <div fxShow.gt-xs="false">
-            <img class="hamburger" (click)="actionMenu()" fxFlexAlign="start" src="./assets/hamburger.png"/>
+            <img *ngIf="!menuIsOpen" class="hamburger" (click)="actionMenu()" fxFlexAlign="start" src="./assets/hamburger_white.png"/>
+            <img *ngIf="menuIsOpen" class="hamburger" (click)="actionMenu()" fxFlexAlign="start" src="./assets/close_white.png"/>
         </div>
         <div class="container-logo" fxFlex=" 1 1 auto">
             <img class="logo" src="./assets/dhlab-logo.png"/>
         </div>
         <div fxShow.gt-xs="false">
             <a [routerLink]="['/login']">
-                <img class="login" fxFlexAlign="end" src="./assets/login.png"/>
+                <img class="login" fxFlexAlign="end" src="./assets/login_white.png"/>
             </a>
         </div>
     </div>

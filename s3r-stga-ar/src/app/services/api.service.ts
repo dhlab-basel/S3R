@@ -9,8 +9,8 @@ import {Params} from "@angular/router";
 
 export class ApiService {
 
-    private static readonly apiURL = "http://localhost:1024/api";
-    // private static readonly apiURL = "http://sipi.langzeitarchivierung.ch:80/api";
+    // private static readonly apiURL = "http://localhost:1024/api";
+    private static readonly apiURL = "http://sipi.langzeitarchivierung.ch:80/api";
 
     constructor(private httpClient: HttpClient) {
     }
