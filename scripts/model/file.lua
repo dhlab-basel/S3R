@@ -132,5 +132,5 @@ function generateFileName(data)
         errMsg = 500
     end
 
-    return year .. "_" .. title ..  "_" .. identifier .. "." .. ending, errMsg
+    return year .. "_" .. title ..  "_" .. data["identifier"] .. "." .. ending, errMsg
 end
