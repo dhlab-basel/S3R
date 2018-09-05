@@ -43,7 +43,6 @@ const routes: Routes = [
     {path: "resources/:id", component: ResourcesComponent, pathMatch: "full"},
     {path: "help", component: HelpComponent},
     {path: "contact", component: ContactComponent},
-    {path: "libraries", component: ContactComponent},
     {path: "login", component: LoginComponent},
     {path: "", redirectTo: "search", pathMatch: "full"},
     {path: "**", component: PageNotFoundComponent}
