@@ -16,7 +16,7 @@ function createFile(parameters)
         local startPos, endPos = string.find(fileParam["origname"], "%.")
         local fileEnding = string.sub(fileParam["origname"], endPos+1, string.len(fileParam["origname"]))
 
-        local fileDir = 'data/'
+        local fileDir = 'files/'
         local success, exists = server.fs.exists(fileDir)
 
         if not success then
