@@ -66,7 +66,7 @@ export class EditResComponent implements OnInit {
         this.type = this.resource["type"];
         this.format = this.resource["format"];
         this.identifier = this.resource["identifier"];
-        this.source = this.resource["resource"];
+        this.source = this.resource["source"];
         this.language = this.resource["language"];
         this.relation = this.resource["relation"];
         this.coverage = this.resource["coverage"];
