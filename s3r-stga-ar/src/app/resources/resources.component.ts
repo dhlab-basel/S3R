@@ -100,7 +100,7 @@ export class ResourcesComponent implements OnInit {
         });
     }
 
-    downloadMetaData() {
+    xmlExport() {
         this.apiService.getResourceMetaData(this.id).subscribe((data) => {
             const contDis = data.headers.get("Content-Disposition");
             saveAs(data.body, contDis.substring(contDis.indexOf("filename=") + 9));
