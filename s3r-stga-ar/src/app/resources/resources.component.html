@@ -27,10 +27,7 @@
                     {{fileSize}}
                 </div>
                 <div>
-                    <button mat-button (click)="downloadFile()">Dateidownload</button>
-                </div>
-                <div>
-                    <button mat-button (click)="downloadMetaData()">Metadaten</button>
+                    <button mat-flat-button (click)="downloadFile()"><img class="button-icon" src="./assets/download.png"/>Dateidownload</button>
                 </div>
             </div>
             <div>
@@ -38,46 +35,51 @@
                     <div class="card-subtitle">Details</div>
                     <mat-divider [inset]="true"></mat-divider>
                 </div>
-                <div class="detail-metadata" fxFlex>
-                    <div class="detail-item-name creator">Urheberin / Urheber</div>
-                    <div class="detail-item-value">{{this.data.creator}}</div>
-                    <div class="detail-item-name subject">Thema</div>
-                    <div class="detail-item-value">{{this.data.subject}}</div>
-                    <div class="detail-item-name description">Beschreibung</div>
-                    <div class="detail-item-value">{{this.data.description}}</div>
-                    <div class="detail-item-name publisher">Verlegerin / Verleger</div>
-                    <div class="detail-item-value">{{this.data.publisher}}</div>
-                    <div class="detail-item-name contributor">Mitwirkende / Mitwirkender</div>
-                    <div class="detail-item-value">{{this.data.contributor}}</div>
-                    <div class="detail-item-name date">Jahr</div>
-                    <div class="detail-item-value">{{convertDate(this.data.date_start, this.data.date_end)}}</div>
-                    <div class="detail-item-name type">Typ</div>
-                    <div class="detail-item-value">{{this.data.type}}</div>
-                    <div class="detail-item-name format">Format</div>
-                    <div class="detail-item-value">{{this.data.format}}</div>
-                    <div class="detail-item-name identifier">Identifikator</div>
-                    <div class="detail-item-value">{{this.data.identifier}}</div>
-                    <div class="detail-item-name source">Quelle</div>
-                    <div class="detail-item-value">{{this.data.source}}</div>
-                    <div class="detail-item-name language">Sprache</div>
-                    <div class="detail-item-value">{{this.data.language}}</div>
-                    <div class="detail-item-name relation">Beziehung</div>
-                    <div class="detail-item-value">{{this.data.relation}}</div>
-                    <div class="detail-item-name coverage">Geltungsbereich</div>
-                    <div class="detail-item-value">{{this.data.coverage}}</div>
-                    <div class="detail-item-name rights">Rechte</div>
-                    <div class="detail-item-value">{{this.data.rights}}</div>
-                    <div class="detail-item-name">Collection</div>
-                    <div class="detail-item-value">{{this.collection}}</div>
+                <div class="detail-metadata-block">
+                    <div class="detail-metadata" fxFlex>
+                        <div class="detail-item-name creator">Urheberin / Urheber</div>
+                        <div class="detail-item-value">{{this.data.creator}}</div>
+                        <div class="detail-item-name subject">Thema</div>
+                        <div class="detail-item-value">{{this.data.subject}}</div>
+                        <div class="detail-item-name description">Beschreibung</div>
+                        <div class="detail-item-value">{{this.data.description}}</div>
+                        <div class="detail-item-name publisher">Verlegerin / Verleger</div>
+                        <div class="detail-item-value">{{this.data.publisher}}</div>
+                        <div class="detail-item-name contributor">Mitwirkende / Mitwirkender</div>
+                        <div class="detail-item-value">{{this.data.contributor}}</div>
+                        <div class="detail-item-name date">Jahr</div>
+                        <div class="detail-item-value">{{convertDate(this.data.date_start, this.data.date_end)}}</div>
+                        <div class="detail-item-name type">Typ</div>
+                        <div class="detail-item-value">{{this.data.type}}</div>
+                        <div class="detail-item-name format">Format</div>
+                        <div class="detail-item-value">{{this.data.format}}</div>
+                        <div class="detail-item-name identifier">Identifikator</div>
+                        <div class="detail-item-value">{{this.data.identifier}}</div>
+                        <div class="detail-item-name source">Quelle</div>
+                        <div class="detail-item-value">{{this.data.source}}</div>
+                        <div class="detail-item-name language">Sprache</div>
+                        <div class="detail-item-value">{{this.data.language}}</div>
+                        <div class="detail-item-name relation">Beziehung</div>
+                        <div class="detail-item-value">{{this.data.relation}}</div>
+                        <div class="detail-item-name coverage">Geltungsbereich</div>
+                        <div class="detail-item-value">{{this.data.coverage}}</div>
+                        <div class="detail-item-name rights">Rechte</div>
+                        <div class="detail-item-value">{{this.data.rights}}</div>
+                        <div class="detail-item-name">Collection</div>
+                        <div class="detail-item-value">{{this.collection}}</div>
+                    </div>
+                    <div class="xml-export">
+                        <a class="xml-export-link" (click)="xmlExport()">Export als XML <img class="button-icon" src="./assets/download.png"/> ></a>
+                    </div>
                 </div>
                 <div class="card-subtitle-container">
                     <div class="card-subtitle">Dateianpassung</div>
                     <mat-divider [inset]="true"></mat-divider>
                 </div>
                 <div *ngIf="isLoggedIn">
-                    <button mat-button (click)="openEditDialog()"><img class="button-icon" src="./assets/edit.png"/>Bearbeiten
+                    <button mat-flat-button (click)="openEditDialog()"><img class="button-icon" src="./assets/edit.png"/>Bearbeiten
                     </button>
-                    <button mat-button (click)="openDeleteDialog()"><img class="button-icon" src="./assets/trash.png"/>Löschen
+                    <button mat-flat-button (click)="openDeleteDialog()"><img class="button-icon" src="./assets/trash.png"/>Löschen
                     </button>
                 </div>
                 <div *ngIf="!isLoggedIn" style="background-color: rgb(232, 232, 232); padding: 0.5rem 1rem">

@@ -16,6 +16,10 @@ form {
     margin:10px 10px;
 }
 
+.detail-metadata-block {
+    margin-left: 1rem;
+}
+
 .detail-metadata {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -25,6 +29,19 @@ form {
     text-align: left;
     margin-right: 10px;
     font-weight: bold;
+}
+
+.xml-export {
+    margin: 1rem 0;
+}
+
+.xml-export-link {
+    color: steelblue;
+    cursor: pointer;
+}
+
+.xml-export-link:hover {
+    background-color: lightgrey;
 }
 
 .detail-file-type-img {
@@ -42,4 +59,14 @@ mat-card-header {
 
 .card-subtitle-container {
     margin: 10px 0 10px;
+}
+
+.mat-flat-button {
+    background-color:  whitesmoke;
+    color: black;
+}
+
+.mat-flat-button:hover {
+    background-color: lightgrey;
+    color: black;
 }
