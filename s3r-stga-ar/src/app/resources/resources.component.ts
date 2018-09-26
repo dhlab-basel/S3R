@@ -19,7 +19,6 @@ export class ResourcesComponent implements OnInit {
     id: number;
     data: any;
     collection: string;
-    picturePath: string;
     fileSize: string;
     isLoggedIn: boolean;
 
@@ -45,7 +44,6 @@ export class ResourcesComponent implements OnInit {
     setResourceData() {
         this.apiService.getResource(this.id).subscribe( (data) => {
             this.data = data["data"];
-            this.picturePath = this.fileService.evaluateMimeType(this.data.mimetype);
             this.fileSize = this.fileService.evaluateFileSize(this.data.filesize);
             this.apiService.getCollection(data["data"]["collection_id"]["id"])
                 .subscribe((collection) => {
@@ -94,25 +92,42 @@ export class ResourcesComponent implements OnInit {
     }
 
     downloadFile() {
-        this.apiService.getResourceBinary(this.id).subscribe((data) => {
+        this.apiService.getResourceFile(this.id).subscribe((data) => {
             const contDis = data.headers.get("Content-Disposition");
             saveAs(data.body, contDis.substring(contDis.indexOf("filename=") + 9));
         });
     }
 
     xmlExport() {
-        this.apiService.getResourceMetaData(this.id).subscribe((data) => {
+        this.apiService.getMetaDataXML(this.id).subscribe((data) => {
             const contDis = data.headers.get("Content-Disposition");
             saveAs(data.body, contDis.substring(contDis.indexOf("filename=") + 9));
         });
     }
 
     showPicture() {
+        // this.apiService.getResourceThumbnail(this.id, "large").subscribe((data) => {
+        //     console.log(data);
+        //     const fileURL = URL.createObjectURL(data.body);
+        //     window.open(fileURL, "_blank");
+        // })
+
         console.log("show picture");
-        this.apiService.getResourceBinary(this.id).subscribe((data) => {
+        this.apiService.getResourcePreview(this.id).subscribe((data) => {
+            console.log(data);
             const fileURL = URL.createObjectURL(data.body);
             window.open(fileURL, "_blank");
-        });
+        })
+
+        // this.apiService.getResourceFile(this.id).subscribe((data) => {
+        //     console.log(data);
+        //     const fileURL = URL.createObjectURL(data.body);
+        //     window.open(fileURL, "_blank");
+        // });
+    }
+
+    getThumbnail(id: number): string {
+        return this.apiService.getResThumbnailURL(id, "medium");
     }
 
     goBack() {

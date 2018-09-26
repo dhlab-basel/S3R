@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, SimpleChanges} from "@angular/core";
 import {Router} from "@angular/router";
+import {ApiService} from "../services/api.service";
 
 export interface Data {
     key: string;
@@ -31,7 +32,7 @@ export class SearchResultsComponent implements OnInit {
     sortSelected: string;
     sortedFilteredResults: any;
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private apiService: ApiService) {
     }
 
     ngOnInit() {
@@ -130,21 +131,8 @@ export class SearchResultsComponent implements OnInit {
         }
     }
 
-    getPicturePath(resulttype: string) {
-        switch (resulttype) {
-            case "application/pdf": {
-                return "./assets/files/pdf.png";
-            }
-            case "image/jpeg": {
-                return "./assets/files/jpg.png";
-            }
-            case "image/tiff": {
-                return "./assets/files/tiff.png";
-            }
-            default: {
-                return "./assets/files/png.png";
-            }
-        }
+    getThumbnail(id: number) {
+        return this.apiService.getResThumbnailURL(id, "small");
     }
 
     convertDate(start: number, end: number) {

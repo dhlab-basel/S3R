@@ -30,12 +30,34 @@ export class ApiService {
         return this.httpClient.get(`${ApiService.apiURL}/resources/${id}`);
     }
 
-    getResourceMetaData(id: number): Observable<any> {
-        return this.httpClient.get(`${ApiService.apiURL}/resources/${id}/metadata`, {responseType: "blob", observe: "response"});
+    getMetaDataXML(id: number): Observable<any> {
+        return this.httpClient.get(`${ApiService.apiURL}/resources/${id}/metadata/xml`, {responseType: "blob", observe: "response"});
     }
 
-    getResourceBinary(id: number) {
-        return this.httpClient.get(`${ApiService.apiURL}/resources/${id}/file`, {responseType: "blob", observe: "response"});
+    getResourceFile(id: number) {
+        return this.httpClient.get(`${ApiService.apiURL}/resources/${id}/content`, {responseType: "blob", observe: "response"});
+    }
+
+    getResourceFileURL(id: number): string {
+        return `${ApiService.apiURL}/resources/${id}/content`;
+    }
+
+    getResourcePreview(id: number) {
+        return this.httpClient.get(`${ApiService.apiURL}/resources/${id}/preview/content`, {responseType: "blob", observe: "response"})
+    }
+
+    getResPreviewURL(id: number): string {
+        return `${ApiService.apiURL}/resources/${id}/preview/content`;
+    }
+
+    getResThumbnail(id: number, size: string) {
+        let thumbnailSize = ((size !== "small") && (size !== "medium") && (size !== "large")) ? "small" : size;
+        return this.httpClient.get(`${ApiService.apiURL}/resources/${id}/thumbnail/${thumbnailSize}/content`, {responseType: "blob", observe: "response"});
+    }
+
+    getResThumbnailURL(id: number, size: string) {
+        let thumbnailSize = ((size !== "small") && (size !== "medium") && (size !== "large")) ? "small" : size;
+        return `${ApiService.apiURL}/resources/${id}/thumbnail/${thumbnailSize}/content`;
     }
 
     createResource(formData: FormData) {
