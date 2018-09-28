@@ -2,11 +2,11 @@
     <h1>{{collectionName}}</h1>
     <div *ngIf="isLoggedIn">
         <button mat-button (click)="createRes()" *ngIf="isLeaf">
-            <img class="button-icon" src="./assets/add.png">Resource erstellen
+            <img class="button-icon" src="./assets/add.png">Objekt hochladen
         </button>
 
         <button mat-button (click)="createCol()" *ngIf="!containsRes">
-            <img class="button-icon" src="./assets/add.png">Collection erstellen
+            <img class="button-icon" src="./assets/add.png">Sammlung erstellen
         </button>
     </div>
 </article>
