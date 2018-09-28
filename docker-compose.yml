@@ -25,6 +25,7 @@ services:
       - $PWD/server:/sipi/server
       - $PWD/testDB:/sipi/testDB
       - $PWD/files:/sipi/files
+      - $PWD/assets:/sipi/assets
     restart: unless-stopped
     networks:
       - s3r-net
