@@ -2,8 +2,10 @@
     <div fxFlex="10%" fxHide.lt-md="true"></div>
     <div fxFlex fxLayout="row">
         <input class="search-input" [(ngModel)]="searchword" (keyup.enter)="startSearch()" fxFlex placeholder="Suchbegriff" type="text"/>
-        <button mat-flat-button (click)="startSearch()"><img class="button-icon" src="./assets/search.png"/>Suche</button>
-        <button mat-button fxHide.lt-sm="true" [routerLink]="['/extended-search']">Erweiterte Suche</button>
+        <button mat-flat-button fxHide.lt-sm="true" (click)="startSearch()"><img class="button-icon" src="./assets/search.png"/>Suche</button>
+        <button mat-button fxHide.lt-sm="true" [routerLink]="['/extended-search']"><img class="button-icon" src="./assets/search-extended.png"/>Erweiterte Suche</button>
+        <button mat-flat-button fxHide.gt-xs="true" (click)="startSearch()"><img class="button-icon" src="./assets/search.png"/></button>
+        <button mat-button fxFlex="0 0 auto" fxHide.gt-xs="true" [routerLink]="['/extended-search']"><img class="button-icon" src="./assets/search-extended.png"/></button>
     </div>
     <div fxFlex="10%" fxHide.lt-md="true"></div>
 </article>
