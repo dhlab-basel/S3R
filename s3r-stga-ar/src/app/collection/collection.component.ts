@@ -55,7 +55,7 @@ export class CollectionComponent implements OnInit {
                 });
             this.apiService.getCollectionCollections(parseInt(params["id"]))
                 .subscribe((data) => {
-                    this.foundChildren = data["data"];
+                    this.foundChildren = data["data"].sort((a, b) => a.name < b.name ? -1: a.name > b.name ? 1:  0 );
                 });
             this.apiService.getCollectionResources(parseInt(params["id"]))
                 .subscribe((data) => {
