@@ -31,7 +31,7 @@
             </mat-form-field>
 
             <mat-form-field fxFlex *ngIf="(dublinField1 !== 'date')">
-                <input [(ngModel)]="searchWord1" matInput placeholder="Suchbegriff" type="text" [disabled]="(compare1 === 'null') || (compare1 === '!null')"/>
+                <input [(ngModel)]="searchWord1" matInput placeholder="Suchbegriff/e" type="text" [disabled]="(compare1 === 'null') || (compare1 === '!null')"/>
             </mat-form-field>
 
             <mat-form-field fxFlex *ngIf="(dublinField1 === 'date')">
@@ -66,7 +66,7 @@
             </mat-form-field>
 
             <mat-form-field fxFlex *ngIf="dublinField2 !== 'date'">
-                <input [(ngModel)]="searchWord2" matInput placeholder="Suchbegriff" type="text" [disabled]="(compare2 === 'null') || (compare2 === '!null')"/>
+                <input [(ngModel)]="searchWord2" matInput placeholder="Suchbegriff/e" type="text" [disabled]="(compare2 === 'null') || (compare2 === '!null')"/>
             </mat-form-field>
 
             <mat-form-field fxFlex *ngIf="(dublinField2 === 'date')">
@@ -101,7 +101,7 @@
             </mat-form-field>
 
             <mat-form-field fxFlex *ngIf="dublinField3 !== 'date'">
-                <input [(ngModel)]="searchWord3" matInput placeholder="Suchbegriff" type="text" [disabled]="(compare3 === 'null') || (compare3 === '!null')"/>
+                <input [(ngModel)]="searchWord3" matInput placeholder="Suchbegriff/e" type="text" [disabled]="(compare3 === 'null') || (compare3 === '!null')"/>
             </mat-form-field>
 
             <mat-form-field fxFlex *ngIf="(dublinField3 === 'date')">
