@@ -31,12 +31,18 @@ export class SearchResultsComponent implements OnInit {
     searchword: string;
     sortSelected: string;
     sortedFilteredResults: any;
+    showAuthor: boolean;
+    showFileType: boolean;
+    showYear: boolean;
 
     constructor(private router: Router, private apiService: ApiService) {
     }
 
     ngOnInit() {
         console.log(this.sort, this.filter);
+        this.showAuthor = true;
+        this.showFileType = true;
+        this.showYear = true;
 
         if (this.sort) {
             this.sortSelected = this.sort;
@@ -82,7 +88,8 @@ export class SearchResultsComponent implements OnInit {
             (totals, p) => ({...totals, [p.creator]: (totals[p.creator] || 0) + 1 }), {}
         );
         this.authorList = Object.entries(author);
-        this.authorList.sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0);
+        console.log(this.authorList);
+        this.authorList.sort((a, b) => a[1] > b[1] ? -1 : a[1] < b[1] ? 1 : 0);
     }
 
     filterFileTypeUpdate() {
@@ -90,7 +97,7 @@ export class SearchResultsComponent implements OnInit {
             (totals, p) => ({...totals, [p.mimetype]: (totals[p.mimetype] || 0) + 1 }), {}
         );
         this.filetypeList = Object.entries(filetype);
-        this.filetypeList.sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0);
+        this.filetypeList.sort((a, b) => a[1] > b[1] ? -1 : a[1] < b[1] ? 1 : 0);
     }
 
     filterYearUpdate() {
@@ -184,5 +191,29 @@ export class SearchResultsComponent implements OnInit {
 
     revertFilter() {
         this.router.navigate([], {queryParams: {filter : null}, queryParamsHandling : "merge" });
+    }
+
+    showAllLessAuthor() {
+        this.showAuthor = !this.showAuthor;
+    }
+
+    showTextAuthor(): string {
+        return this.showAuthor ? "Alle anzeigen": "Weniger anzeigen";
+    }
+
+    showAllLessFileType() {
+        this.showFileType = !this.showFileType;
+    }
+
+    showTextFileType(): string {
+        return this.showFileType ? "Alle anzeigen": "Weniger anzeigen";
+    }
+
+    showAllLessYear() {
+        this.showYear = !this.showYear;
+    }
+
+    showTextYear(): string {
+        return this.showYear ? "Alle anzeigen": "Weniger anzeigen";
     }
 }

@@ -25,7 +25,7 @@ mat-divider {
 }
 
 .file-type-img {
-    height: 100px;
+    border: 1px solid lightgrey;
 }
 
 .forward-img {
@@ -88,6 +88,13 @@ mat-divider {
     /*Kantonsbibliothek*/
     /*background-color: rgb(207, 46, 40);*/
     color: black;
+}
+
+.fold-text {
+    margin-top: 1rem;
+    text-align: right;
+    font-style: italic;
+    cursor: pointer;
 }
 
 /*div {*/

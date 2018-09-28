@@ -35,18 +35,18 @@ form {
     margin: 1rem 0;
 }
 
-.xml-export-link {
+.link {
     color: steelblue;
     cursor: pointer;
 }
 
-.xml-export-link:hover {
+.link:hover {
     background-color: lightgrey;
 }
 
 .detail-file-type-img {
-    height: 8rem;
     cursor: pointer;
+    border: 1px solid lightgrey;
 }
 
 .button-icon {
