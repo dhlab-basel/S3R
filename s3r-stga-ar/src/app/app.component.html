@@ -15,7 +15,7 @@
     </div>
     <div *ngIf="menuIsOpen" class="middle-link" fxFlex="40%" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center">
         <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/search']">Suche</a></div>
-        <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/collections']">Sammlung</a></div>
+        <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/collections']">Sammlungen</a></div>
         <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/help']">Hilfe</a></div>
         <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/contact']">Kontakt</a></div>
         <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a href="http://lib.langzeitarchivierung.ch">Bibliotheken</a></div>
@@ -30,7 +30,9 @@
 </nav>
 
 <article class="container-main-logo">
-    <img class="main-logo" src="./assets/stga-logo.png"/>
+    <a [routerLink]="['/search']">
+        <img class="main-logo" src="./assets/stga-logo.png"/>
+    </a>
 </article>
 
 <main class="container">
