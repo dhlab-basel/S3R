@@ -42,9 +42,7 @@ export class ExtendedSearchComponent implements OnInit {
     comparisonOp1: ComparisonOp[] = [
         {value: "eq", viewValue: "ist exakt", show: true},
         {value: "like", viewValue: "enthält", show: true},
-        {value: "!like", viewValue: "entält nicht", show: true},
-        {value: "null", viewValue: "ist leer", show: true},
-        {value: "!null", viewValue: "ist nicht leer", show: true},
+        {value: "!like", viewValue: "enthält nicht", show: true},
         {value: "gt", viewValue: "später als", show: false},
         {value: "lt", viewValue: "früher als", show: false},
         {value: "between", viewValue: "zwischen", show: false},
@@ -53,9 +51,7 @@ export class ExtendedSearchComponent implements OnInit {
     comparisonOp2: ComparisonOp[] = [
         {value: "eq", viewValue: "ist exakt", show: true},
         {value: "like", viewValue: "enthält", show: true},
-        {value: "!like", viewValue: "entält nicht", show: true},
-        {value: "null", viewValue: "ist leer", show: true},
-        {value: "!null", viewValue: "ist nicht leer", show: true},
+        {value: "!like", viewValue: "enthält nicht", show: true},
         {value: "gt", viewValue: "später als", show: false},
         {value: "lt", viewValue: "früher als", show: false},
         {value: "between", viewValue: "zwischen", show: false},
@@ -64,9 +60,7 @@ export class ExtendedSearchComponent implements OnInit {
     comparisonOp3: ComparisonOp[] = [
         {value: "eq", viewValue: "ist exakt", show: true},
         {value: "like", viewValue: "enthält", show: true},
-        {value: "!like", viewValue: "entält nicht", show: true},
-        {value: "null", viewValue: "ist leer", show: true},
-        {value: "!null", viewValue: "ist nicht leer", show: true},
+        {value: "!like", viewValue: "enthält nicht", show: true},
         {value: "gt", viewValue: "später als", show: false},
         {value: "lt", viewValue: "früher als", show: false},
         {value: "between", viewValue: "zwischen", show: false},
