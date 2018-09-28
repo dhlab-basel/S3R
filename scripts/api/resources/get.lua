@@ -7,16 +7,14 @@ require "./model/file"
 
 -- Constant
 thumbnail = {
-    small  = {height = 100, width =  75},
-    medium = {height = 140, width = 105},
-    large  = {height = 200, width = 150}
+    small  = {height = 100},
+    medium = {height = 140},
+    large  = {height = 200}
 }
 
-previewHeight = {
-    small  =  600,
-    medium = 1024,
-    large  = 1440
-}
+thumbnailSquare = false;
+
+preview = {height = 600}
 
 function getDublinCoreXML(data)
     local content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" .. "\n" .. "<metadata>" .. "\n"
@@ -224,10 +222,10 @@ function getPreview()
         return
     end
 
-    if (dimsBefore.ny < previewHeight.small) then
-        table1["resolution"] = {height=dimsBefore.ny, width=dimsBefore.nx}
+    if (dimsBefore.ny < preview.height) then
+        table1["resolution"] = {height = dimsBefore.ny, width = dimsBefore.nx}
     else
-        img.scale(img, "," .. previewHeight.small)
+        img.scale(img, "," .. preview.height)
 
         local dimsAfterSuccess, dimsAfter = img.dims(img)
 
@@ -236,7 +234,7 @@ function getPreview()
             return
         end
 
-        table1["resolution"] = {height=dimsAfter.ny, width=dimsAfter.nx}
+        table1["resolution"] = {height = dimsAfter.ny, width = dimsAfter.nx}
     end
 
     table1["mimetype"] = mimetype
@@ -312,7 +310,7 @@ function getPreviewContent()
         return
     end
 
-    img.scale(img, "," .. previewHeight.small)
+    img.scale(img, "," .. preview.height)
 
     local dimsSuccess, dims = img.dims(img)
 
@@ -362,7 +360,14 @@ function getThumbnailSize()
         return
     end
 
-    table1["resolution"] = {height=thumbnail[size].height, width=thumbnail[size].width }
+    local width
+    if (thumbnailSquare) then
+        width = thumbnail[size].height
+    else
+        width = thumbnail[size].height * 0.75
+    end
+
+    table1["resolution"] = {height = thumbnail[size].height, width }
 
     server.setBuffer()
 
@@ -414,12 +419,16 @@ function getThumbnailSizeContent()
         return
     end
 
-    if (mimetype ~= "image/jpeg") and (mimetype ~= "image/tiff") and (mimetype ~= "image/jp2") and (mimetype ~= "image/png") then
-        print("not a image")
-        return
+    local typePath
+    if (mimetype == "application/pdf") then
+        typePath = "assets/pdf.png"
+    elseif (mimetype ~= "image/jpeg") and (mimetype ~= "image/tiff") and (mimetype ~= "image/jp2") and (mimetype ~= "image/png") then
+        typePath = "assets/unknown.png"
+    else
+        typePath = "files/" .. serverFilename
     end
 
-    local succes, img = SipiImage.new("files/" .. serverFilename)
+    local succes, img = SipiImage.new(typePath)
 
     if (not succes) then
         print("fail")
@@ -433,27 +442,34 @@ function getThumbnailSizeContent()
         return
     end
 
+    local width
+    if (thumbnailSquare) then
+        width = thumbnail[size].height
+    else
+        width = thumbnail[size].height * 0.75
+    end
+
     local imageRatio = dims.nx / dims.ny
-    local thumbnailRatio = thumbnail[size].width / thumbnail[size].height
+    local thumbnailRatio = width / thumbnail[size].height
 
     if (imageRatio < thumbnailRatio) then
         print("höher als Breite")
         img.scale(img, thumbnail[size].width .. ",")
         local success, dims = img.dims(img)
         if success then
-            local startY = (dims.ny -thumbnail[size].height) / 2
-            img.crop(img, "0," .. startY .. "," .. thumbnail[size].width .. "," .. thumbnail[size].height)
+            local startY = (dims.ny - thumbnail[size].height) / 2
+            img.crop(img, "0," .. startY .. "," .. width .. "," .. thumbnail[size].height)
         end
     elseif (imageRatio > thumbnailRatio) then
         print("breiter als Höhe")
         img.scale(img, "," .. thumbnail[size].height)
         local success, dims = img.dims(img)
         if success then
-            local startX = (dims.nx - thumbnail[size].width) / 2
-            img.crop(img, startX .. ",0," .. thumbnail[size].width .. "," .. thumbnail[size].height)
+            local startX = (dims.nx - width) / 2
+            img.crop(img, startX .. ",0," .. width .. "," .. thumbnail[size].height)
         end
     else
-        img.scale(img, thumbnail[size].width .. "," .. thumbnail[size].height)
+        img.scale(img, width .. "," .. thumbnail[size].height)
     end
 
     server.sendHeader('Content-type', 'image/jpeg')
