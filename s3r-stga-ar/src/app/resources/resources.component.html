@@ -27,7 +27,7 @@
                     {{fileSize}}
                 </div>
                 <div>
-                    <button mat-flat-button (click)="downloadFile()"><img class="button-icon" src="./assets/download.png"/>Dateidownload</button>
+                    <button mat-flat-button (click)="downloadFile()"><img class="button-icon" src="./assets/download.png"/>Download</button>
                 </div>
             </div>
             <div>
@@ -65,11 +65,11 @@
                         <div class="detail-item-value">{{this.data.coverage}}</div>
                         <div class="detail-item-name rights">Rechte</div>
                         <div class="detail-item-value">{{this.data.rights}}</div>
-                        <div class="detail-item-name">Collection</div>
-                        <div class="detail-item-value">{{this.collection}}</div>
+                        <div class="detail-item-name">Sammlung</div>
+                        <div class="detail-item-value" [routerLink]="['/collections', this.data.collection_id.id]"><a class="link">{{this.collection}}></a></div>
                     </div>
                     <div class="xml-export">
-                        <a class="xml-export-link" (click)="xmlExport()">Export als XML <img class="button-icon" src="./assets/download.png"/> ></a>
+                        <a class="link" (click)="xmlExport()">Export als XML <img class="button-icon" src="./assets/download.png"/>></a>
                     </div>
                 </div>
                 <div class="card-subtitle-container">

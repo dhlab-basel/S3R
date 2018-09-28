@@ -48,7 +48,6 @@ export class ResourcesComponent implements OnInit {
             this.apiService.getCollection(data["data"]["collection_id"]["id"])
                 .subscribe((collection) => {
                     this.collection = collection["data"]["name"];
-                    console.log(collection["data"]);
                 });
         });
     }
