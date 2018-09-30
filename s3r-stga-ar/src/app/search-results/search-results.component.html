@@ -20,10 +20,10 @@
 
                             <div class="filter-list">
                                 <div class="filter-line" [routerLink]="[]" [queryParams]="{filter: 'author_' + author[0]}" queryParamsHandling="merge" *ngFor="let author of authorList; index as i">
-                                    <a *ngIf="i<7" class="filter-value">{{author[0]}} &nbsp;<span style="color: darkgray;font-size: smaller"> ({{author[1]}})</span></a>
-                                    <a *ngIf="i>=7" [hidden]="showAuthor" class="filter-value">{{author[0]}} &nbsp;<span style="color: darkgray;font-size: smaller"> ({{author[1]}})</span></a>
+                                    <a *ngIf="i<amountFilterResults" class="filter-value">{{author[0]}} &nbsp;<span style="color: darkgray;font-size: smaller"> ({{author[1]}})</span></a>
+                                    <a *ngIf="i>=amountFilterResults" [hidden]="showAuthor" class="filter-value">{{author[0]}} &nbsp;<span style="color: darkgray;font-size: smaller"> ({{author[1]}})</span></a>
                                 </div>
-                                <div class="fold-text" *ngIf="authorList.length>7" (click)="showAllLessAuthor()">{{showTextAuthor()}}</div>
+                                <div class="fold-text" *ngIf="authorList.length>amountFilterResults" (click)="showAllLessAuthor()">{{showTextAuthor()}}</div>
                             </div>
 
                         </mat-expansion-panel>
@@ -41,10 +41,10 @@
 
                             <div class="filter-list">
                                 <div class="filter-line" [routerLink]="[]" [queryParams]="{filter: 'type_'+ filetype[0]}" queryParamsHandling="merge" *ngFor="let filetype of filetypeList; index as i">
-                                    <a *ngIf="i<7" class="filter-value">{{filetype[0]}} &nbsp;<span style="color: darkgray;font-size: smaller"> ({{filetype[1]}})</span></a>
-                                    <a *ngIf="i>=7" [hidden]="showFileType" class="filter-value">{{filetype[0]}} &nbsp;<span style="color: darkgray;font-size: smaller"> ({{filetype[1]}})</span></a>
+                                    <a *ngIf="i<amountFilterResults" class="filter-value">{{filetype[0]}} &nbsp;<span style="color: darkgray;font-size: smaller"> ({{filetype[1]}})</span></a>
+                                    <a *ngIf="i>=amountFilterResults" [hidden]="showFileType" class="filter-value">{{filetype[0]}} &nbsp;<span style="color: darkgray;font-size: smaller"> ({{filetype[1]}})</span></a>
                                 </div>
-                                <div class="fold-text" *ngIf="filetypeList.length>7" (click)="showAllLessFileType()">{{showTextFileType()}}</div>
+                                <div class="fold-text" *ngIf="filetypeList.length>amountFilterResults" (click)="showAllLessFileType()">{{showTextFileType()}}</div>
                             </div>
 
                         </mat-expansion-panel>
@@ -59,11 +59,11 @@
                             </mat-expansion-panel-header>
                             <div class="filter-list">
                                 <div class="filter-line" [routerLink]="[]" [queryParams]="{filter: 'year_'+ year[0]}" queryParamsHandling="merge" *ngFor="let year of yearList; index as i">
-                                    <a *ngIf="i<7" class="filter-value">{{year[0]}} &nbsp;<span style="color: darkgray;font-size: smaller"> ({{year[1]}})</span></a>
-                                    <a *ngIf="i>=7" [hidden]="showYear" class="filter-value">{{year[0]}} &nbsp;<span style="color: darkgray;font-size: smaller"> ({{year[1]}})</span></a>
+                                    <a *ngIf="i<amountFilterResults" class="filter-value">{{year[0]}} &nbsp;<span style="color: darkgray;font-size: smaller"> ({{year[1]}})</span></a>
+                                    <a *ngIf="i>=amountFilterResults" [hidden]="showYear" class="filter-value">{{year[0]}} &nbsp;<span style="color: darkgray;font-size: smaller"> ({{year[1]}})</span></a>
                                 </div>
                             </div>
-                            <div class="fold-text" *ngIf="yearList.length>7" (click)="showAllLessYear()">{{showTextYear()}}</div>
+                            <div class="fold-text" *ngIf="yearList.length>amountFilterResults" (click)="showAllLessYear()">{{showTextYear()}}</div>
                         </mat-expansion-panel>
                     </mat-accordion>
                 </div>

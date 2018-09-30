@@ -13,6 +13,8 @@ export interface Data {
     styleUrls: ["./search-results.component.css"]
 })
 export class SearchResultsComponent implements OnInit {
+    private readonly amountFilterResults = 7;
+
     @Input() resultsOfSearch: any;
     @Input() sort: string;
     @Input() filter: string;
