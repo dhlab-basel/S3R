@@ -163,31 +163,35 @@ end
 
 -------------------------------------------------------------------------------
 -- Reads all the resources from the database with a full text search
--- @param   'searchword' (string): word which should be looked for in all the column
+-- @param   'searchword' (table): table with all words which should be looked for in all the column
 -- @return  'data' (table): returns all the data with dublin core fields
 -------------------------------------------------------------------------------
-function readAllResFullText(searchword)
+function readAllResFullText(searchwords)
     local db = sqlite(dbPath, "RW")
     local trivialCond = "id==0"
     local statement
 
     local parameters = {"title", "creator", "subject", "description", "publisher", "contributor", "type", "format", "identifier", "source", "language", "relation", "coverage", "rights", "filename", "mimetype"}
 
-    if (searchword ~= nil) and (searchword ~= "") then
-        for k, paramName in pairs(parameters) do
-            statement = like(paramName, searchword)
-            trivialCond = orOperator({trivialCond, statement})
-        end
+    if (searchwords ~= nil) and (#searchwords ~= 0) then
 
-        -- Search statement in time period if searchword is number
-        if (tonumber(searchword) ~= nil) then
-            local s1 = greaterThanEqual(searchword, "date_start")
-            local s2 = lessThanEqual(searchword, "date_end")
-            statement = "(" .. andOperator({s1, s2}) .. ")"
-            trivialCond = orOperator({trivialCond, statement})
-        end
+        for key, searchword in pairs (searchwords) do
 
-        -- Search in collection -> CROSS JOIN
+            for k, paramName in pairs(parameters) do
+                statement = like(paramName, searchword)
+                trivialCond = orOperator({trivialCond, statement})
+            end
+
+            -- Search statement in time period if searchwords is number
+            if (tonumber(searchword) ~= nil) then
+                local s1 = greaterThanEqual(searchword, "date_start")
+                local s2 = lessThanEqual(searchword, "date_end")
+                statement = "(" .. andOperator({s1, s2}) .. ")"
+                trivialCond = orOperator({trivialCond, statement})
+            end
+
+            -- Search in collection -> CROSS JOIN
+        end
 
     else
         trivialCond = "id!=0"

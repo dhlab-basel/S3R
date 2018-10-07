@@ -7,7 +7,7 @@ require "./model/file"
 require "./model/query"
 
 -- Function definitions
-function getSearchword(parameters)
+function getSearchwords(parameters)
     local found = 0
     local searchword, errMsg
 
@@ -24,13 +24,16 @@ function getSearchword(parameters)
         searchword = ""
     end
 
-    return searchword, errMsg
+    local searchwords = {}
+    for word in searchword:gmatch("%w+") do table.insert(searchwords, word) end
+
+    return searchwords, errMsg
 end
 
 function fullSearch()
-    local searchword, errMsg
+    local searchwords, errMsg
 
-    searchword, errMsg = getSearchword(server.get)
+    searchwords, errMsg = getSearchwords(server.get)
 
     if (errMsg ~= nil) then
         server.sendHeader('Content-type', 'application/json')
@@ -39,7 +42,7 @@ function fullSearch()
     end
 
     local table1 = {}
-    table1["data"] = readAllResFullText(searchword)
+    table1["data"] = readAllResFullText(searchwords)
 
     if #table1["data"] > 0 then
         table1["status"] = "successful"
