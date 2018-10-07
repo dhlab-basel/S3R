@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../services/api.service";
+import {forEach} from "@angular/router/src/utils/collection";
 
 export interface FilterOptions {
     key: string;
@@ -18,6 +19,8 @@ export class SearchComponent implements OnInit {
     sort: string;
     filter: string;
     searchword: string;
+
+    private static readonly SEARCH_SEPARATORS = [" ", "+", ",", ";"];
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
@@ -45,7 +48,16 @@ export class SearchComponent implements OnInit {
     }
 
     startSearch() {
+        this.searchword = this.replaceSeparators(this.searchword);
         this.router.navigate(["search", this.searchword], { queryParams: {filter: null} , queryParamsHandling : "merge"});
+    }
+
+    replaceSeparators(searchword: string): string {
+        let correctedSearchWord = searchword;
+        for(let separator of SearchComponent.SEARCH_SEPARATORS) {
+            correctedSearchWord = correctedSearchWord.split(separator).join(" ");
+        }
+        return correctedSearchWord;
     }
 
     startRequest(searchword: string) {
