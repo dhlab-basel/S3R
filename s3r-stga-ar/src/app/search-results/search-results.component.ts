@@ -21,10 +21,9 @@ export class SearchResultsComponent implements OnInit {
 
     sortParameterList: Data[] = [
         {key: "title", value: "Titel"},
-        {key: "creator", value: "Urheberin/ Urheber"},
+        {key: "creator", value: "Autor/Autorin"},
         {key: "date_start", value: "Jahr"},
-        {key: "identifier", value: "Identifikator"},
-        {key: "description", value: "Beschreibung"}
+        {key: "identifier", value: "Identifikator"}
     ];
 
     authorList: any[];
