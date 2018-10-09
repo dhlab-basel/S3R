@@ -69,8 +69,8 @@ function readAllRes(parameters)
 
         if (param[1] == "date") then
             if (compOp == "EQ") then
-                local s1 = equal(paramName, value1)
-                local s2 = equal(paramName, value1)
+                local s1 = equal("date_start", value1)
+                local s2 = equal("date_end", value1)
                 statement = "(" .. andOperator({s1, s2}) .. ")"
             elseif (compOp == "LIKE") then
                 -- For exact year
