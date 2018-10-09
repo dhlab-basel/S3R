@@ -1,3 +1,4 @@
+<div class="wrapper">
 <nav class="menu-bar mat-typography" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between">
     <div class="menu-bar-item" fxLayout="row">
         <div fxShow.gt-xs="false">
@@ -29,15 +30,23 @@
     </div>
 </nav>
 
+    <main class="container">
+
 <article class="container-main-logo">
     <a [routerLink]="['/search']">
         <img class="main-logo" src="./assets/stga-logo.png"/>
     </a>
 </article>
 
-<main class="container">
+
     <router-outlet></router-outlet>
 </main>
+
+<footer class="mat-typography">
+    <a href="http://dhlab.unibas.ch/">Digital Humanities Lab | University of Basel</a> © 2018
+</footer>
+
+</div>
 
 <!--<br>-->
 <!--<article>-->
