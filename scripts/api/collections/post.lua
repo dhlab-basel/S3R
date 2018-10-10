@@ -1,9 +1,9 @@
 print("---- POST collections script ----")
 
 -- Required external script files
+require "./crud/collection"
+require "./crud/resource"
 require "./model/parameter"
-require "./model/collection"
-require "./model/resource"
 
 local uriPattern = "api/collections$"
 

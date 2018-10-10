@@ -1,9 +1,9 @@
 print("---- GET collections script ----")
 
 -- Required external script files
-require "./model/collection"
-require "./model/resource"
-require "./model/file"
+require "./crud/collection"
+require "./crud/resource"
+require "./crud/file"
 
 -- Function definitions
 function getCollections()

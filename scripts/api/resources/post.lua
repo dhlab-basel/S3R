@@ -1,10 +1,10 @@
 print("---- POST resources script ----")
 
 -- Required external script files
-require "./model/resource"
+require "./crud/file"
+require "./crud/collection"
+require "./crud/resource"
 require "./model/parameter"
-require "./model/file"
-require "./model/collection"
 
 local uriPattern = "api/resources$"
 

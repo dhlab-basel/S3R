@@ -1,9 +1,9 @@
 print("---- DELETE resources script ----")
 
 -- Required external script files
-require "./model/resource"
+require "./crud/resource"
+require "./crud/file"
 require "./model/parameter"
-require "./model/file"
 
 -- Gets ID from the url
 local id = getID("^/api/resources/%d+$")

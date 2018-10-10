@@ -1,9 +1,9 @@
 print("---- GET search script ----")
 
 -- Required external script files
-require "./model/resource"
+require "./crud/resource"
+require "./crud/file"
 require "./model/parameter"
-require "./model/file"
 require "./model/query"
 
 -- Function definitions

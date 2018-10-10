@@ -1,9 +1,9 @@
 print("---- GET resources script ----")
 
 -- Required external script files
-require "./model/resource"
+require "./crud/resource"
+require "./crud/file"
 require "./model/parameter"
-require "./model/file"
 
 -- Constant
 thumbnail = {

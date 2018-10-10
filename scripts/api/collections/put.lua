@@ -1,8 +1,8 @@
 print("---- PUT collections script ----")
 
 -- Required external script files
+require "./crud/collection"
 require "./model/parameter"
-require "./model/collection"
 
 -- Gets ID from the url
 local id = getID("^/api/collections/%d+$")

@@ -1,10 +1,10 @@
 print("---- PUT resources script ----")
 
 -- Required external script files
-require "./model/resource"
+require "./crud/resource"
+require "./crud/file"
+require "./crud/collection"
 require "./model/parameter"
-require "./model/file"
-require "./model/collection"
 
 -- Gets ID from the url
 local id = getID("^/api/resources/%d+$")
