@@ -1,6 +1,6 @@
 require "./model/query"
 
-dbPath = "testDB/test_stga.db"
+dbPath = "testDB/test_stga_v1.db"
 colTable = "collection"
 
 -------------------------------------------------------------------------------
