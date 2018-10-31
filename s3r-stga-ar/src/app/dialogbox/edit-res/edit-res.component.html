@@ -7,7 +7,7 @@
             <div style="padding: 0 20px 20px 20px">
                 <div style="margin: 20px 0; font-weight: bolder">Aktuelle Datei</div>
                 <div fxLayout="row">
-                    <img style="height:3rem;" class="detail-file-type-img" src={{picturePath}}/>
+                    <img style="height:auto;" class="detail-file-type-img" src={{getThumbnail()}}/>
                     <div style="margin-left: 1rem">
                         <div>
                             Name: <label>{{resource["generated_filename"]}}</label>
@@ -36,15 +36,11 @@
                 </div>
 
                 <button style="margin-top:20px" class="mat-raised-button" onclick="document.getElementById('file').click();">Datei ersetzen</button>
+                <button *ngIf="selectedFile" class="mat-raised-button save-button" style="margin-top:20px" onclick="save()">Speichern</button>
             </div>
         </div>
 
     <input type="file" style="display:none;" id="file" name="file" (change)="onFileSelect($event)"/>
-
-
-    <!--<div>-->
-        <!--<img class="detail-file-type-img" src={{picturePath}}/>-->
-    <!--</div>-->
 
     <h4 mat-subheader>Dublin Core Felder</h4>
 

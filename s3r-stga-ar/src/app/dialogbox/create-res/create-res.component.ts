@@ -10,8 +10,7 @@ import {File} from "../../model/file";
 })
 export class CreateResComponent implements OnInit {
     selectedFile = null;
-    picturePath: string;
-    fileSize: string;
+    selectedFileSize: string;
 
     data: string;
 
@@ -97,9 +96,11 @@ export class CreateResComponent implements OnInit {
     }
 
     onFileSelect(event) {
-        this.selectedFile = event.target.files[0];
-        this.picturePath = this.file.evaluateMimeType(this.selectedFile.type);
-        this.fileSize = this.file.evaluateFileSize(this.selectedFile.size);
-        console.log(this.selectedFile);
+        if (this.file.isRightMimeType(event.target.files[0].type)) {
+            this.selectedFile = event.target.files[0];
+            this.selectedFileSize = this.file.evaluateFileSize(this.selectedFile.size);
+        } else {
+            console.log("Wrong mime type");
+        }
     }
 }

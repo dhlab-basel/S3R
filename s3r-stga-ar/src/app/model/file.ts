@@ -3,21 +3,8 @@ import {Injectable} from "@angular/core";
 @Injectable()
 export class File {
 
-    evaluateMimeType(resulttype: string) {
-        switch (resulttype) {
-            case "application/pdf": {
-                return "./assets/files/pdf.png";
-            }
-            case "image/jpeg": {
-                return "./assets/files/jpg.png";
-            }
-            case "image/tiff": {
-                return "./assets/files/tiff.png";
-            }
-            default: {
-                return "./assets/files/png.png";
-            }
-        }
+    isRightMimeType(resulttype: string): boolean {
+        return ((resulttype === "application/pdf") || (resulttype === "image/jpeg") || (resulttype === "image/tiff"));
     }
 
     evaluateFileSize(fileSize: number) {

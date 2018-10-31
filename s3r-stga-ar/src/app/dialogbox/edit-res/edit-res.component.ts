@@ -12,11 +12,11 @@ import {File} from "../../model/file";
 export class EditResComponent implements OnInit {
     selectedFile = null;
     selectedFileSize: string;
-    picturePath: string;
     fileSize: string;
     resource: string;
     collections: any[];
 
+    id: number;
     title: string;
     creator: string;
     subject: string;
@@ -40,9 +40,7 @@ export class EditResComponent implements OnInit {
                 private file: File) {
         // Übergebene Daten
         this.resource = resource;
-        this.picturePath = this.file.evaluateMimeType(this.resource["mimetype"]);
         this.fileSize = this.file.evaluateFileSize(this.resource["filesize"]);
-        console.log(this.picturePath);
         this.apiService.getCollections()
             .subscribe((data) => {
             this.collections = data["data"]
@@ -54,6 +52,7 @@ export class EditResComponent implements OnInit {
                 }, []);
             });
 
+        this.id = this.resource["id"];
         this.selectedValue = this.resource["collection_id"]["id"];
         this.title = this.resource["title"];
         this.creator = this.resource["creator"];
@@ -135,8 +134,16 @@ export class EditResComponent implements OnInit {
     }
 
     onFileSelect(event) {
-        this.selectedFile = event.target.files[0];
-        this.selectedFileSize = this.file.evaluateFileSize(this.selectedFile.size);
+        if (this.file.isRightMimeType(event.target.files[0].type)) {
+            this.selectedFile = event.target.files[0];
+            this.selectedFileSize = this.file.evaluateFileSize(this.selectedFile.size);
+        } else {
+            console.log("Wrong mime type");
+        }
+    }
+
+    getThumbnail(): string {
+        return this.apiService.getResThumbnailURL(this.id, "small");
     }
 
 }
