@@ -15,6 +15,7 @@ export class EditResComponent implements OnInit {
     fileSize: string;
     resource: string;
     collections: any[];
+    fileTypeList: string[];
 
     id: number;
     title: string;
@@ -63,13 +64,14 @@ export class EditResComponent implements OnInit {
         this.date_start = this.resource["date_start"];
         this.date_end = this.resource["date_end"];
         this.type = this.resource["type"];
-        this.format = this.resource["format"];
+        this.format = this.file.mimeTypeToSimpleForm(this.resource["format"]);
         this.identifier = this.resource["identifier"];
         this.source = this.resource["source"];
         this.language = this.resource["language"];
         this.relation = this.resource["relation"];
         this.coverage = this.resource["coverage"];
         this.rights = this.resource["rights"];
+        this.fileTypeList = this.file.getAllSimpleForms();
     }
 
     ngOnInit() {
@@ -112,7 +114,7 @@ export class EditResComponent implements OnInit {
         fd.append("contributor", this.contributor);
         fd.append("date_start", this.date_start);
         fd.append("date_end", this.date_end);
-        fd.append("format", this.format);
+        fd.append("format", this.file.simpleFormTomimeType(this.format));
         fd.append("identifier", this.identifier);
         fd.append("source", this.source);
         fd.append("language", this.language);
@@ -134,10 +136,12 @@ export class EditResComponent implements OnInit {
     }
 
     onFileSelect(event) {
-        if (this.file.isRightMimeType(event.target.files[0].type)) {
+        const fileType = this.file.mimeTypeToSimpleForm(event.target.files[0].type);
+        if (fileType !== null) {
             this.selectedFile = event.target.files[0];
             this.selectedFileSize = this.file.evaluateFileSize(this.selectedFile.size);
         } else {
+            this.selectedFile = null;
             console.log("Wrong mime type");
         }
     }

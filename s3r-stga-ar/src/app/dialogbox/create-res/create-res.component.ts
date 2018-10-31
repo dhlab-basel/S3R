@@ -11,6 +11,7 @@ import {File} from "../../model/file";
 export class CreateResComponent implements OnInit {
     selectedFile = null;
     selectedFileSize: string;
+    fileTypeList: string[];
 
     data: string;
 
@@ -35,6 +36,7 @@ export class CreateResComponent implements OnInit {
                 private apiService: ApiService,
                 private file: File) {
         this.data = data;
+        this.fileTypeList = this.file.getAllSimpleForms();
     }
 
     ngOnInit() {
@@ -76,7 +78,7 @@ export class CreateResComponent implements OnInit {
         fd.append("contributor", this.contributor);
         fd.append("date_start", this.date_start);
         fd.append("date_end", this.date_end);
-        fd.append("format", this.format);
+        fd.append("format", this.file.simpleFormTomimeType(this.format));
         fd.append("identifier", this.identifier);
         fd.append("source", this.source);
         fd.append("language", this.language);
@@ -96,10 +98,12 @@ export class CreateResComponent implements OnInit {
     }
 
     onFileSelect(event) {
-        if (this.file.isRightMimeType(event.target.files[0].type)) {
+        const fileType = this.file.mimeTypeToSimpleForm(event.target.files[0].type);
+        if (fileType !== null) {
             this.selectedFile = event.target.files[0];
             this.selectedFileSize = this.file.evaluateFileSize(this.selectedFile.size);
         } else {
+            this.selectedFile = null;
             console.log("Wrong mime type");
         }
     }
