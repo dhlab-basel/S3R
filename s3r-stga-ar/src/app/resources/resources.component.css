@@ -38,6 +38,7 @@ form {
 .link {
     color: steelblue;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .link:hover {
