@@ -125,8 +125,8 @@ export class ResourcesComponent implements OnInit {
         // });
     }
 
-    getThumbnail(id: number): string {
-        return this.apiService.getResThumbnailURL(id, "medium");
+    getThumbnail(): string {
+        return this.apiService.getResThumbnailURL(this.id, "medium");
     }
 
     goBack() {
