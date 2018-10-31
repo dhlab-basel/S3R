@@ -49,7 +49,6 @@ mat-divider {
 .card-header {
     padding: 0 24px;
     background-color: rgb(232,232,232);
-    height: 50px;
     text-align: right;
     font-size: 15px;
 }
