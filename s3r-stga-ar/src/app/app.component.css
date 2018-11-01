@@ -8,6 +8,13 @@
     padding: 0 5px;
 }
 
+.responsive {
+    padding: 0 15px;
+    width: 100%;
+    max-width: 410px;
+    height: auto;
+}
+
 .container-logo {
     text-align: center;
 }
