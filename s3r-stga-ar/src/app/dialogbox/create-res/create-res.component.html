@@ -1,3 +1,5 @@
+<form [formGroup]="form" (ngSubmit)="create()">
+
 <h2 mat-dialog-title>Objekt hochladen in {{data["colName"]}}</h2>
 
 <mat-dialog-content>
@@ -19,69 +21,87 @@
                 Mimetype: <label>{{selectedFile.type}}</label>
             </div>
 
-            <button style="margin-top:20px" class="mat-raised-button" onclick="document.getElementById('file').click();">Durchsuchen</button>
+            <button class="mat-raised-button" type="button" style="margin-top:20px" onclick="document.getElementById('file').click();">Durchsuchen</button>
         </div>
     </div>
 
-    <input type="file" style="display:none;" id="file" name="file" (change)="onFileSelect($event)"/>
-
+    <input id="file" type="file" formControlName="file" style="display:none;" name="file" (change)="onFileSelect($event)"/>
 
     <h4 mat-subheader>Dublin Core Felder</h4>
-    <!--<div style="border: 1px solid darkgray; padding: 20px">-->
-        <mat-form-field class="example-full-width">
-            <input [(ngModel)]="title" matInput placeholder="Titel">
-        </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <input [(ngModel)]="creator" matInput placeholder="Autor/Autorin">
-        </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input matInput formControlName="title" placeholder="Titel" required>
+        <mat-error *ngIf="form.get('title').invalid">{{getErrorTitle()}}</mat-error>
+    </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <input [(ngModel)]="subject" matInput placeholder="Thema z.B. muster1, muster2, usw.">
-        </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input matInput formControlName="creator" placeholder="Autor/Autorin">
+    </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <input [(ngModel)]="description" matInput placeholder="Beschreibung">
-        </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input matInput formControlName="subject" placeholder="Thema z.B. muster1, muster2, usw.">
+    </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <input [(ngModel)]="publisher" matInput placeholder="Verlag">
-        </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input matInput formControlName="description" placeholder="Beschreibung">
+    </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <input [(ngModel)]="contributor" matInput placeholder="Mitwirkende/Mitwirkender">
-        </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input matInput formControlName="publisher" placeholder="Verlag">
+    </mat-form-field>
 
-        <mat-form-field class="example-half-width">
-            <input [(ngModel)]="date_start" matInput type="number" min="1000" max="9999" placeholder="Jahresbeginn">
-        </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input matInput formControlName="contributor" placeholder="Mitwirkende/Mitwirkender">
+    </mat-form-field>
 
-        <mat-form-field class="example-half-width">
-            <input [(ngModel)]="date_end" matInput type="number" min="1000" max="9999" placeholder="Jahresende">
-        </mat-form-field>
+    <mat-form-field class="example-half-width">
+        <input matInput formControlName="dateStart" type="number" placeholder="Jahresbeginn" required>
+        <mat-error *ngIf="form.get('dateStart').invalid">{{getErrorDateStart()}}</mat-error>
+    </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <mat-select placeholder="Format" [(ngModel)]="format">
-                <mat-option *ngFor="let fileType of fileTypeList" [value]="fileType">{{fileType}}</mat-option>
-            </mat-select>
-        </mat-form-field>
+    <mat-form-field class="example-half-width">
+        <input matInput formControlName="dateEnd" type="number" placeholder="Jahresende" required>
+        <mat-error *ngIf="form.get('dateEnd').invalid">{{getErrorDateEnd()}}</mat-error>
+    </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <input [(ngModel)]="identifier" matInput placeholder="Identifikator">
-        </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-select placeholder="Format" [formControl]="form.get('format')">
+            <mat-option *ngFor="let fileType of fileTypeList" [value]="fileType">{{fileType}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('format').invalid">{{getErrorFormat()}}</mat-error>
+    </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <input [(ngModel)]="language" matInput placeholder="Sprache">
-        </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input matInput formControlName="identifier" placeholder="Identifikator" required>
+        <mat-error *ngIf="form.get('identifier').invalid">{{getErrorIdentifier()}}</mat-error>
+    </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <input [(ngModel)]="rights" matInput placeholder="Rechte">
-        </mat-form-field>
-    <!--</div>-->
+    <mat-form-field class="example-full-width">
+        <input matInput formControlName="language" placeholder="Sprache">
+    </mat-form-field>
 
-</mat-dialog-content>
+    <mat-form-field class="example-full-width">
+        <input matInput formControlName="rights" placeholder="Rechte">
+    </mat-form-field>
 
-<mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
-    <button mat-raised-button (click)="cancel()">Abbrechen</button>
-    <button class="create-button" mat-raised-button (click)="create()">Erstellen</button>
-</mat-dialog-actions>
+    <!--Dublin Core Fields which are not used-->
+    <!--<mat-form-field class="example-full-width">-->
+    <!--<input matInput formControlName="source" placeholder="Quelle">-->
+    <!--</mat-form-field>-->
+
+    <!--<mat-form-field class="example-full-width">-->
+    <!--<input matInput formControlName="relation" placeholder="Beziehung">-->
+    <!--</mat-form-field>-->
+
+    <!--<mat-form-field class="example-full-width">-->
+    <!--<input matInput formControlName="coverage" placeholder="Geltungsbereich">-->
+    <!--</mat-form-field>-->
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
+        <button type="button" mat-raised-button (click)="cancel()">Abbrechen</button>
+        <button class="create-button" type="submit" mat-raised-button [disabled]="form.invalid">Erstellen</button>
+    </mat-dialog-actions>
+
+</form>
