@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {ApiService} from "../../services/api.service";
-import {NgForm} from "@angular/forms";
+import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 
 @Component({
     selector: "app-create-col",
@@ -10,6 +10,8 @@ import {NgForm} from "@angular/forms";
 })
 export class CreateColComponent implements OnInit {
     collectionID: string;
+    form: FormGroup;
+    name: string;
 
     constructor(private dialogRef: MatDialogRef<CreateColComponent>, @Inject(MAT_DIALOG_DATA) data,
                 private apiService: ApiService) {
@@ -17,13 +19,15 @@ export class CreateColComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.form = new FormGroup({
+            name: new FormControl('', [Validators.required])
+        })
     }
 
-    create(form: NgForm) {
-        console.log(form);
+    create() {
         const fd = new FormData();
         fd.append("collection_id", this.collectionID);
-        fd.append("name", form.value.name);
+        fd.append("name", this.name);
         this.apiService.createCollection(fd)
             .subscribe((result) => console.log(result));
         this.dialogRef.close();
