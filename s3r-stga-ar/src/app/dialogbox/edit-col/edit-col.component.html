@@ -4,14 +4,14 @@
     <mat-dialog-content>
 
         <mat-form-field class="example-full-width">
-            <input [(ngModel)]="name" formControlName="name" matInput placeholder="Name">
-            <mat-error *ngIf="form.get('name').hasError('require') || form.get('name').touched">Bitte Namen eingeben</mat-error>
+            <input matInput formControlName="name" placeholder="Name">
+            <mat-error *ngIf="form.invalid">{{getErrorName()}}</mat-error>
         </mat-form-field>
 
     </mat-dialog-content>
 
     <mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
         <button type="button" mat-raised-button (click)="cancel()">Abbrechen</button>
-        <button type="submit" class="save-button" mat-raised-button [disabled]="!form.valid">Speichern</button>
+        <button type="submit" class="save-button" mat-raised-button [disabled]="form.invalid">Speichern</button>
     </mat-dialog-actions>
 </form>
