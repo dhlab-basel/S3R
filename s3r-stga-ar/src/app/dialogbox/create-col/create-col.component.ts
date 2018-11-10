@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {ApiService} from "../../services/api.service";
-import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
     selector: "app-create-col",
@@ -11,23 +11,22 @@ import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 export class CreateColComponent implements OnInit {
     collectionID: string;
     form: FormGroup;
-    name: string;
 
-    constructor(private dialogRef: MatDialogRef<CreateColComponent>, @Inject(MAT_DIALOG_DATA) data,
-                private apiService: ApiService) {
+    constructor(private dialogRef: MatDialogRef<CreateColComponent>, @Inject(MAT_DIALOG_DATA) data, private apiService: ApiService) {
         this.collectionID = data["colID"];
     }
 
     ngOnInit() {
         this.form = new FormGroup({
-            name: new FormControl('', [Validators.required])
+            name: new FormControl('', [Validators.required, Validators.pattern(/^\w+/)])
         })
     }
 
     create() {
         const fd = new FormData();
         fd.append("collection_id", this.collectionID);
-        fd.append("name", this.name);
+        fd.append("name", this.form.get("name").value);
+
         this.apiService.createCollection(fd)
             .subscribe((result) => console.log(result));
         this.dialogRef.close();
@@ -37,4 +36,8 @@ export class CreateColComponent implements OnInit {
         this.dialogRef.close();
     }
 
+    getErrorName(): string {
+        return this.form.get('name').hasError('required') ? "Bitte Namen eingeben":
+            this.form.get('name').hasError('pattern') ? "Ungültiger Name": '';
+    }
 }
