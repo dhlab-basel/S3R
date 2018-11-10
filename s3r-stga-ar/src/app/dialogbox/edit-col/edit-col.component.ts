@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {FormControl} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {DeleteColComponent} from "../delete-col/delete-col.component";
 import {ApiService} from "../../services/api.service";
 
@@ -13,6 +13,7 @@ export class EditColComponent implements OnInit {
     collection: any;
     name: string;
     id: number;
+    form: FormGroup;
 
     constructor(private dialogRef: MatDialogRef<DeleteColComponent>, @Inject(MAT_DIALOG_DATA) data, private apiService: ApiService) {
         this.collection = data;
@@ -21,6 +22,9 @@ export class EditColComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.form = new FormGroup({
+            name: new FormControl('', [Validators.required])
+        })
     }
 
     save() {
