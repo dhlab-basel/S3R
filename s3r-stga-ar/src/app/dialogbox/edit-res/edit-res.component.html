@@ -1,108 +1,128 @@
-<h2 mat-dialog-title>Objekt editieren</h2>
+<form [formGroup]="form" (ngSubmit)="save()">
 
-<mat-dialog-content>
+    <h2 mat-dialog-title>Objekt editieren</h2>
 
-        <div style="border: 1px solid darkgray; background: whitesmoke">
+    <mat-dialog-content>
 
-            <div style="padding: 0 20px 20px 20px">
-                <div style="margin: 20px 0; font-weight: bolder">Aktuelle Datei</div>
-                <div fxLayout="row">
-                    <img style="height:auto;" class="detail-file-type-img" src={{getThumbnail()}}/>
-                    <div style="margin-left: 1rem">
-                        <div>
-                            Name: <label>{{resource["generated_filename"]}}</label>
-                        </div>
-                        <div>
-                            Grösse: <label>{{fileSize}}</label>
-                        </div>
-                        <div>
-                            Mimetype: <label>{{resource["mimetype"]}}</label>
+            <div style="border: 1px solid darkgray; background: whitesmoke">
+                <div style="padding: 0 20px 20px 20px">
+                    <div style="margin: 20px 0; font-weight: bolder">Aktuelle Datei</div>
+                    <div fxLayout="row">
+                        <img style="height:auto;" class="detail-file-type-img" src={{getThumbnail()}}/>
+                        <div style="margin-left: 1rem">
+                            <div>
+                                Name: <label>{{resource["generated_filename"]}}</label>
+                            </div>
+                            <div>
+                                Grösse: <label>{{fileSize}}</label>
+                            </div>
+                            <div>
+                                Mimetype: <label>{{resource["mimetype"]}}</label>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <div style="padding: 0 20px 20px 20px; border-top: 1px solid darkgray">
+                    <div style="margin: 20px 0; font-weight: bolder" *ngIf="selectedFile">Neue Datei</div>
+                    <div *ngIf="selectedFile">
+                        Name: <label>{{selectedFile.name}}</label>
+                    </div>
+                    <div *ngIf="selectedFile">
+                        Grösse: <label>{{selectedFileSize}}</label>
+                    </div>
+                    <div *ngIf="selectedFile">
+                        Mimetype: <label>{{selectedFile.type}}</label>
+                    </div>
+
+                    <button type="button" style="margin-top:20px" class="mat-raised-button" onclick="document.getElementById('file').click();">Datei ersetzen</button>
+                    <button type="submit" style="margin-top:20px" [disabled]="!selectedFile" class="mat-raised-button save-button">Speichern</button>
+                </div>
             </div>
 
+        <input type="file" style="display:none;" id="file" name="file" (change)="onFileSelect($event)"/>
 
-            <div style="padding: 0 20px 20px 20px; border-top: 1px solid darkgray">
-                <div style="margin: 20px 0; font-weight: bolder" *ngIf="selectedFile">Neue Datei</div>
-                <div *ngIf="selectedFile">
-                    Name: <label>{{selectedFile.name}}</label>
-                </div>
-                <div *ngIf="selectedFile">
-                    Grösse: <label>{{selectedFileSize}}</label>
-                </div>
-                <div *ngIf="selectedFile">
-                    Mimetype: <label>{{selectedFile.type}}</label>
-                </div>
+        <h4 mat-subheader>Dublin Core Felder</h4>
 
-                <button style="margin-top:20px" class="mat-raised-button" onclick="document.getElementById('file').click();">Datei ersetzen</button>
-                <button style="margin-top:20px" *ngIf="selectedFile" class="mat-raised-button save-button" onclick="save()">Speichern</button>
-            </div>
-        </div>
+        <mat-form-field>
+            <mat-select placeholder="Sammlung" [formControl]="form.get('collectionID')">
+                <mat-option *ngFor="let collection of collections" [value]="collection.value">{{collection.viewValue}}</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-    <input type="file" style="display:none;" id="file" name="file" (change)="onFileSelect($event)"/>
+        <mat-form-field class="example-full-width">
+            <input matInput formControlName="title" placeholder="Titel">
+            <mat-error *ngIf="form.get('title').invalid">{{getErrorTitle()}}</mat-error>
+        </mat-form-field>
 
-    <h4 mat-subheader>Dublin Core Felder</h4>
+        <mat-form-field class="example-full-width">
+            <input matInput formControlName="creator" placeholder="Autor/Autorin">
+        </mat-form-field>
 
-    <mat-form-field>
-        <mat-select placeholder="Collection" [(ngModel)]="selectedValue">
-            <mat-option *ngFor="let collection of collections" [value]="collection.value">{{collection.viewValue}}</mat-option>
-        </mat-select>
-    </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput formControlName="subject" placeholder="Thema">
+        </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-        <input [(ngModel)]="title" matInput placeholder="Titel">
-    </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput formControlName="description" placeholder="Beschreibung">
+        </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-        <input [(ngModel)]="creator" matInput placeholder="Autor/Autorin">
-    </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput formControlName="publisher" placeholder="Verlag">
+        </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-        <input [(ngModel)]="subject" matInput placeholder="Thema">
-    </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput formControlName="contributor" placeholder="Mitwirkende/Mitwirkender">
+        </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-        <input [(ngModel)]="description" matInput placeholder="Beschreibung">
-    </mat-form-field>
+        <mat-form-field class="example-half-width">
+            <input matInput formControlName="dateStart" type="number" placeholder="Jahresbeginn" required>
+            <mat-error *ngIf="form.get('dateStart').invalid">{{getErrorDateStart()}}</mat-error>
+        </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-        <input [(ngModel)]="publisher" matInput placeholder="Verlag">
-    </mat-form-field>
+        <mat-form-field class="example-half-width">
+            <input matInput formControlName="dateEnd" type="number" placeholder="Jahresende" required>
+            <mat-error *ngIf="form.get('dateEnd').invalid">{{getErrorDateEnd()}}</mat-error>
+        </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-        <input [(ngModel)]="contributor" matInput placeholder="Mitwirkende/Mitwirkender">
-    </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-select placeholder="Format" [formControl]="form.get('format')">
+                <mat-option *ngFor="let fileType of fileTypeList" [value]="fileType">{{fileType}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('format').invalid">{{getErrorFormat()}}</mat-error>
+        </mat-form-field>
 
-    <mat-form-field class="example-half-width">
-        <input [(ngModel)]="date_start" matInput type="number" min="1" placeholder="Jahresbeginn">
-    </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput formControlName="identifier" placeholder="Identifikator" required>
+            <mat-error *ngIf="form.get('identifier').invalid">{{getErrorIdentifier()}}</mat-error>
+        </mat-form-field>
 
-    <mat-form-field class="example-half-width">
-        <input [(ngModel)]="date_end" matInput type="number" min="1" placeholder="Jahresende">
-    </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput formControlName="language" placeholder="Sprache">
+        </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-        <mat-select placeholder="Format" [(ngModel)]="format">
-            <mat-option *ngFor="let fileType of fileTypeList" [value]="fileType">{{fileType}}</mat-option>
-        </mat-select>
-    </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput formControlName="rights" placeholder="Rechte">
+        </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-        <input [(ngModel)]="identifier" matInput placeholder="Identifikator">
-    </mat-form-field>
+        <!--Dublin Core Fields which are not used-->
+        <!--<mat-form-field class="example-full-width">-->
+        <!--<input matInput formControlName="source" placeholder="Quelle">-->
+        <!--</mat-form-field>-->
 
-    <mat-form-field class="example-full-width">
-        <input [(ngModel)]="language" matInput placeholder="Sprache">
-    </mat-form-field>
+        <!--<mat-form-field class="example-full-width">-->
+        <!--<input matInput formControlName="relation" placeholder="Beziehung">-->
+        <!--</mat-form-field>-->
 
-    <mat-form-field class="example-full-width">
-        <input [(ngModel)]="rights" matInput placeholder="Rechte">
-    </mat-form-field>
+        <!--<mat-form-field class="example-full-width">-->
+        <!--<input matInput formControlName="coverage" placeholder="Geltungsbereich">-->
+        <!--</mat-form-field>-->
 
-</mat-dialog-content>
+    </mat-dialog-content>
 
-<mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
-    <button mat-raised-button (click)="cancel()">Abbrechen</button>
-    <button class="save-button" mat-raised-button (click)="save()">Speichern</button>
-</mat-dialog-actions>
+    <mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
+        <button mat-raised-button (click)="cancel()" type="button">Abbrechen</button>
+        <button class="save-button" mat-raised-button type="submit">Speichern</button>
+    </mat-dialog-actions>
+
+</form>

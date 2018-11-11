@@ -62,16 +62,16 @@ export class CreateResComponent implements OnInit {
         fd.append("contributor", this.form.get("contributor").value);
         fd.append("date_start", this.form.get("dateStart").value);
         fd.append("date_end", this.form.get("dateEnd").value);
-        fd.append("format", this.file.simpleFormTomimeType(this.form.get("format").value));
+        fd.append("format", this.file.simpleFormToMimeType(this.form.get("format").value));
         fd.append("identifier", this.form.get("identifier").value);
         fd.append("language", this.form.get("language").value);
         fd.append("rights", this.form.get("rights").value);
         fd.append("collection_id", this.data["colID"]);
 
         // Dublin Core Fields which are not used
-        // fd.append("source", this.form.get("source").value);
-        // fd.append("relation", this.form.get("relation").value);
-        // fd.append("coverage", this.form.get("coverage").value);
+        fd.append("source", null);
+        fd.append("relation", null);
+        fd.append("coverage", null);
 
         this.apiService.createResource(fd)
             .subscribe((result) => {
