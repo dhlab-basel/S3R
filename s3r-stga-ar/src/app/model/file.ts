@@ -20,7 +20,7 @@ export class File {
         return simpleForm;
     }
 
-    simpleFormTomimeType(simpleForm: string): string | null {
+    simpleFormToMimeType(simpleForm: string): string | null {
         let mimeType = null;
         for (let i of this.validMimeTypes) {
             if (simpleForm === i[1]) {
