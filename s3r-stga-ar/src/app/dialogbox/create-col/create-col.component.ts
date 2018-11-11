@@ -19,7 +19,7 @@ export class CreateColComponent implements OnInit {
     ngOnInit() {
         this.form = new FormGroup({
             name: new FormControl('', [Validators.required, Validators.pattern(/^\w+/)])
-        })
+        });
     }
 
     create() {

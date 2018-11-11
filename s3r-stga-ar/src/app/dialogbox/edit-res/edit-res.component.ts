@@ -18,6 +18,7 @@ export class EditResComponent implements OnInit {
     collections: any[];
     fileTypeList: string[];
     form: FormGroup;
+    submitted: boolean;
 
     constructor(private dialogRef: MatDialogRef<EditResComponent>, @Inject(MAT_DIALOG_DATA) data,
                 private apiService: ApiService,
@@ -37,6 +38,7 @@ export class EditResComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.submitted = false;
         this.id = this.resource["id"];
         this.fileTypeList = this.file.getAllSimpleForms();
         this.fileSize = this.file.evaluateFileSize(this.resource["filesize"]);
@@ -66,6 +68,11 @@ export class EditResComponent implements OnInit {
     }
 
     save() {
+        this.submitted = true;
+
+        if (this.form.invalid) {
+            return;
+        }
 
         const fd = new FormData();
         // Reihenfolge von title ändern

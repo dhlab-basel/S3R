@@ -52,7 +52,7 @@
 
         <mat-form-field class="example-full-width">
             <input matInput formControlName="title" placeholder="Titel">
-            <mat-error *ngIf="form.get('title').invalid">{{getErrorTitle()}}</mat-error>
+            <mat-error *ngIf="submitted && form.get('title').invalid">{{getErrorTitle()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
@@ -77,24 +77,24 @@
 
         <mat-form-field class="example-half-width">
             <input matInput formControlName="dateStart" type="number" placeholder="Jahresbeginn" required>
-            <mat-error *ngIf="form.get('dateStart').invalid">{{getErrorDateStart()}}</mat-error>
+            <mat-error *ngIf="submitted && form.get('dateStart').invalid">{{getErrorDateStart()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-half-width">
             <input matInput formControlName="dateEnd" type="number" placeholder="Jahresende" required>
-            <mat-error *ngIf="form.get('dateEnd').invalid">{{getErrorDateEnd()}}</mat-error>
+            <mat-error *ngIf="submitted && form.get('dateEnd').invalid">{{getErrorDateEnd()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
             <mat-select placeholder="Format" [formControl]="form.get('format')">
                 <mat-option *ngFor="let fileType of fileTypeList" [value]="fileType">{{fileType}}</mat-option>
             </mat-select>
-            <mat-error *ngIf="form.get('format').invalid">{{getErrorFormat()}}</mat-error>
+            <mat-error *ngIf="submitted && form.get('format').invalid">{{getErrorFormat()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
             <input matInput formControlName="identifier" placeholder="Identifikator" required>
-            <mat-error *ngIf="form.get('identifier').invalid">{{getErrorIdentifier()}}</mat-error>
+            <mat-error *ngIf="submitted && form.get('identifier').invalid">{{getErrorIdentifier()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
