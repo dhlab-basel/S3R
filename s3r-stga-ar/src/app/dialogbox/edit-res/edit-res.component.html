@@ -45,18 +45,19 @@
         <h4 mat-subheader>Dublin Core Felder</h4>
 
         <mat-form-field>
-            <mat-select placeholder="Sammlung" [formControl]="form.get('collectionID')">
+            <mat-select placeholder="Sammlung" [formControl]="form.get('collectionID')" required>
                 <mat-option *ngFor="let collection of collections" [value]="collection.value">{{collection.viewValue}}</mat-option>
             </mat-select>
+            <mat-error *ngIf="(submitted || form.get('collectionID').touched) && form.get('collectionID').invalid">{{getErrorColID()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput formControlName="title" placeholder="Titel">
-            <mat-error *ngIf="submitted && form.get('title').invalid">{{getErrorTitle()}}</mat-error>
+            <input matInput formControlName="title" placeholder="Titel" required>
+            <mat-error *ngIf="(submitted || form.get('title').touched) && form.get('title').invalid">{{getErrorTitle()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput formControlName="creator" placeholder="Autor/Autorin">
+            <input matInput formControlName="creator" placeholder="Autor/Autorin z.B. Nachname1 Vorname1; Nachname2 Vorname2">
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
@@ -68,42 +69,44 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput formControlName="publisher" placeholder="Verlag">
+            <input matInput formControlName="publisher" placeholder="Ort, Verlag">
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput formControlName="contributor" placeholder="Mitwirkende/Mitwirkender">
+            <input matInput formControlName="contributor" placeholder="Mitwirkende/Mitwirkender z.B. Nachname1 Vorname1; Nachname2 Vorname2">
         </mat-form-field>
 
         <mat-form-field class="example-half-width">
             <input matInput formControlName="dateStart" type="number" placeholder="Jahresbeginn" required>
-            <mat-error *ngIf="submitted && form.get('dateStart').invalid">{{getErrorDateStart()}}</mat-error>
+            <mat-error *ngIf="(submitted || form.get('dateStart').touched) && form.get('dateStart').invalid">{{getErrorDateStart()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-half-width">
             <input matInput formControlName="dateEnd" type="number" placeholder="Jahresende" required>
-            <mat-error *ngIf="submitted && form.get('dateEnd').invalid">{{getErrorDateEnd()}}</mat-error>
+            <mat-error *ngIf="(submitted || form.get('dateEnd').touched) && form.get('dateEnd').invalid">{{getErrorDateEnd()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <mat-select placeholder="Format" [formControl]="form.get('format')">
+            <mat-select placeholder="Format" [formControl]="form.get('format')" required>
                 <mat-option *ngFor="let fileType of fileTypeList" [value]="fileType">{{fileType}}</mat-option>
             </mat-select>
-            <mat-error *ngIf="submitted && form.get('format').invalid">{{getErrorFormat()}}</mat-error>
+            <mat-error *ngIf="(submitted || form.get('format').touched) && form.get('format').invalid">{{getErrorFormat()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
             <input matInput formControlName="identifier" placeholder="Identifikator" required>
-            <mat-error *ngIf="submitted && form.get('identifier').invalid">{{getErrorIdentifier()}}</mat-error>
+            <mat-error *ngIf="(submitted || form.get('identifier').touched) && form.get('identifier').invalid">{{getErrorIdentifier()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput formControlName="language" placeholder="Sprache">
+            <input matInput formControlName="language" placeholder="Sprache z.B. Sprache1; Sprache2">
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput formControlName="rights" placeholder="Rechte">
+            <input matInput formControlName="rights" placeholder="Rechte" required>
+            <mat-error *ngIf="(submitted || form.get('rights').touched) && form.get('rights').invalid">{{getErrorRights()}}</mat-error>
         </mat-form-field>
+
 
         <!--Dublin Core Fields which are not used-->
         <!--<mat-form-field class="example-full-width">-->

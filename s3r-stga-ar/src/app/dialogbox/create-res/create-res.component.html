@@ -6,7 +6,7 @@
 
         <div>
             <h4 mat-subheader>Datei Upload</h4>
-            <div style="border: 2px dashed darkgray; padding: 20px">
+            <div class="file-upload-box" [style.border]="fileUploadBorder">
                 <!--<h3 mat-subheader>Informationen</h3>-->
                 <div *ngIf="!selectedFile">
                     Keine Datei hinzugefügt
@@ -31,15 +31,15 @@
 
         <mat-form-field class="example-full-width">
             <input matInput formControlName="title" placeholder="Titel" required>
-            <mat-error *ngIf="form.get('title').invalid">{{getErrorTitle()}}</mat-error>
+            <mat-error *ngIf="(submitted || form.get('title').touched) && form.get('title').invalid">{{getErrorTitle()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput formControlName="creator" placeholder="Autor/Autorin">
+            <input matInput formControlName="creator" placeholder="Autor/Autorin z.B. Nachname1 Vorname1; Nachname2 Vorname2">
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput formControlName="subject" placeholder="Thema z.B. muster1, muster2, usw.">
+            <input matInput formControlName="subject" placeholder="Thema z.B. muster1; muster2">
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
@@ -47,41 +47,42 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput formControlName="publisher" placeholder="Verlag">
+            <input matInput formControlName="publisher" placeholder="Ort, Verlag">
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput formControlName="contributor" placeholder="Mitwirkende/Mitwirkender">
+            <input matInput formControlName="contributor" placeholder="Mitwirkende/Mitwirkender z.B. Nachname1 Vorname1; Nachname2 Vorname2">
         </mat-form-field>
 
         <mat-form-field class="example-half-width">
             <input matInput formControlName="dateStart" type="number" placeholder="Jahresbeginn" required>
-            <mat-error *ngIf="form.get('dateStart').invalid">{{getErrorDateStart()}}</mat-error>
+            <mat-error *ngIf="(submitted || form.get('dateStart').touched) && form.get('dateStart').invalid">{{getErrorDateStart()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-half-width">
             <input matInput formControlName="dateEnd" type="number" placeholder="Jahresende" required>
-            <mat-error *ngIf="form.get('dateEnd').invalid">{{getErrorDateEnd()}}</mat-error>
+            <mat-error *ngIf="(submitted || form.get('dateEnd').touched) && form.get('dateEnd').invalid">{{getErrorDateEnd()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
             <mat-select placeholder="Format" [formControl]="form.get('format')" required>
                 <mat-option *ngFor="let fileType of fileTypeList" [value]="fileType">{{fileType}}</mat-option>
             </mat-select>
-            <mat-error *ngIf="form.get('format').invalid">{{getErrorFormat()}}</mat-error>
+            <mat-error *ngIf="(submitted || form.get('format').touched) && form.get('format').invalid">{{getErrorFormat()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
             <input matInput formControlName="identifier" placeholder="Identifikator" required>
-            <mat-error *ngIf="form.get('identifier').invalid">{{getErrorIdentifier()}}</mat-error>
+            <mat-error *ngIf="(submitted || form.get('identifier').touched) && form.get('identifier').invalid">{{getErrorIdentifier()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput formControlName="language" placeholder="Sprache">
+            <input matInput formControlName="language" placeholder="Sprache z.B. Sprache1; Sprache2">
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput formControlName="rights" placeholder="Rechte">
+            <input matInput formControlName="rights" placeholder="Rechte" required>
+            <mat-error *ngIf="(submitted || form.get('rights').touched) && form.get('rights').invalid">{{getErrorRights()}}</mat-error>
         </mat-form-field>
 
         <!--Dublin Core Fields which are not used-->
@@ -101,7 +102,7 @@
 
     <mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
         <button type="button" mat-raised-button (click)="cancel()">Abbrechen</button>
-        <button class="create-button" type="submit" mat-raised-button [disabled]="form.invalid">Erstellen</button>
+        <button class="create-button" type="submit" mat-raised-button>Erstellen</button>
     </mat-dialog-actions>
 
 </form>

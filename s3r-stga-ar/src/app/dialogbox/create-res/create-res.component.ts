@@ -15,6 +15,8 @@ export class CreateResComponent implements OnInit {
     fileTypeList: string[];
     data: string;
     form: FormGroup;
+    submitted: boolean;
+    fileUploadBorder: any;
 
     constructor(private dialogRef: MatDialogRef<CreateResComponent>, @Inject(MAT_DIALOG_DATA) data,
                 private apiService: ApiService,
@@ -24,6 +26,7 @@ export class CreateResComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.fileUploadBorder = "2px dashed darkgray";
         this.form = new FormGroup({
             file: new FormControl(),
             title: new FormControl("", [Validators.required, Validators.pattern(/^\w+/)]),
@@ -37,7 +40,7 @@ export class CreateResComponent implements OnInit {
             format: new FormControl("", [Validators.required]),
             identifier: new FormControl("", [Validators.required]),
             language: new FormControl("", []),
-            rights: new FormControl("", [])
+            rights: new FormControl("", [Validators.required])
 
             // Dublin Core Fields which are not used
             // source: new FormControl("", []),
@@ -47,7 +50,12 @@ export class CreateResComponent implements OnInit {
     }
 
     create() {
-        if (this.selectedFile == null) {
+        this.submitted = true;
+
+        if (this.form.invalid) {
+            if (this.selectedFile == null) {
+                this.fileUploadBorder = "2px dashed red";
+            }
             return;
         }
 
@@ -89,6 +97,7 @@ export class CreateResComponent implements OnInit {
         if (fileType !== null) {
             this.selectedFile = event.target.files[0];
             this.selectedFileSize = this.file.evaluateFileSize(this.selectedFile.size);
+            this.fileUploadBorder = "2px dashed darkgray";
         } else {
             this.selectedFile = null;
             console.log("Wrong mime type");
@@ -121,8 +130,13 @@ export class CreateResComponent implements OnInit {
     }
 
     getErrorIdentifier(): string {
-        return this.form.get("identifier").hasError("required") ? "Signatur muss eingegeben werden":
+        return this.form.get("identifier").hasError("required") ? "Identifikator muss eingegeben werden":
                 "";
+    }
+
+    getErrorRights(): string {
+        return this.form.get("rights").hasError("required") ? "Rechte muss eingegeben werden":
+            "";
     }
 
 

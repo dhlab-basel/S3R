@@ -43,14 +43,14 @@
                         <div class="detail-item-value">{{this.data.subject}}</div>
                         <div class="detail-item-name description">Beschreibung</div>
                         <div class="detail-item-value">{{this.data.description}}</div>
-                        <div class="detail-item-name publisher">Verlag</div>
+                        <div class="detail-item-name publisher">Ort, Verlag</div>
                         <div class="detail-item-value">{{this.data.publisher}}</div>
                         <div class="detail-item-name contributor">Mitwirkende / Mitwirkender</div>
                         <div class="detail-item-value">{{this.data.contributor}}</div>
                         <div class="detail-item-name date">Jahr</div>
                         <div class="detail-item-value">{{convertDate(this.data.date_start, this.data.date_end)}}</div>
                         <div class="detail-item-name format">Format</div>
-                        <div class="detail-item-value">{{this.data.format}}</div>
+                        <div class="detail-item-value">{{this.fileService.mimeTypeToSimpleForm(this.data.format)}}</div>
                         <div class="detail-item-name identifier">Identifikator</div>
                         <div class="detail-item-value">{{this.data.identifier}}</div>
                         <div class="detail-item-name language">Sprache</div>

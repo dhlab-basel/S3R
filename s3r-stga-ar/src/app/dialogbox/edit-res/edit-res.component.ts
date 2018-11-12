@@ -58,7 +58,7 @@ export class EditResComponent implements OnInit {
             format: new FormControl(this.file.mimeTypeToSimpleForm(this.resource["format"]), [Validators.required]),
             identifier: new FormControl(this.resource["identifier"], [Validators.required]),
             language: new FormControl(this.resource["language"]? this.resource["language"]: '', []),
-            rights: new FormControl(this.resource["rights"]? this.resource["rights"] : '', [])
+            rights: new FormControl(this.resource["rights"]? this.resource["rights"] : '', [Validators.required])
 
             // Dublin Core Fields which are not used
             // source: new FormControl("", []),
@@ -128,6 +128,11 @@ export class EditResComponent implements OnInit {
         return this.apiService.getResThumbnailURL(this.id, "small");
     }
 
+    getErrorColID(): string {
+        return this.form.get("collectionID").hasError("required") ? "Sammlung muss ausgewählt werden":
+            "";
+    }
+
     getErrorTitle(): string {
         return this.form.get("title").hasError("required") ? "Titel muss eingegeben werden":
             this.form.get("title").hasError("pattern") ? "Ungültiger Titel":
@@ -154,7 +159,13 @@ export class EditResComponent implements OnInit {
     }
 
     getErrorIdentifier(): string {
-        return this.form.get("identifier").hasError("required") ? "Signatur muss eingegeben werden":
+        return this.form.get("identifier").hasError("required") ? "Identifikator muss eingegeben werden":
+            "";
+    }
+
+
+    getErrorRights(): string {
+        return this.form.get("rights").hasError("required") ? "Rechte muss eingegeben werden":
             "";
     }
 

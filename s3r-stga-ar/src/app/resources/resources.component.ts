@@ -28,7 +28,7 @@ export class ResourcesComponent implements OnInit {
                 private loginDialog: MatDialog,
                 private apiService: ApiService,
                 private location: Location,
-                private fileService: File,
+                public fileService: File,
                 private loginService: LoginService) {
         route.params.subscribe(params => {
             this.id = params["id"];
