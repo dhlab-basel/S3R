@@ -59,6 +59,11 @@ export class CreateResComponent implements OnInit {
             return;
         }
 
+        if (this.selectedFile == null) {
+            this.fileUploadBorder = "2px dashed red";
+            return;
+        }
+
         const fd = new FormData();
         fd.append("image", this.selectedFile, this.selectedFile.name);
         fd.append("dump", "");
