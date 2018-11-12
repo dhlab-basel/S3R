@@ -19,6 +19,7 @@ export class EditResComponent implements OnInit {
     fileTypeList: string[];
     form: FormGroup;
     submitted: boolean;
+    choseFile: boolean;
 
     constructor(private dialogRef: MatDialogRef<EditResComponent>, @Inject(MAT_DIALOG_DATA) data,
                 private apiService: ApiService,
@@ -39,6 +40,7 @@ export class EditResComponent implements OnInit {
 
     ngOnInit() {
         this.submitted = false;
+        this.choseFile = false;
         this.id = this.resource["id"];
         this.fileTypeList = this.file.getAllSimpleForms();
         this.fileSize = this.file.evaluateFileSize(this.resource["filesize"]);
@@ -114,11 +116,13 @@ export class EditResComponent implements OnInit {
     }
 
     onFileSelect(event) {
+        this.choseFile = false;
         const fileType = this.file.mimeTypeToSimpleForm(event.target.files[0].type);
         if (fileType !== null) {
             this.selectedFile = event.target.files[0];
             this.selectedFileSize = this.file.evaluateFileSize(this.selectedFile.size);
         } else {
+            this.choseFile = true;
             this.selectedFile = null;
             console.log("Wrong mime type");
         }
