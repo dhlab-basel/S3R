@@ -42,7 +42,6 @@ function readLang(id)
         data = {}
         data["id"] = row[0]
         data["name"] = row[1]
-        data["resource_id"] =  { ["id"] = row[2], ["url"] = "/api/resources/" .. row[2]}
     end
 
     -- delete query and free prepared statment
@@ -94,7 +93,6 @@ function readAllLang(parameters)
         local data = {}
         data["id"] = row[0]
         data["name"] = row[1]
-        data["resource_id"] =  { ["id"] = row[2], ["url"] = "/api/resources/" .. row[2]}
         table.insert(allData, data)
         row = qry()
     end

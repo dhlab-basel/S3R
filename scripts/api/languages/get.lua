@@ -1,5 +1,8 @@
 print("---- GET language script ----")
 
+-- Required external script files
+require "./crud/language"
+
 function getLanguages()
     local table1 = {}
     table1["data"] = readAllLang({})

@@ -292,6 +292,11 @@ routes = {
     },
     {
         method = 'GET',
+        route = '/api/languages',
+        script = 'api/languages/get.lua'
+    },
+    {
+        method = 'GET',
         route = '/api/resources',
         script = 'api/resources/get.lua'
     },
