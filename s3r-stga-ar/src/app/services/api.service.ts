@@ -22,6 +22,10 @@ export class ApiService {
         return this.httpClient.post(`${ApiService.API_URL}/login`, fd, {observe: "response"});
     }
 
+    getLanguages(): Observable<any> {
+        return this.httpClient.get(`${ApiService.API_URL}/languages`);
+    }
+
     getResources(): Observable<any> {
         return this.httpClient.get(`${ApiService.API_URL}/resources`);
     }

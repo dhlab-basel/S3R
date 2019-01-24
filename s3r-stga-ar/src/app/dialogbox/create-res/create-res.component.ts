@@ -13,6 +13,7 @@ export class CreateResComponent implements OnInit {
     selectedFile = null;
     selectedFileSize: string;
     fileTypeList: string[];
+    languageList: {name: string, id: number}[];
     data: string;
     form: FormGroup;
     submitted: boolean;
@@ -26,6 +27,10 @@ export class CreateResComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.apiService.getLanguages()
+            .subscribe((data) => {
+                this.languageList = data.data;
+        });
         this.fileUploadBorder = "2px dashed darkgray";
         this.form = new FormGroup({
             file: new FormControl(),

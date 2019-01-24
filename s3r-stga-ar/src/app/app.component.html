@@ -1,50 +1,50 @@
 <div class="wrapper">
-<nav class="menu-bar mat-typography" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between">
-    <div class="menu-bar-item" fxLayout="row">
-        <div fxShow.gt-xs="false">
-            <img *ngIf="!menuIsOpen" class="hamburger" (click)="actionMenu()" fxFlexAlign="start" src="./assets/hamburger_white.png"/>
-            <img *ngIf="menuIsOpen" class="hamburger" (click)="actionMenu()" fxFlexAlign="start" src="./assets/close_white.png"/>
+    <nav class="menu-bar mat-typography" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between">
+        <div class="menu-bar-item" fxLayout="row">
+            <div fxShow.gt-xs="false">
+                <img *ngIf="!menuIsOpen" class="hamburger" (click)="actionMenu()" fxFlexAlign="start" src="./assets/hamburger_white.png"/>
+                <img *ngIf="menuIsOpen" class="hamburger" (click)="actionMenu()" fxFlexAlign="start" src="./assets/close_white.png"/>
+            </div>
+            <div class="container-logo" fxFlex=" 1 1 auto">
+                <img class="logo" src="./assets/dhlab-logo.png"/>
+            </div>
+            <div fxShow.gt-xs="false">
+                <a [routerLink]="['/login']">
+                    <img class="login" fxFlexAlign="end" src="./assets/login_white.png"/>
+                </a>
+            </div>
         </div>
-        <div class="container-logo" fxFlex=" 1 1 auto">
-            <img class="logo" src="./assets/dhlab-logo.png"/>
+        <div *ngIf="menuIsOpen" class="middle-link" fxFlex="40%" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center">
+            <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/search']">Suche</a></div>
+            <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/collections']">Sammlungen</a></div>
+            <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/help']">Hilfe</a></div>
+            <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/contact']">Kontakt</a></div>
+            <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a href="http://lib.langzeitarchivierung.ch">Bibliotheken</a></div>
         </div>
-        <div fxShow.gt-xs="false">
-            <a [routerLink]="['/login']">
-                <img class="login" fxFlexAlign="end" src="./assets/login_white.png"/>
-            </a>
+        <div class="login-screen" fxHide.lt-sm="true">
+            <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto" fxShow.lt-sm="false">
+                <a [routerLink]="['/login']">Login:
+                    <span>&nbsp;{{loggedInAs()}}</span>
+                </a>
+            </div>
         </div>
-    </div>
-    <div *ngIf="menuIsOpen" class="middle-link" fxFlex="40%" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center">
-        <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/search']">Suche</a></div>
-        <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/collections']">Sammlungen</a></div>
-        <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/help']">Hilfe</a></div>
-        <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/contact']">Kontakt</a></div>
-        <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a href="http://lib.langzeitarchivierung.ch">Bibliotheken</a></div>
-    </div>
-    <div class="login-screen" fxHide.lt-sm="true">
-        <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto" fxShow.lt-sm="false">
-            <a [routerLink]="['/login']">Login:
-                <span>&nbsp;{{loggedInAs()}}</span>
-            </a>
-        </div>
-    </div>
-</nav>
+    </nav>
 
     <main class="container">
 
-<article class="container-main-logo">
-    <a [routerLink]="['/search']">
-        <img class="main-logo responsive" src="./assets/stga-logo.png"/>
-    </a>
-</article>
+        <article class="container-main-logo">
+            <a [routerLink]="['/search']">
+                <img class="main-logo responsive" src="./assets/stga-logo.png"/>
+            </a>
+        </article>
 
+        <router-outlet></router-outlet>
 
-    <router-outlet></router-outlet>
-</main>
+    </main>
 
-<footer class="mat-typography">
-    <a href="http://dhlab.unibas.ch/">Digital Humanities Lab | University of Basel</a> © 2018
-</footer>
+    <footer class="mat-typography">
+        <a href="http://dhlab.unibas.ch/">Digital Humanities Lab | University of Basel</a> © 2019
+    </footer>
 
 </div>
 
