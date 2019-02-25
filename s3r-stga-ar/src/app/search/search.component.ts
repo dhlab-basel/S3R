@@ -71,7 +71,7 @@ export class SearchComponent implements OnInit {
                 console.log(this.data);
             } else {
                 this.data = data["data"];
-                console.log("found more than 1 resutlt");
+                console.log("found more than 1 result");
             }
         }, (error) => console.log(error));
 

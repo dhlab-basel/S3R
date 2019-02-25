@@ -171,26 +171,27 @@ function readAllResFullText(searchwords)
     local trivialCond = "id==0"
     local statement
 
-    local parameters = {"title", "creator", "subject", "description", "publisher", "contributor", "type", "format", "identifier", "source", "language", "relation", "coverage", "rights", "filename", "mimetype"}
+    local parameters = {"title", "creator", "subject", "description", "publisher", "contributor", "type", "format", "identifier", "source", "language", "relation", "coverage", "rights", "filename", "mimetype", "date_start", "date_end"}
 
     if (searchwords ~= nil) and (#searchwords ~= 0) then
 
-        for key, searchword in pairs (searchwords) do
+        for key1, paramName in pairs(parameters) do
 
-            for k, paramName in pairs(parameters) do
-                statement = like(paramName, searchword)
-                trivialCond = orOperator({trivialCond, statement})
+            for key2, searchword in pairs(searchwords) do
+
+                local s1 = like(paramName, searchword)
+
+                if (key2 == 1) then
+                    statement = s1
+                else
+                    statement = andOperator({statement, s1})
+                end
+
             end
 
-            -- Search statement in time period if searchwords is number
-            if (tonumber(searchword) ~= nil) then
-                local s1 = greaterThanEqual(searchword, "date_start")
-                local s2 = lessThanEqual(searchword, "date_end")
-                statement = "(" .. andOperator({s1, s2}) .. ")"
-                trivialCond = orOperator({trivialCond, statement})
-            end
+            statement = "(" .. statement .. ")"
+            trivialCond = orOperator({trivialCond, statement})
 
-            -- Search in collection -> CROSS JOIN
         end
 
     else
@@ -213,6 +214,7 @@ function readAllResFullText(searchwords)
 
     return allData
 end
+
 
 -------------------------------------------------------------------------------
 -- Updates a resource from the database
