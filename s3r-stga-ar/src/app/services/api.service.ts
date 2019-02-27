@@ -10,7 +10,7 @@ import {Params} from "@angular/router";
 export class ApiService {
 
     // public static readonly API_URL = "http://localhost:1024/api";
-    private static readonly API_URL = "http://sipi.langzeitarchivierung.ch:80/api";
+    public static readonly API_URL = "http://sipi.langzeitarchivierung.ch:80/api";
 
     constructor(private httpClient: HttpClient) {
     }
