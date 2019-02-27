@@ -1,6 +1,10 @@
 <h2 mat-dialog-title>Login</h2>
 
-<mat-dialog-content>
+<div mat-dialog-content class="error" *ngIf="loginFailed">
+    {{loginFailedMessage}}
+</div>
+
+<mat-dialog-content (keydown)="resetLoginFailed()" (keyup.enter)="login()">
 
     <div class="extended-row form-field-row" fxLayout="row" fxLayout.lt-md="column">
         <mat-form-field fxFlex>

@@ -1,37 +1,40 @@
 import {Injectable} from "@angular/core";
 import {ApiService} from "./api.service";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs/index";
+import {map} from "rxjs/internal/operators";
 
 @Injectable({
     providedIn: "root"
 })
 export class LoginService {
-    private loginSuccessful: boolean;
 
-    constructor(private apiService: ApiService) {
-        this.loginSuccessful = false;
+    constructor(private httpClient: HttpClient) {
     }
 
     isLoggedIn(): boolean {
-        return this.loginSuccessful;
+        return (localStorage.getItem("token") !== null);
     }
 
     loggedInAs(): string {
-        return this.loginSuccessful ? "Admin" : "Gast";
+        return this.isLoggedIn() ? localStorage.getItem("name") : "Gast";
     }
 
-    login(name: string, password: string) {
-        // this.apiService.login(name, password)
-        //     .subscribe((data) => {
-        //     console.log(data);
-        //         if (data["status"] === 200) {
-        //             this.loginSuccessful = true;
-        //         }
-        //     });
+    login(name: string, pw: string):Observable<any> {
+        const fd = new FormData();
+        fd.append("name", name);
+        fd.append("password", pw);
 
-        this.loginSuccessful = true;
+        return this.httpClient.post(`${ApiService.API_URL}/login`, fd, {observe: "response"})
+            .pipe(map(result => {
+                localStorage.setItem("token", result.body["token"]);
+                localStorage.setItem("name", name);
+                return result;
+            }))
     }
 
     logout() {
-        this.loginSuccessful = false;
+        localStorage.removeItem("token");
+        localStorage.removeItem("name")
     }
 }

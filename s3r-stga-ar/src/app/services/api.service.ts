@@ -9,17 +9,10 @@ import {Params} from "@angular/router";
 
 export class ApiService {
 
-    // private static readonly API_URL = "http://localhost:1024/api";
+    // public static readonly API_URL = "http://localhost:1024/api";
     private static readonly API_URL = "http://sipi.langzeitarchivierung.ch:80/api";
 
     constructor(private httpClient: HttpClient) {
-    }
-
-    login(name: string, pw: string): Observable<any> {
-        const fd = new FormData();
-        fd.append("name", name);
-        fd.append("password", pw);
-        return this.httpClient.post(`${ApiService.API_URL}/login`, fd, {observe: "response"});
     }
 
     getLanguages(): Observable<any> {
