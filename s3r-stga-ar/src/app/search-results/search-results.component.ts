@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, SimpleChanges} from "@angular/core";
 import {Router} from "@angular/router";
 import {ApiService} from "../services/api.service";
+import {File} from "../model/file";
 
 export interface Data {
     key: string;
@@ -36,7 +37,7 @@ export class SearchResultsComponent implements OnInit {
     showFileType: boolean;
     showYear: boolean;
 
-    constructor(private router: Router, private apiService: ApiService) {
+    constructor(private router: Router, private apiService: ApiService, private file: File) {
     }
 
     ngOnInit() {
@@ -216,5 +217,9 @@ export class SearchResultsComponent implements OnInit {
 
     showTextYear(): string {
         return this.showYear ? "Alle anzeigen": "Weniger anzeigen";
+    }
+
+    mimeTypeToSimpleForm(mimeType: string): string {
+        return this.file.mimeTypeToSimpleForm(mimeType);
     }
 }

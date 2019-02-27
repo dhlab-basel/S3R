@@ -41,7 +41,7 @@
 
                             <div class="filter-list">
                                 <div class="filter-line" [routerLink]="[]" [queryParams]="{filter: 'type_'+ filetype[0]}" queryParamsHandling="merge" *ngFor="let filetype of filetypeList; index as i">
-                                    <a *ngIf="i<amountFilterResults" class="filter-value">{{filetype[0]}} &nbsp;<span style="color: darkgray;font-size: smaller"> ({{filetype[1]}})</span></a>
+                                    <a *ngIf="i<amountFilterResults" class="filter-value">{{mimeTypeToSimpleForm(filetype[0])}} <span style="color: darkgray;font-size: smaller"> ({{filetype[1]}})</span></a>
                                     <a *ngIf="i>=amountFilterResults" [hidden]="showFileType" class="filter-value">{{filetype[0]}} &nbsp;<span style="color: darkgray;font-size: smaller"> ({{filetype[1]}})</span></a>
                                 </div>
                                 <div class="fold-text" *ngIf="filetypeList.length>amountFilterResults" (click)="showAllLessFileType()">{{showTextFileType()}}</div>
