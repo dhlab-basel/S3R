@@ -107,7 +107,7 @@ export class SearchResultsComponent implements OnInit {
             (totals, p) => {
                 console.log(p.date_start, p.date_end);
                 if (p.date_start !== p.date_end) {
-                    return ({...totals, "Zeitperiode" : (totals["Zeitperiode"] || 0) + 1 });
+                    return ({...totals, [ `${p.date_start}-${p.date_end}`] : (totals[`${p.date_start}-${p.date_end}`] || 0) + 1 });
                 } else {
                     return ({...totals, [p.date_start]: (totals[p.date_start] || 0) + 1 });
                 }
@@ -164,12 +164,11 @@ export class SearchResultsComponent implements OnInit {
 
     filterYear(year: string) {
         this.abortFilter();
-        if (year === "Zeitperiode") {
-            console.log("Zeitperiode");
-            this.sortedFilteredResults = this.sortedFilteredResults.filter((element) => element["date_start"] !== element["date_end"]);
+        if (year.indexOf("-") > -1) {
+            const periods = year.split("-");
+            this.sortedFilteredResults = this.sortedFilteredResults.filter((element) => ((element["date_start"] === parseInt(periods[0])) && (element["date_end"] === parseInt(periods[1]))));
         } else {
-            console.log("keine Zeitperiode");
-            this.sortedFilteredResults = this.sortedFilteredResults.filter((element) => element["date_start"] === parseInt(year));
+            this.sortedFilteredResults = this.sortedFilteredResults.filter((element) => element["date_start"] === parseInt(year) && element["date_end"] === parseInt(year));
         }
         this.applySort(this.sortSelected);
     }
