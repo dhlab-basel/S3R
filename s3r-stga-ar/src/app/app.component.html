@@ -9,7 +9,7 @@
                 <img class="logo" src="./assets/dhlab-logo.png"/>
             </div>
             <div fxShow.gt-xs="false">
-                <a [routerLink]="['/login']">
+                <a (click)="openLoginDialog()">
                     <img class="login" fxFlexAlign="end" src="./assets/login_white.png"/>
                 </a>
             </div>
