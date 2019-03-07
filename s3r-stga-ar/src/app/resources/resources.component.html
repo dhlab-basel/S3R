@@ -69,6 +69,17 @@
                     </div>
                 </div>
                 <div class="card-subtitle-container">
+                    <div class="card-subtitle">Zitiertext</div>
+                    <mat-divider [inset]="true"></mat-divider>
+                </div>
+                <div fxLayout="row">
+                    <div style="border: 1px solid lightgrey; background-color: white;padding:10px 20px;">
+                        {{this.data.creator}}: {{this.data.title}}. {{this.data.publisher}}, {{convertDate(this.data.date_start, this.data.date_end)}}. {{this.data.identifier}}
+                    </div>
+                    <button mat-flat-button><img class="button-icon" src="./assets/edit.png"/>Kopieren</button>
+                </div>
+
+                <div class="card-subtitle-container">
                     <div class="card-subtitle">Dateianpassung</div>
                     <mat-divider [inset]="true"></mat-divider>
                 </div>
