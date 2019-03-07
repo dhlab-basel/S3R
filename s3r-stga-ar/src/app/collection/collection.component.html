@@ -1,5 +1,9 @@
 <article class="edit-collect">
-    <h2 mat-dialog-title>{{collectionName}}</h2>
+    <h3 mat-dialog-title>
+        <span class="link" *ngFor="let col of path; let i = index" [routerLink]="['/collections', col['id']]">
+            {{col["name"]}}<span *ngIf="i != path.length-1">>&nbsp;</span>
+        </span>
+    </h3>
     <div *ngIf="isLoggedIn">
         <button mat-button (click)="createRes()" *ngIf="isLeaf">
             <img class="button-icon" src="./assets/add.png">Objekt hochladen

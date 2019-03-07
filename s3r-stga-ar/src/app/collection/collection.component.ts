@@ -36,6 +36,7 @@ export class CollectionComponent implements OnInit {
     sort: string;
     filter: string;
     isLoggedIn: boolean;
+    path: {id: number, name: string} [];
 
     constructor(private createResDialog: MatDialog,
                 private createColDialog: MatDialog,
@@ -52,6 +53,7 @@ export class CollectionComponent implements OnInit {
                 .subscribe((data) => {
                     this.collectionName = data["data"]["name"];
                     this.isLeaf = data["data"]["isLeaf"];
+                    this.path = data["data"]["path"].reverse();
                 });
             this.apiService.getCollectionCollections(parseInt(params["id"]))
                 .subscribe((data) => {
