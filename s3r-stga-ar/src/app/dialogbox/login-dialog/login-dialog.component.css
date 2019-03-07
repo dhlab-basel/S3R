@@ -1,4 +1,4 @@
-.login-button {
+.login {
     /*Stiftungsbibliothek*/
     /*background-color: rgb(255, 183, 86);*/
     background-color: rgb(249, 190, 148);
@@ -14,5 +14,13 @@
     border: 1px solid darkred;
     color: darkred;
     background: rgb(255, 230, 230);
+    padding: 10px;
+}
+
+.success {
+    margin: 10px 0 15px;
+    border: 1px solid seagreen;
+    color: seagreen;
+    background: rgb(230, 255, 230);
     padding: 10px;
 }

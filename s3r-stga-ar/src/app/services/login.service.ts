@@ -1,15 +1,17 @@
 import {Injectable} from "@angular/core";
 import {ApiService} from "./api.service";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs/index";
+import {BehaviorSubject, Observable} from "rxjs/index";
 import {map} from "rxjs/internal/operators";
 
 @Injectable({
     providedIn: "root"
 })
 export class LoginService {
+    private loggedIn: BehaviorSubject<boolean>;
 
     constructor(private httpClient: HttpClient) {
+        this.loggedIn = new BehaviorSubject(this.isLoggedIn());
     }
 
     isLoggedIn(): boolean {
@@ -29,12 +31,18 @@ export class LoginService {
             .pipe(map(result => {
                 localStorage.setItem("token", result.body["token"]);
                 localStorage.setItem("name", name);
+                this.loggedIn.next(true);
                 return result;
             }))
     }
 
+    sub() {
+        return this.loggedIn.asObservable();
+    }
+
     logout() {
         localStorage.removeItem("token");
-        localStorage.removeItem("name")
+        localStorage.removeItem("name");
+        this.loggedIn.next(false);
     }
 }

@@ -12,6 +12,8 @@ export class LoginDialogComponent implements OnInit {
     pw: string;
     loginFailed: boolean;
     loginFailedMessage: string;
+    logoutSuccess: boolean;
+    logoutSuccessMessage: string;
 
     constructor(private dialogRef: MatDialogRef<LoginDialogComponent>, @Inject(MAT_DIALOG_DATA) data, private loginService: LoginService) {
     }
@@ -38,10 +40,26 @@ export class LoginDialogComponent implements OnInit {
 
     resetLoginFailed() {
         this.loginFailed = false;
+        this.logoutSuccess = false;
     }
 
     cancel() {
         this.dialogRef.close();
+    }
+
+    logout() {
+        this.loginService.logout();
+        this.logoutSuccess = true;
+        this.logoutSuccessMessage = "Sie haben sich erfolgreich ausgeloggt!"
+    }
+
+
+    isLoggedIn(): boolean {
+        return this.loginService.isLoggedIn();
+    }
+
+    loggedInAs(): string {
+        return this.loginService.loggedInAs();
     }
 
 }

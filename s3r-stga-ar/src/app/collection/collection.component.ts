@@ -65,7 +65,10 @@ export class CollectionComponent implements OnInit {
                 });
         });
 
-        this.isLoggedIn = loginService.isLoggedIn();
+        this.loginService.sub().subscribe(data => {
+            this.isLoggedIn = data;
+        });
+
     }
 
     ngOnInit() {

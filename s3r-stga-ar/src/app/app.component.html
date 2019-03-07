@@ -23,7 +23,7 @@
         </div>
         <div class="login-screen" fxHide.lt-sm="true">
             <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto" fxShow.lt-sm="false">
-                <a [routerLink]="['/login']">Login:
+                <a (click)="openLoginDialog()">Login:
                     <span>&nbsp;{{loggedInAs()}}</span>
                 </a>
             </div>

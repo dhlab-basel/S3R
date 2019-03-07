@@ -36,7 +36,7 @@ export class ResourcesComponent implements OnInit {
             this.setResourceData();
             console.log(`The ID is: ${this.id}`);
         });
-        this.isLoggedIn = this.loginService.isLoggedIn();
+        this.loginService.sub().subscribe(data => this.isLoggedIn = data);
     }
 
     ngOnInit() {
