@@ -18,6 +18,7 @@ export class CreateResComponent implements OnInit {
     form: FormGroup;
     submitted: boolean;
     fileUploadBorder: any;
+    private static readonly DEFAULT_RIGHTS = "CC";
 
     constructor(private dialogRef: MatDialogRef<CreateResComponent>, @Inject(MAT_DIALOG_DATA) data,
                 private apiService: ApiService,
@@ -45,7 +46,7 @@ export class CreateResComponent implements OnInit {
             format: new FormControl("", [Validators.required]),
             identifier: new FormControl("", [Validators.required]),
             language: new FormControl("", []),
-            rights: new FormControl("", [Validators.required])
+            rights: new FormControl(CreateResComponent.DEFAULT_RIGHTS, [Validators.required])
 
             // Dublin Core Fields which are not used
             // source: new FormControl("", []),
