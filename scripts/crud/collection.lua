@@ -33,10 +33,17 @@ end
 -- @return  'data' (table): returns the data of the collection
 -------------------------------------------------------------------------------
 function readCol(id)
+    local data
+    local path = {}
+
     local db = sqlite(dbPath, "RW")
     local qry = db << selectIDQuery(id, colTable)
     local row = qry()
-    local data
+
+    -- delete query and free prepared statment
+    qry =~ qry;
+    -- delete the database connection
+    db =~ db;
 
     if (row ~= nil) then
         -- ACHTUNG: "row[0]" IST EIGENTLICH LUA-SYNTAKTISCH FALSCH
@@ -45,12 +52,25 @@ function readCol(id)
         data["name"] = row[1]
         data["collection_id"] =  { ["id"] = row[2], ["url"] = "/api/collections/" .. row[2]}
         data["isLeaf"] = row[3]
-    end
 
-    -- delete query and free prepared statment
-    qry =~ qry;
-    -- delete the database connection
-    db =~ db;
+        local parentCol_id = row[0]
+        repeat
+            local db = sqlite(dbPath, "RW")
+            qry = db << selectIDQuery(parentCol_id, colTable)
+            row = qry()
+            if (row ~= nil) then
+                table.insert(path, { ["id"] = row[0], ["name"] = row[1] })
+                parentCol_id = row[2]
+            end
+
+            -- delete query and free prepared statment
+            qry =~ qry;
+            -- delete the database connection
+            db =~ db;
+        until parentCol_id == 1 and row[0] == 1
+
+        data["path"] = path
+    end
 
     return data
 end

@@ -19,6 +19,7 @@ export class ResourcesComponent implements OnInit {
     id: number;
     data: any;
     collection: string;
+    path: {id: number, name: string} [];
     fileSize: string;
     isLoggedIn: boolean;
 
@@ -48,6 +49,7 @@ export class ResourcesComponent implements OnInit {
             this.apiService.getCollection(data["data"]["collection_id"]["id"])
                 .subscribe((collection) => {
                     this.collection = collection["data"]["name"];
+                    this.path = collection["data"]["path"].reverse();
                 });
         });
     }
