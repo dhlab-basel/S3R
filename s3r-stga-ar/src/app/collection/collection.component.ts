@@ -57,7 +57,7 @@ export class CollectionComponent implements OnInit {
                 });
             this.apiService.getCollectionCollections(parseInt(params["id"]))
                 .subscribe((data) => {
-                    this.foundChildren = data["data"].sort((a, b) => a.name < b.name ? -1: a.name > b.name ? 1:  0 );
+                    this.foundChildren = this.sortAlphabetic(data["data"]);
                 });
             this.apiService.getCollectionResources(parseInt(params["id"]))
                 .subscribe((data) => {
@@ -79,6 +79,10 @@ export class CollectionComponent implements OnInit {
                 this.sort = queries["sort"];
                 this.filter = queries["filter"];
             });
+    }
+
+    sortAlphabetic(data: any[]): any[] {
+        return data.sort((a, b) => a.name < b.name ? -1: a.name > b.name ? 1:  0 );
     }
 
     findChildrenByParent(id: number, children: any[]) {
@@ -135,7 +139,8 @@ export class CollectionComponent implements OnInit {
                 });
             this.apiService.getCollectionCollections(parseInt(this.collectionID))
                 .subscribe((result) => {
-                    this.foundChildren = result["data"];
+                    console.log("bla", result["data"]);
+                    this.foundChildren = this.sortAlphabetic(result["data"]);
                 });
         });
     }
@@ -159,7 +164,7 @@ export class CollectionComponent implements OnInit {
                 });
             this.apiService.getCollectionCollections(parseInt(this.collectionID))
                 .subscribe((data) => {
-                    this.foundChildren = data["data"];
+                    this.foundChildren = this.sortAlphabetic(data["data"]);
                 });
         });
     }
@@ -182,7 +187,7 @@ export class CollectionComponent implements OnInit {
                     });
                 this.apiService.getCollectionCollections(parseInt(this.collectionID))
                     .subscribe((result) => {
-                        this.foundChildren = result["data"];
+                        this.foundChildren = this.sortAlphabetic(result["data"]);
                     });
                 this.apiService.getCollectionResources(parseInt(this.collectionID))
                     .subscribe((result) => {
