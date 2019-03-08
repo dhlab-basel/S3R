@@ -46,6 +46,18 @@ if (collection == nil) then
     return
 end
 
+-- Checks if resource already exists
+local params = {}
+table.insert(params, {"title", "EQ", parameters["title"], null })
+table.insert(params, {"date", "EQ", parameters["date_start"], parameters["date_end"] })
+table.insert(params, {"creator", "EQ", parameters["creator"], null})
+
+if (#readAllRes(params) ~= 0) then
+    server.sendHeader('Content-type', 'application/json')
+    server.sendStatus(409)
+    return
+end
+
 -- Replaces file
 if (server.uploads ~= nil) then
     parameters = updateFile(parameters, data["filename"])

@@ -2,7 +2,11 @@
 
     <h2 mat-dialog-title>Objekt editieren</h2>
 
-    <mat-dialog-content>
+    <div mat-dialog-content class="error" *ngIf="existingObject">
+        {{existingObjectMessage}}
+    </div>
+
+    <mat-dialog-content (keydown)="resetExistingObject()">
 
             <div style="border: 1px solid darkgray; background: whitesmoke">
                 <div style="padding: 0 20px 20px 20px">

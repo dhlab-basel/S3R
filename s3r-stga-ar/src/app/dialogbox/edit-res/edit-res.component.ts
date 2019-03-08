@@ -20,6 +20,8 @@ export class EditResComponent implements OnInit {
     form: FormGroup;
     submitted: boolean;
     choseFile: boolean;
+    existingObject: boolean;
+    existingObjectMessage: string = "Dieses Objekt existiert bereits! Ändern Sie den Titel, Autor oder die Jahreszahlen";
 
     constructor(private dialogRef: MatDialogRef<EditResComponent>, @Inject(MAT_DIALOG_DATA) data,
                 private apiService: ApiService,
@@ -39,6 +41,7 @@ export class EditResComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.resetExistingObject();
         this.submitted = false;
         this.choseFile = false;
         this.id = this.resource["id"];
@@ -105,10 +108,18 @@ export class EditResComponent implements OnInit {
 
         this.apiService.updateResource(this.resource["id"], fd)
             .subscribe((data) => {
-                console.log(data);
+                this.dialogRef.close();
+            }, (error) => {
+                if (error.status === 409) {
+                    this.existingObject = true;
+                } else {
+                    console.log("failed")
+                }
             });
+    }
 
-        this.dialogRef.close();
+    resetExistingObject() {
+        this.existingObject = false;
     }
 
     cancel() {
