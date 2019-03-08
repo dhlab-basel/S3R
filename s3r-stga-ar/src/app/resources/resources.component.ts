@@ -107,24 +107,11 @@ export class ResourcesComponent implements OnInit {
     }
 
     showPicture() {
-        // this.apiService.getResourceThumbnail(this.id, "large").subscribe((data) => {
-        //     console.log(data);
-        //     const fileURL = URL.createObjectURL(data.body);
-        //     window.open(fileURL, "_blank");
-        // })
-
-        console.log("show picture");
         this.apiService.getResourcePreview(this.id).subscribe((data) => {
             console.log(data);
             const fileURL = URL.createObjectURL(data.body);
             window.open(fileURL, "_blank");
         })
-
-        // this.apiService.getResourceFile(this.id).subscribe((data) => {
-        //     console.log(data);
-        //     const fileURL = URL.createObjectURL(data.body);
-        //     window.open(fileURL, "_blank");
-        // });
     }
 
     getThumbnail(): string {

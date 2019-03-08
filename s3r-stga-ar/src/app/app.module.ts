@@ -9,7 +9,6 @@ import {ExtendedSearchComponent} from "./extended-search/extended-search.compone
 import {CollectionComponent} from "./collection/collection.component";
 import {HelpComponent} from "./help/help.component";
 import {ContactComponent} from "./contact/contact.component";
-import {LoginComponent} from "./login/login.component";
 import {CreateResComponent} from "./dialogbox/create-res/create-res.component";
 import {EditResComponent} from "./dialogbox/edit-res/edit-res.component";
 import {DeleteResComponent} from "./dialogbox/delete-res/delete-res.component";
@@ -57,7 +56,6 @@ const routes: Routes = [
         CollectionComponent,
         HelpComponent,
         ContactComponent,
-        LoginComponent,
         ExtendedSearchComponent,
         SearchResultsComponent,
         ResourcesComponent,
