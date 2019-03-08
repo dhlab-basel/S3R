@@ -18,6 +18,8 @@ export class CreateResComponent implements OnInit {
     form: FormGroup;
     submitted: boolean;
     fileUploadBorder: any;
+    existingObject: boolean;
+    existingObjectMessage: string = "Dieses Objekt existiert bereits! Ändern Sie den Titel, Autor oder die Jahreszahlen";
     private static readonly DEFAULT_RIGHTS = "CC";
 
     constructor(private dialogRef: MatDialogRef<CreateResComponent>, @Inject(MAT_DIALOG_DATA) data,
@@ -28,6 +30,7 @@ export class CreateResComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.resetExistingObject();
         this.apiService.getLanguages()
             .subscribe((data) => {
                 this.languageList = data.data;
@@ -56,6 +59,7 @@ export class CreateResComponent implements OnInit {
     }
 
     create() {
+        this.resetExistingObject();
         this.submitted = true;
 
         if (this.form.invalid) {
@@ -94,13 +98,22 @@ export class CreateResComponent implements OnInit {
 
         this.apiService.createResource(fd)
             .subscribe((result) => {
-                console.log(result);
+                this.dialogRef.close();
+            }, (error) => {
+                if (error.status === 409) {
+                    this.existingObject = true;
+                } else {
+                    console.log("failed")
+                }
             });
-        this.dialogRef.close();
     }
 
     cancel() {
         this.dialogRef.close();
+    }
+
+    resetExistingObject() {
+        this.existingObject = false;
     }
 
     onFileSelect(event) {
