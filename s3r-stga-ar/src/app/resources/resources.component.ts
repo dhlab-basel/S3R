@@ -9,6 +9,7 @@ import {saveAs} from "file-saver";
 import {File} from "../model/file";
 import {LoginService} from "../services/login.service";
 import {LoginDialogComponent} from "../dialogbox/login-dialog/login-dialog.component";
+import {FileNotFoundComponent} from "../dialogbox/file-not-found/file-not-found.component";
 
 @Component({
     selector: "app-resources",
@@ -27,6 +28,7 @@ export class ResourcesComponent implements OnInit {
                 private editDialog: MatDialog,
                 private deleteDialog: MatDialog,
                 private loginDialog: MatDialog,
+                private fileNotFound: MatDialog,
                 private apiService: ApiService,
                 private location: Location,
                 public fileService: File,
@@ -77,7 +79,6 @@ export class ResourcesComponent implements OnInit {
     }
 
     openLoginDialog() {
-        console.log("open login");
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
@@ -93,9 +94,14 @@ export class ResourcesComponent implements OnInit {
     }
 
     downloadFile() {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
         this.apiService.getResourceFile(this.id).subscribe((data) => {
             const contDis = data.headers.get("Content-Disposition");
             saveAs(data.body, contDis.substring(contDis.indexOf("filename=") + 9));
+        }, (error) => {
+            this.fileNotFound.open(FileNotFoundComponent, dialogConfig);
         });
     }
 
@@ -107,10 +113,14 @@ export class ResourcesComponent implements OnInit {
     }
 
     showPicture() {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
         this.apiService.getResourcePreview(this.id).subscribe((data) => {
-            console.log(data);
             const fileURL = URL.createObjectURL(data.body);
             window.open(fileURL, "_blank");
+        }, (error) => {
+            this.fileNotFound.open(FileNotFoundComponent, dialogConfig);
         })
     }
 

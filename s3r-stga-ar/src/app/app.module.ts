@@ -32,6 +32,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {LoginDialogComponent} from "./dialogbox/login-dialog/login-dialog.component";
 import {LoginService} from "./services/login.service";
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { FileNotFoundComponent } from './dialogbox/file-not-found/file-not-found.component';
 
 const routes: Routes = [
     {path: "search", component: SearchComponent},
@@ -63,7 +64,8 @@ const routes: Routes = [
         DeleteColComponent,
         CreateColComponent,
         LoginDialogComponent,
-        PageNotFoundComponent
+        PageNotFoundComponent,
+        FileNotFoundComponent
     ],
     imports: [
         RouterModule.forRoot(routes),
@@ -98,7 +100,8 @@ const routes: Routes = [
         CreateColComponent,
         EditColComponent,
         DeleteColComponent,
-        LoginDialogComponent
+        LoginDialogComponent,
+        FileNotFoundComponent
     ]
 })
 export class AppModule {

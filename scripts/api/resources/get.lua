@@ -306,7 +306,8 @@ function getPreviewContent()
     local succes, img = SipiImage.new("files/" .. serverFilename)
 
     if (not succes) then
-        print("fail")
+        print("image not found and could not be created")
+        server.sendStatus(500)
         return
     end
 
@@ -315,7 +316,8 @@ function getPreviewContent()
     local dimsSuccess, dims = img.dims(img)
 
     if (not dimsSuccess) then
-        print("fail")
+        print("image could not be scaled")
+        server.sendStatus(500)
         return
     end
 
