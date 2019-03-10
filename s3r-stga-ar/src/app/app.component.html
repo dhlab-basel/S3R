@@ -6,7 +6,9 @@
                 <img *ngIf="menuIsOpen" class="hamburger" (click)="actionMenu()" fxFlexAlign="start" src="./assets/close_white.png"/>
             </div>
             <div class="container-logo" fxFlex=" 1 1 auto">
-                <img class="logo" src="./assets/dhlab-logo.png"/>
+                <a href="http://lib.langzeitarchivierung.ch">
+                    <img class="logo" src="./assets/dhlab-logo.png"/>
+                </a>
             </div>
             <div fxShow.gt-xs="false">
                 <a (click)="openLoginDialog()">
