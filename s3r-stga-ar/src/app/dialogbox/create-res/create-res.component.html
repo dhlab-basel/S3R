@@ -91,6 +91,14 @@
             <mat-error *ngIf="(submitted || form.get('rights').touched) && form.get('rights').invalid">{{getErrorRights()}}</mat-error>
         </mat-form-field>
 
+        <mat-form-field class="example-full-width">
+            <input matInput formControlName="signature" placeholder="Signatur">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input matInput formControlName="isbn" placeholder="ISBN">
+        </mat-form-field>
+
         <!--Dublin Core Fields which are not used-->
         <!--<mat-form-field class="example-full-width">-->
         <!--<input matInput formControlName="source" placeholder="Quelle">-->

@@ -49,7 +49,9 @@ export class CreateResComponent implements OnInit {
             format: new FormControl("", [Validators.required]),
             identifier: new FormControl("", [Validators.required]),
             language: new FormControl("", []),
-            rights: new FormControl(CreateResComponent.DEFAULT_RIGHTS, [Validators.required])
+            rights: new FormControl(CreateResComponent.DEFAULT_RIGHTS, [Validators.required]),
+            signature: new FormControl("", []),
+            isbn: new FormControl("", [])
 
             // Dublin Core Fields which are not used
             // source: new FormControl("", []),
@@ -89,6 +91,8 @@ export class CreateResComponent implements OnInit {
         fd.append("identifier", this.form.get("identifier").value);
         fd.append("language", this.form.get("language").value);
         fd.append("rights", this.form.get("rights").value);
+        fd.append("signature", this.form.get("signature").value);
+        fd.append("isbn", this.form.get("isbn").value);
         fd.append("collection_id", this.data["colID"]);
 
         // Dublin Core Fields which are not used

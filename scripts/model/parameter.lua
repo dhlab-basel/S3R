@@ -1,11 +1,3 @@
---
--- Created by IntelliJ IDEA.
--- User: vijeinath
--- Date: 03.05.18
--- Time: 13:12
--- To change this template use File | Settings | File Templates.
---
-
 function getResParams(serverParam)
     local parameters = {}
     local errMsg
@@ -26,7 +18,9 @@ function getResParams(serverParam)
         "relation",
         "coverage",
         "rights",
-        "collection_id"
+        "signature",
+        "isbn",
+        "collection_id",
     }
 
     -- Checks if all parameters are in the serverParams and allocates them to data structure

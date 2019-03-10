@@ -32,14 +32,16 @@ function getDublinCoreXML(data)
         "language",
         "relation",
         "coverage",
-        "rights"
+        "rights",
+        "signature",
+        "isbn"
     }
 
     local temp
     for key, value in pairs(paramList) do
         if (value == "date") then
             if ((data["date_start"] ~= nil) and (data["date_end"] ~= nil)) then
-                print(type(data["date_end"]))
+
                 if ((data["date_start"] == data["date_end"])) then
                     temp = content .. "\t" .. "<dc:".. value .. ">" .. data["date_start"]  .. "</dc:" .. value .. ">" .. "\n"
                 else

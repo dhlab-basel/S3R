@@ -171,7 +171,7 @@ function readAllResFullText(searchwords)
     local trivialCond = "id==0"
     local statement
 
-    local parameters = {"title", "creator", "subject", "description", "publisher", "contributor", "type", "format", "identifier", "source", "language", "relation", "coverage", "rights", "filename", "mimetype", "date_start", "date_end"}
+    local parameters = {"title", "creator", "subject", "description", "publisher", "contributor", "type", "format", "identifier", "source", "language", "relation", "coverage", "rights", "signature", "isbn", "filename", "mimetype", "date_start", "date_end"}
 
     if (searchwords ~= nil) and (#searchwords ~= 0) then
 
@@ -272,10 +272,12 @@ function getDataFormat(row)
     data["relation"] = row[14]
     data["coverage"] = row[15]
     data["rights"] = row[16]
-    data["collection_id"] =  { ["id"] = row[17], ["url"] = "/api/collections/" .. row[17]}
-    data["filename"] = row[18]
-    data["mimetype"] = row[19]
-    data["filesize"] = row[20]
+    data["signature"] = row[17]
+    data["isbn"] = row[18]
+    data["collection_id"] =  { ["id"] = row[19], ["url"] = "/api/collections/" .. row[19]}
+    data["filename"] = row[20]
+    data["mimetype"] = row[21]
+    data["filesize"] = row[22]
     data["url"] = "/api/resources/".. row[0] .."/file"
 
     return data

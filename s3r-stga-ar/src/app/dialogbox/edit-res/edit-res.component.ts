@@ -63,7 +63,9 @@ export class EditResComponent implements OnInit {
             format: new FormControl(this.file.mimeTypeToSimpleForm(this.resource["format"]), [Validators.required]),
             identifier: new FormControl(this.resource["identifier"], [Validators.required]),
             language: new FormControl(this.resource["language"]? this.resource["language"]: '', []),
-            rights: new FormControl(this.resource["rights"]? this.resource["rights"] : '', [Validators.required])
+            rights: new FormControl(this.resource["rights"]? this.resource["rights"] : '', [Validators.required]),
+            signature: new FormControl(this.resource["signature"]? this.resource["signature"] : '', []),
+            isbn: new FormControl(this.resource["isbn"]? this.resource["isbn"] : '', [])
 
             // Dublin Core Fields which are not used
             // source: new FormControl("", []),
@@ -98,6 +100,8 @@ export class EditResComponent implements OnInit {
         fd.append("identifier", this.form.get('identifier').value);
         fd.append("language", this.form.get('language').value);
         fd.append("rights", this.form.get('rights').value);
+        fd.append("signature", this.form.get('signature').value);
+        fd.append("isbn", this.form.get('isbn').value);
         fd.append("collection_id", this.form.get('collectionID').value);
 
         // Dublin Core Fields which are not used
