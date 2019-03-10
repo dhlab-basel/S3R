@@ -101,6 +101,9 @@ export class ResourcesComponent implements OnInit {
             const contDis = data.headers.get("Content-Disposition");
             saveAs(data.body, contDis.substring(contDis.indexOf("filename=") + 9));
         }, (error) => {
+            dialogConfig.data = {
+                message: "Die Datei wurde nicht gefunden!"
+            };
             this.fileNotFound.open(FileNotFoundComponent, dialogConfig);
         });
     }
@@ -120,6 +123,9 @@ export class ResourcesComponent implements OnInit {
             const fileURL = URL.createObjectURL(data.body);
             window.open(fileURL, "_blank");
         }, (error) => {
+            dialogConfig.data = {
+                message: "Die Datei wurde nicht gefunden!"
+            };
             this.fileNotFound.open(FileNotFoundComponent, dialogConfig);
         })
     }

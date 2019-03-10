@@ -7,9 +7,10 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
     styleUrls: ["./file-not-found.component.css"]
 })
 export class FileNotFoundComponent implements OnInit {
-    static readonly FILE_NOT_FOUND_MESSAGE = "Die Datei wurde nicht gefunden!";
+    message: string;
 
     constructor(private dialogRef: MatDialogRef<FileNotFoundComponent>, @Inject(MAT_DIALOG_DATA) data) {
+        this.message = data.message;
     }
 
     ngOnInit() {
@@ -17,10 +18,6 @@ export class FileNotFoundComponent implements OnInit {
 
     close() {
         this.dialogRef.close();
-    }
-
-    getMessage(): string {
-        return FileNotFoundComponent.FILE_NOT_FOUND_MESSAGE;
     }
 
 }

@@ -7,6 +7,7 @@ import {DeleteColComponent} from "../dialogbox/delete-col/delete-col.component";
 import {ActivatedRoute} from "@angular/router";
 import {ApiService} from "../services/api.service";
 import {LoginService} from "../services/login.service";
+import {FileNotFoundComponent} from "../dialogbox/file-not-found/file-not-found.component";
 
 export interface Parent {
     url: string;
@@ -42,6 +43,7 @@ export class CollectionComponent implements OnInit {
                 private createColDialog: MatDialog,
                 private editColDialog: MatDialog,
                 private deleteColDialog: MatDialog,
+                private deleteFailDialog: MatDialog,
                 private route: ActivatedRoute,
                 private apiService: ApiService,
                 private loginService: LoginService) {
@@ -100,7 +102,6 @@ export class CollectionComponent implements OnInit {
     }
 
     createRes() {
-        console.log("create res");
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
@@ -139,15 +140,12 @@ export class CollectionComponent implements OnInit {
                 });
             this.apiService.getCollectionCollections(parseInt(this.collectionID))
                 .subscribe((result) => {
-                    console.log("bla", result["data"]);
                     this.foundChildren = this.sortAlphabetic(result["data"]);
                 });
         });
     }
 
     editCol(collection: any) {
-        console.log("edit col");
-        console.log(collection);
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
@@ -170,7 +168,6 @@ export class CollectionComponent implements OnInit {
     }
 
     deleteCol(collection: any) {
-        console.log("delete col");
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
@@ -180,24 +177,32 @@ export class CollectionComponent implements OnInit {
         const t = this.deleteColDialog.open(DeleteColComponent, dialogConfig);
         t.afterClosed()
             .subscribe((data) => {
-                this.apiService.getCollection(parseInt(this.collectionID))
-                    .subscribe((result) => {
-                        this.collectionName = result["data"]["name"];
-                        this.isLeaf = result["data"]["isLeaf"];
-                    });
-                this.apiService.getCollectionCollections(parseInt(this.collectionID))
-                    .subscribe((result) => {
-                        this.foundChildren = this.sortAlphabetic(result["data"]);
-                    });
-                this.apiService.getCollectionResources(parseInt(this.collectionID))
-                    .subscribe((result) => {
-                        this.resources = result["data"];
-                        console.log(this.resources);
-                        this.containsRes = (this.resources.length !== 0);
-                    });
-                console.log(data);
-            }, (error) => {
-                console.log(error);
+                if (data.success) {
+                    this.apiService.getCollection(parseInt(this.collectionID))
+                        .subscribe((result) => {
+                            this.collectionName = result["data"]["name"];
+                            this.isLeaf = result["data"]["isLeaf"];
+                        });
+                    this.apiService.getCollectionCollections(parseInt(this.collectionID))
+                        .subscribe((result) => {
+                            this.foundChildren = this.sortAlphabetic(result["data"]);
+                        });
+                    this.apiService.getCollectionResources(parseInt(this.collectionID))
+                        .subscribe((result) => {
+                            this.resources = result["data"];
+                            console.log(this.resources);
+                            this.containsRes = (this.resources.length !== 0);
+                        });
+                } else {
+                    const dialogConfig2 = new MatDialogConfig();
+                    dialogConfig2.disableClose = true;
+                    dialogConfig2.autoFocus = true;
+                    dialogConfig2.data = {
+                        message: "Diese Sammlung kann nicht gelöscht werden, da es mindestens eine Sammlung bzw. ein Objekt beinhaltet"
+                    };
+                    this.deleteFailDialog.open(FileNotFoundComponent, dialogConfig2);
+
+                }
             }
         );
     }

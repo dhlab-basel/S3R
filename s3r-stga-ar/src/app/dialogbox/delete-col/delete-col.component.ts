@@ -17,19 +17,25 @@ export class DeleteColComponent implements OnInit {
     }
 
     ngOnInit() {
-
     }
 
     delete() {
         this.apiService.deleteCollection(this.collection["id"])
             .subscribe((data) => {
                 console.log(data);
+                this.dialogRef.close({
+                    success: true,
+                    status: null
+                });
+            }, (error) => {
+                this.dialogRef.close({
+                    success: false,
+                    status: error.status
+                });
             });
-        this.dialogRef.close();
     }
 
     abort() {
-        console.log("abbrechen");
         this.dialogRef.close();
     }
 }
