@@ -130,6 +130,10 @@ export class ResourcesComponent implements OnInit {
         })
     }
 
+    createQuoteString(): string {
+        return `${this.data.creator}: ${this.data.title}. ${this.data.publisher}, ${this.convertDate(this.data.date_start, this.data.date_end)}. ${this.data.identifier}`;
+    }
+
     getThumbnail(): string {
         return this.apiService.getResThumbnailURL(this.id, "medium");
     }
