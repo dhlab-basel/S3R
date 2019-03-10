@@ -46,8 +46,16 @@ if (collection == nil) then
     return
 end
 
+-- Checks if collection is a Leaf
+if (collection["isLeaf"] ~= 1) then
+    server.sendHeader('Content-type', 'application/json')
+    server.sendStatus(402)
+    return
+end
+
 -- Checks if resource already exists
 local params = {}
+table.insert(params, {"id", "!EQ", id, null })
 table.insert(params, {"title", "EQ", parameters["title"], null })
 table.insert(params, {"date", "EQ", parameters["date_start"], parameters["date_end"] })
 table.insert(params, {"creator", "EQ", parameters["creator"], null})
