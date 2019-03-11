@@ -1,3 +1,9 @@
+-------------------------------------------------------------------------------
+-- Parameter module which includes operator builder functions and query builder functions
+-- @module queryModule
+-- @author Vijeinath Tissaveerasingham
+-- @release 2019/03
+
 function getResParams(serverParam)
     local parameters = {}
     local errMsg

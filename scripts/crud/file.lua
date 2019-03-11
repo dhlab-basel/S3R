@@ -1,15 +1,13 @@
 
-path = "./files/"
+m = require ("./config/s3r-config")
 
 -------------------------------------------------------------------------------
---|                           CRUD Operations                               |--
--------------------------------------------------------------------------------
+-- @section All CRUD Operations on a file
 
 -------------------------------------------------------------------------------
 -- Creates a file on the file system
 -- @param   'parameters' (table):  table with name of parameter and value
 -- @return  'parameters' (table):  table with added metadata about the file
--------------------------------------------------------------------------------
 function createFile(parameters)
     for fileIndex, fileParam in pairs(server.uploads) do
 
@@ -59,10 +57,9 @@ end
 -- @param   'filename' (string):  name of the file with the file ending
 -- @return  'content': content of the file
 -- @return  'errMsg': Error if file does not exists
--------------------------------------------------------------------------------
 function readFile(filename)
     local content, errMsg
-    local file = io.open(path .. filename)
+    local file = io.open(m.files.dir .. filename)
 
     if (file) then
         io.input(file)
@@ -80,7 +77,6 @@ end
 -- @param   'parameters' (table):  table with name of parameter and value
 -- @param   'filename' (string):  name of the file with the file ending
 -- @return  'parameters' (table):  table with updated data and metadata about the file
--------------------------------------------------------------------------------
 function updateFile(parameters, filename)
     parameters = createFile(parameters)
     deleteFile(filename)
@@ -90,9 +86,8 @@ end
 -------------------------------------------------------------------------------
 -- Deletes the file on the file system
 -- @param   'filename' (string):  name of the file with the file ending
--------------------------------------------------------------------------------
 function deleteFile(fileName)
-    if (os.remove(path .. fileName)) then
+    if (os.remove(m.files.dir .. fileName)) then
         print("file deleted")
     else
         print("file could not be deleted")
@@ -100,15 +95,13 @@ function deleteFile(fileName)
 end
 
 -------------------------------------------------------------------------------
---|                             Other Function                              |--
--------------------------------------------------------------------------------
+--@section Other Function
 
 -------------------------------------------------------------------------------
 -- Generates the file name
 -- @param   'data' (table): data of a resource
 -- @return  (string): generated file name
 -- @return  (errMsg): error if file name could not be generated
--------------------------------------------------------------------------------
 function generateFileName(data)
     local year, title, identifier, ending, dump, errMsg
 
@@ -118,10 +111,16 @@ function generateFileName(data)
         year = data["date_start"] .. "-" .. data["date_end"]
     end
 
+    -- Replace space with "-"
+    identifier, dump = string.gsub(data["identifier"], " ", "-")
     title, dump = string.gsub(data["title"], " ", "-")
+    -- Eliminate "."
     title, dump = string.gsub(title, "%.", "")
+    -- Replace "ä" with "ae"
     title, dump = string.gsub(title, "ä", "ae")
+    -- Replace "ö" with "oe"
     title, dump = string.gsub(title, "ö", "oe")
+    -- Replace "ü" with "üe"
     title, dump = string.gsub(title, "ü", "ue")
     title = title:sub(1,1):upper()..title:sub(2)
 
@@ -132,5 +131,5 @@ function generateFileName(data)
         errMsg = 500
     end
 
-    return year .. "_" .. title ..  "_" .. data["identifier"] .. "." .. ending, errMsg
+    return year .. "_" .. title ..  "_" .. identifier .. "." .. ending, errMsg
 end
