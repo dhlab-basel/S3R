@@ -186,22 +186,6 @@ function getFileResource()
         return
     end
 
---    local filename = data["filename"]
---    local mimetype = data["mimetype"]
---
---    if (filename ~= nil) and (mimetype ~= nil) then
---        local fileContent = readFile(filename)
---        if (fileContent ~= nil) then
---            server.setBuffer()
---            server.sendHeader('Content-type', mimetype)
---            server.sendStatus(200)
---            server.print(fileContent)
---            return
---        else
---            print("failed to read file")
---        end
---    end
-
     local serverFilename = data["filename"]
     local mimetype = data["mimetype"]
 
