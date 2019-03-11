@@ -1,7 +1,5 @@
+dbM = require ("./config/s3r-config").database
 require "./model/query"
-
-dbPath = "testDB/test_stga_v1.db"
-resTable = "resource"
 
 -------------------------------------------------------------------------------
 --|                           CRUD Operations                               |--
@@ -13,8 +11,8 @@ resTable = "resource"
 -- @return  (string): ID of the created resource
 -------------------------------------------------------------------------------
 function createRes(parameters)
-    local db = sqlite(dbPath, "RW")
-    local qry = db << insertQuery(parameters, resTable)
+    local db = sqlite(dbM.path, "RW")
+    local qry = db << insertQuery(parameters, dbM.resTable)
     local row = qry()
 
     qry = db << lastInsertedQuery()
@@ -33,8 +31,8 @@ end
 -- @return  'data' (table): returns the data with dublin core fields
 -------------------------------------------------------------------------------
 function readRes(id)
-    local db = sqlite(dbPath, "RW")
-    local qry = db << selectIDQuery(id, resTable)
+    local db = sqlite(dbM.path, "RW")
+    local qry = db << selectIDQuery(id, dbM.resTable)
     local row = qry()
     local data
 
@@ -56,7 +54,7 @@ end
 -- @return  'data' (table): returns all the data with dublin core fields
 -------------------------------------------------------------------------------
 function readAllRes(parameters)
-    local db = sqlite(dbPath, "RW")
+    local db = sqlite(dbM.path, "RW")
     local trivialCond = "id!=0"
 
     for key, param in pairs(parameters) do
@@ -144,9 +142,9 @@ function readAllRes(parameters)
         trivialCond = andOperator({trivialCond, statement})
     end
 
-    print(selectConditionQuery(trivialCond, resTable))
+    print(selectConditionQuery(trivialCond, dbM.resTable))
 
-    local qry = db << selectConditionQuery(trivialCond, resTable)
+    local qry = db << selectConditionQuery(trivialCond, dbM.resTable)
     local row = qry()
     local allData = {}
 
@@ -167,7 +165,7 @@ end
 -- @return  'data' (table): returns all the data with dublin core fields
 -------------------------------------------------------------------------------
 function readAllResFullText(searchwords)
-    local db = sqlite(dbPath, "RW")
+    local db = sqlite(dbM.path, "RW")
     local trivialCond = "id==0"
     local statement
 
@@ -198,9 +196,9 @@ function readAllResFullText(searchwords)
         trivialCond = "id!=0"
     end
 
-    print(selectConditionQuery(trivialCond, resTable))
+    print(selectConditionQuery(trivialCond, dbM.resTable))
 
-    local qry = db << selectConditionQuery(trivialCond, resTable)
+    local qry = db << selectConditionQuery(trivialCond, dbM.resTable)
     local row = qry()
     local allData = {}
 
@@ -222,8 +220,8 @@ end
 -- @param   'parameters' (table): table with name of parameter and value
 -------------------------------------------------------------------------------
 function updateRes(id, parameters)
-    local db = sqlite(dbPath, "RW")
-    local qry = db << updateQuery(id, parameters, resTable)
+    local db = sqlite(dbM.path, "RW")
+    local qry = db << updateQuery(id, parameters, dbM.resTable)
     local row = qry()
 
     qry =~ qry;
@@ -235,8 +233,8 @@ end
 -- @param   'id' (table): ID of the resource
 -------------------------------------------------------------------------------
 function deleteRes(id)
-    local db = sqlite(dbPath, "RW")
-    local qry = db << deleteQuery(id, resTable)
+    local db = sqlite(dbM.path, "RW")
+    local qry = db << deleteQuery(id, dbM.resTable)
     local row = qry()
 
     qry =~ qry;

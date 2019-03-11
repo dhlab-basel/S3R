@@ -1,3 +1,4 @@
+dbM = require ("./config/s3r-config").database
 require "./model/query"
 
 dbPath = "testDB/test_stga_v1.db"
@@ -14,8 +15,8 @@ colTable = "collection"
 -------------------------------------------------------------------------------
 function createCol(parameters)
     parameters["isLeaf"] = 1
-    local db = sqlite(dbPath, "RW")
-    local qry = db << insertQuery(parameters, colTable)
+    local db = sqlite(dbM.path, "RW")
+    local qry = db << insertQuery(parameters, dbM.colTable)
     local row = qry()
 
     qry = db << lastInsertedQuery()
@@ -36,8 +37,8 @@ function readCol(id)
     local data
     local path = {}
 
-    local db = sqlite(dbPath, "RW")
-    local qry = db << selectIDQuery(id, colTable)
+    local db = sqlite(dbM.path, "RW")
+    local qry = db << selectIDQuery(id, dbM.colTable)
     local row = qry()
 
     -- delete query and free prepared statment
@@ -55,8 +56,8 @@ function readCol(id)
 
         local parentCol_id = row[0]
         repeat
-            local db = sqlite(dbPath, "RW")
-            qry = db << selectIDQuery(parentCol_id, colTable)
+            local db = sqlite(dbM.path, "RW")
+            qry = db << selectIDQuery(parentCol_id, dbM.colTable)
             row = qry()
             if (row ~= nil) then
                 table.insert(path, { ["id"] = row[0], ["name"] = row[1] })
@@ -81,7 +82,7 @@ end
 -- @return  'data' (table): returns all the collections
 -------------------------------------------------------------------------------
 function readAllCol(parameters)
-    local db = sqlite(dbPath, "RW")
+    local db = sqlite(dbM.path, "RW")
     local trivialCond = "id!=0"
 
     for key, param in pairs(parameters) do
@@ -119,7 +120,7 @@ function readAllCol(parameters)
         trivialCond = andOperator({trivialCond, statement})
     end
 
-    local qry = db << selectConditionQuery(trivialCond, colTable)
+    local qry = db << selectConditionQuery(trivialCond, dbM.colTable)
     local row = qry()
     local allData = {}
 
@@ -145,8 +146,8 @@ end
 -- @param   'parameters' (table): table with name of parameter and value
 -------------------------------------------------------------------------------
 function updateCol(id, parameters)
-    local db = sqlite(dbPath, "RW")
-    local qry = db << updateQuery(id, parameters, colTable)
+    local db = sqlite(dbM.path, "RW")
+    local qry = db << updateQuery(id, parameters, dbM.colTable)
     local row = qry()
 
     qry =~ qry;
@@ -158,8 +159,8 @@ end
 -- @param   'id' (table): ID of the collection
 -------------------------------------------------------------------------------
 function deleteCol(id)
-    local db = sqlite(dbPath, "RW")
-    local qry = db << deleteQuery(id, colTable)
+    local db = sqlite(dbM.path, "RW")
+    local qry = db << deleteQuery(id, dbM.colTable)
     local row = qry()
 
     qry =~ qry;

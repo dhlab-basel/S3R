@@ -1,5 +1,5 @@
 
-m = require ("./config/s3r-config")
+filedir = require ("./config/s3r-config").files.dir
 
 -------------------------------------------------------------------------------
 -- @section All CRUD Operations on a file
@@ -59,7 +59,7 @@ end
 -- @return  'errMsg': Error if file does not exists
 function readFile(filename)
     local content, errMsg
-    local file = io.open(m.files.dir .. filename)
+    local file = io.open(filedir .. filename)
 
     if (file) then
         io.input(file)
@@ -87,7 +87,7 @@ end
 -- Deletes the file on the file system
 -- @param   'filename' (string):  name of the file with the file ending
 function deleteFile(fileName)
-    if (os.remove(m.files.dir .. fileName)) then
+    if (os.remove(filedir .. fileName)) then
         print("file deleted")
     else
         print("file could not be deleted")

@@ -6,8 +6,8 @@
 s3rConfModule = {
     -- Database settings
     database = {
-        -- Directory where the sqlite file is located and all the metadate are stored
-        dir = "testDB/test_stga_v1.db",
+        -- Path where the sqlite file is located. This file contains all the metadate of the files
+        path = "testDB/test_stga_v1.db",
 
         -- Resource table name in the sqliteDB
         resTable = "resource",
@@ -24,7 +24,7 @@ s3rConfModule = {
 
     -- File settings
     files = {
-        -- Directory where the files are located
+        -- Directory where the files are located. The files all have a generated filename
         dir = "./files/"
     }
 }

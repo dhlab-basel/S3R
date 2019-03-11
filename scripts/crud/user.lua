@@ -1,7 +1,5 @@
+dbM = require ("./config/s3r-config").database
 require "./model/query"
-
-dbPath = "testDB/test_stga_v1.db"
-userTable = "user"
 
 -------------------------------------------------------------------------------
 --|                           CRUD Operations                               |--
@@ -15,8 +13,8 @@ userTable = "user"
 function readUser(name)
     local condition = equal("name", name)
 
-    local db = sqlite(dbPath, "RW")
-    local qry = db << selectConditionQuery(condition, userTable)
+    local db = sqlite(dbM.path, "RW")
+    local qry = db << selectConditionQuery(condition, dbM.userTable)
     local row = qry()
     local data
 

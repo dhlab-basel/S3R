@@ -1,7 +1,5 @@
+dbM = require ("./config/s3r-config").database
 require "./model/query"
-
-dbPath = "testDB/test_stga_v1.db"
-langTable = "language"
 
 -------------------------------------------------------------------------------
 --|                           CRUD Operations                               |--
@@ -13,8 +11,8 @@ langTable = "language"
 -- @return  (string): ID of the created language
 -------------------------------------------------------------------------------
 function createLang(parameters)
-    local db = sqlite(dbPath, "RW")
-    local qry = db << insertQuery(parameters, langTable)
+    local db = sqlite(dbM.path, "RW")
+    local qry = db << insertQuery(parameters, dbM.langTable)
     local row = qry()
 
     qry = db << lastInsertedQuery()
@@ -32,8 +30,8 @@ end
 -- @return  'data' (table): returns the data of the language
 -------------------------------------------------------------------------------
 function readLang(id)
-    local db = sqlite(dbPath, "RW")
-    local qry = db << selectIDQuery(id, langTable)
+    local db = sqlite(dbM.path, "RW")
+    local qry = db << selectIDQuery(id, dbM.langTable)
     local row = qry()
     local data
 
@@ -58,7 +56,7 @@ end
 -- @return  'data' (table): returns all the languages
 -------------------------------------------------------------------------------
 function readAllLang(parameters)
-    local db = sqlite(dbPath, "RW")
+    local db = sqlite(dbM.path, "RW")
     local trivialCond = "id!=0"
 
     for key, param in pairs(parameters) do
@@ -85,7 +83,7 @@ function readAllLang(parameters)
         trivialCond = andOperator({trivialCond, statement})
     end
 
-    local qry = db << selectConditionQuery(trivialCond, langTable)
+    local qry = db << selectConditionQuery(trivialCond, dbM.langTable)
     local row = qry()
     local allData = {}
 
@@ -109,8 +107,8 @@ end
 -- @param   'parameters' (table): table with name of parameter and value
 -------------------------------------------------------------------------------
 function updateLang(id, parameters)
-    local db = sqlite(dbPath, "RW")
-    local qry = db << updateQuery(id, parameters, langTable)
+    local db = sqlite(dbM.path, "RW")
+    local qry = db << updateQuery(id, parameters, dbM.langTable)
     local row = qry()
 
     qry =~ qry;
@@ -122,8 +120,8 @@ end
 -- @param   'id' (table): ID of the language
 -------------------------------------------------------------------------------
 function deleteLang(id)
-    local db = sqlite(dbPath, "RW")
-    local qry = db << deleteQuery(id, langTable)
+    local db = sqlite(dbM.path, "RW")
+    local qry = db << deleteQuery(id, dbM.langTable)
     local row = qry()
 
     qry =~ qry;
