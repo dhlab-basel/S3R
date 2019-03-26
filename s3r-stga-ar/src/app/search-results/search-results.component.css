@@ -35,6 +35,7 @@ mat-divider {
 
 .result:hover {
     background-color: whitesmoke;
+    cursor: pointer;
 }
 
 .result-number, .file-type, .arrow {
