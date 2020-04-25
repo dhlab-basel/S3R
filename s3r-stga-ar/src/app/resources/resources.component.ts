@@ -10,6 +10,7 @@ import {File} from "../model/file";
 import {LoginService} from "../services/login.service";
 import {LoginDialogComponent} from "../dialogbox/login-dialog/login-dialog.component";
 import {FileNotFoundComponent} from "../dialogbox/file-not-found/file-not-found.component";
+import {ArkService} from "../services/ark.service";
 
 @Component({
     selector: "app-resources",
@@ -19,6 +20,7 @@ import {FileNotFoundComponent} from "../dialogbox/file-not-found/file-not-found.
 export class ResourcesComponent implements OnInit {
     id: number;
     data: any;
+    arkUrl: string;
     collection: string;
     path: {id: number, name: string} [];
     fileSize: string;
@@ -32,7 +34,8 @@ export class ResourcesComponent implements OnInit {
                 private apiService: ApiService,
                 private location: Location,
                 public fileService: File,
-                private loginService: LoginService) {
+                private loginService: LoginService,
+                private arkService: ArkService) {
         route.params.subscribe(params => {
             this.id = params["id"];
             this.setResourceData();
@@ -42,6 +45,7 @@ export class ResourcesComponent implements OnInit {
     }
 
     ngOnInit() {
+      this.getArkUrl();
     }
 
     setResourceData() {
@@ -142,4 +146,13 @@ export class ResourcesComponent implements OnInit {
         this.location.back();
     }
 
+    getArkUrl(): void {
+      this.arkService.getArkId(this.id).subscribe(
+        ark_url_str => {
+          console.log('ARK:', ark_url_str);
+          this.arkUrl = ark_url_str;
+        }
+      );
+
+    }
 }

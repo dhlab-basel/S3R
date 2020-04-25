@@ -72,18 +72,30 @@
                         <a href="javascript:void(0);" class="link" (click)="xmlExport()">Export als XML <img class="button-icon" src="./assets/download.png"/>></a>
                     </div>
                 </div>
-                <div class="card-subtitle-container">
-                    <div class="card-subtitle">Zitiertext</div>
-                    <mat-divider [inset]="true"></mat-divider>
-                </div>
-                <div fxLayout="row">
-                    <div style="border: 1px solid lightgrey; background-color: white;padding:10px 20px;">
-                        {{createQuoteString()}}
-                    </div>
-                    <!--<button mat-flat-button><img class="button-icon" src="./assets/edit.png"/>Kopieren</button>-->
-                </div>
 
-                <div class="card-subtitle-container">
+              <div class="card-subtitle-container">
+                <div class="card-subtitle">Zitiertext</div>
+                <mat-divider [inset]="true"></mat-divider>
+              </div>
+              <div fxLayout="row">
+                <div style="border: 1px solid lightgrey; background-color: white;padding:10px 20px;">
+                  {{createQuoteString()}}
+                </div>
+                <!--<button mat-flat-button><img class="button-icon" src="./assets/edit.png"/>Kopieren</button>-->
+              </div>
+
+              <div class="card-subtitle-container">
+                <div class="card-subtitle">ARK URL (Persistent Identifier</div>
+                <mat-divider [inset]="true"></mat-divider>
+              </div>
+              <div fxLayout="row">
+                <div style="border: 1px solid lightgrey; background-color: white;padding:10px 20px;">
+                  {{ arkUrl }}
+                </div>
+                <!--<button mat-flat-button><img class="button-icon" src="./assets/edit.png"/>Kopieren</button>-->
+              </div>
+
+              <div class="card-subtitle-container">
                     <div class="card-subtitle">Dateianpassung</div>
                     <mat-divider [inset]="true"></mat-divider>
                 </div>
