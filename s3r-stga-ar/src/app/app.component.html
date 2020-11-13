@@ -6,9 +6,7 @@
                 <img *ngIf="menuIsOpen" class="hamburger" (click)="actionMenu()" fxFlexAlign="start" src="./assets/close_white.png"/>
             </div>
             <div class="container-logo" fxFlex=" 1 1 auto">
-                <a href="http://lib.langzeitarchivierung.ch">
-                    <img class="logo" src="./assets/dhlab-logo.png"/>
-                </a>
+                <img class="logo" src="./assets/dhlab-logo.png"/>
             </div>
             <div fxShow.gt-xs="false">
                 <a (click)="openLoginDialog()">
@@ -21,7 +19,7 @@
             <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/collections']">Sammlungen</a></div>
             <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/help']">Hilfe</a></div>
             <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a [routerLink]="['/contact']">Kontakt</a></div>
-            <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a href="http://lib.langzeitarchivierung.ch">Bibliotheken</a></div>
+<!--            <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto"><a href="http://lib.langzeitarchivierung.ch">Bibliotheken</a></div>-->
         </div>
         <div class="login-screen" fxHide.lt-sm="true">
             <div class="menu-bar-item menu-link" fxFlex.gt-xs="1 1 auto" fxShow.lt-sm="false">
