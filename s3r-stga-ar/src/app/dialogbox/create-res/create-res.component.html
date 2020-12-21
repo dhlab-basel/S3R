@@ -43,19 +43,7 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput formControlName="subject" placeholder="Thema z.B. muster1; muster2">
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width">
-            <input matInput formControlName="description" placeholder="Beschreibung">
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width">
-            <input matInput formControlName="publisher" placeholder="Ort, Verlag">
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width">
-            <input matInput formControlName="contributor" placeholder="Mitwirkende/Mitwirkender z.B. Nachname1, Vorname1; Nachname2, Vorname2">
+            <input matInput formControlName="contributor" placeholder="Beteiligte z.B. Nachname1, Vorname1; Nachname2, Vorname2">
         </mat-form-field>
 
         <mat-form-field class="example-half-width">
@@ -69,6 +57,18 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
+            <input matInput formControlName="publisher" placeholder="Ort: Verlag">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input matInput formControlName="isbn" placeholder="ISBN">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input matInput formControlName="signature" placeholder="Signatur">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
             <mat-select placeholder="Format" [formControl]="form.get('format')" required>
                 <mat-option *ngFor="let fileType of fileTypeList" [value]="fileType">{{fileType}}</mat-option>
             </mat-select>
@@ -76,14 +76,17 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput formControlName="identifier" placeholder="Identifikator" required>
-            <mat-error *ngIf="(submitted || form.get('identifier').touched) && form.get('identifier').invalid">{{getErrorIdentifier()}}</mat-error>
+            <mat-select placeholder="Sprache">
+              <mat-option *ngFor="let language of languageList" [value]="language.name">{{language.name}}</mat-option>
+            </mat-select>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <mat-select placeholder="Sprache">
-                <mat-option *ngFor="let language of languageList" [value]="language.name">{{language.name}}</mat-option>
-            </mat-select>
+            <input matInput formControlName="subject" placeholder="Thema z.B. muster1; muster2">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input matInput formControlName="description" placeholder="Beschreibung">
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
@@ -92,11 +95,8 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput formControlName="signature" placeholder="Signatur">
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width">
-            <input matInput formControlName="isbn" placeholder="ISBN">
+            <input matInput formControlName="identifier" placeholder="Identifikator" required>
+            <mat-error *ngIf="(submitted || form.get('identifier').touched) && form.get('identifier').invalid">{{getErrorIdentifier()}}</mat-error>
         </mat-form-field>
 
         <!--Dublin Core Fields which are not used-->

@@ -37,32 +37,32 @@
                 </div>
                 <div class="detail-metadata-block">
                     <div class="detail-metadata" fxFlex>
-                        <div *ngIf="data.title"class="detail-item-name title">Titel</div>
+                        <div *ngIf="data.title" class="detail-item-name title">Titel</div>
                         <div *ngIf="data.title" class="detail-item-value">{{this.data.title}}</div>
-                        <div *ngIf="data.creator"class="detail-item-name creator">Autor/Autorin</div>
+                        <div *ngIf="data.creator" class="detail-item-name creator">Autor/Autorin</div>
                         <div *ngIf="data.creator" class="detail-item-value">{{this.data.creator}}</div>
+                        <div *ngIf="data.contributor" class="detail-item-name contributor">Beteiligte</div>
+                        <div *ngIf="data.contributor" class="detail-item-value">{{this.data.contributor}}</div>
+                        <div class="detail-item-name date">Jahr</div>
+                        <div class="detail-item-value">{{convertDate(this.data.date_start, this.data.date_end)}}</div>
+                        <div *ngIf="data.publisher" class="detail-item-name publisher">Ort: Verlag</div>
+                        <div *ngIf="data.publisher" class="detail-item-value">{{this.data.publisher}}</div>
+                        <div *ngIf="data.isbn" class="detail-item-name isbn">ISBN</div>
+                        <div *ngIf="data.isbn" class="detail-item-value">{{this.data.isbn}}</div>
+                        <div *ngIf="data.signature" class="detail-item-name signature">Signatur</div>
+                        <div *ngIf="data.signature" class="detail-item-value">{{this.data.signature}}</div>
+                        <div class="detail-item-name format">Format</div>
+                        <div class="detail-item-value">{{this.fileService.mimeTypeToSimpleForm(this.data.format)}}</div>
+                        <div *ngIf="data.language" class="detail-item-name language">Sprache</div>
+                        <div *ngIf="data.language" class="detail-item-value">{{this.data.language}}</div>
                         <div *ngIf="data.subject" class="detail-item-name subject">Thema</div>
                         <div *ngIf="data.subject" class="detail-item-value">{{this.data.subject}}</div>
                         <div *ngIf="data.description" class="detail-item-name description">Beschreibung</div>
                         <div *ngIf="data.description" class="detail-item-value">{{this.data.description}}</div>
-                        <div *ngIf="data.publisher" class="detail-item-name publisher">Ort, Verlag</div>
-                        <div *ngIf="data.publisher" class="detail-item-value">{{this.data.publisher}}</div>
-                        <div *ngIf="data.contributor" class="detail-item-name contributor">Mitwirkende / Mitwirkender</div>
-                        <div *ngIf="data.contributor" class="detail-item-value">{{this.data.contributor}}</div>
-                        <div class="detail-item-name date">Jahr</div>
-                        <div class="detail-item-value">{{convertDate(this.data.date_start, this.data.date_end)}}</div>
-                        <div class="detail-item-name format">Format</div>
-                        <div class="detail-item-value">{{this.fileService.mimeTypeToSimpleForm(this.data.format)}}</div>
-                        <div class="detail-item-name identifier">Identifikator</div>
-                        <div class="detail-item-value">{{this.data.identifier}}</div>
-                        <div *ngIf="data.language" class="detail-item-name language">Sprache</div>
-                        <div *ngIf="data.language" class="detail-item-value">{{this.data.language}}</div>
                         <div class="detail-item-name rights">Rechte</div>
                         <div class="detail-item-value">{{this.data.rights}}</div>
-                        <div *ngIf="data.signature" class="detail-item-name contributor">Signatur</div>
-                        <div *ngIf="data.signature" class="detail-item-value">{{this.data.signature}}</div>
-                        <div *ngIf="data.isbn" class="detail-item-name contributor">ISBN</div>
-                        <div *ngIf="data.isbn" class="detail-item-value">{{this.data.isbn}}</div>
+                        <div class="detail-item-name identifier">Identifikator</div>
+                        <div class="detail-item-value">{{this.data.identifier}}</div>
                         <div class="detail-item-name">Sammlung</div>
                         <div class="detail-item-value">
                             <span *ngFor="let col of path" [routerLink]="['/collections', col['id']]"><a class="link">{{col["name"]}}> </a><br></span>
