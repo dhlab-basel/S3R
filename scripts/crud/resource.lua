@@ -276,7 +276,7 @@ function getDataFormat(row)
     data["filename"] = row[20]
     data["mimetype"] = row[21]
     data["filesize"] = row[22]
-    data["url"] = "/api/resources/".. row[0] .."/file"
+    data["url"] = "/api/resources/".. row[0] .."/content"
 
     return data
 end

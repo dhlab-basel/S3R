@@ -86,7 +86,7 @@ function getID(pattern)
 end
 
 function getIDofBinaryFile(url)
-    local filePattern = "^/api/resources/%d+/file$"
+    local filePattern = "^/api/resources/%d+/content$"
     local i, j = string.find(url, filePattern)
     if (i~=nil) and (j ~= nil) then
         return string.match(url,"%d+")
