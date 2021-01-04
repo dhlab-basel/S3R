@@ -107,7 +107,7 @@ export class CreateResComponent implements OnInit {
                 if (error.status === 409) {
                     this.existingObject = true;
                 } else {
-                    console.log("failed")
+                    console.log("failed");
                 }
             });
     }
