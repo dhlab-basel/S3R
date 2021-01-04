@@ -94,13 +94,11 @@
                 </div>
                 <div class="result-info" fxFlex fxLayout="column" fxLayoutAlign="center">
                     <div mat-dialog-title class="title" fxFlex="1 1 auto">{{result.title}}</div>
-                    <div *ngIf="result.description" class="description" fxFlex="1 1 auto">{{result.description}}</div>
                     <div *ngIf="result.creator" class="creator" fxFlex="1 1 auto">{{result.creator}}</div>
-                    <div *ngIf="result.subject" class="subject" fxFlex="1 1 auto">{{result.subject}}</div>
-                    <div *ngIf="result.publisher" class="publisher" fxFlex="1 1 auto">{{result.publisher}}</div>
                     <div class="date" fxFlex="1 1 auto">{{convertDate(result.date_start, result.date_end)}}</div>
-                    <div class="identifier" fxFlex="1 1 auto">{{result.identifier}}</div>
-                    <!--<div>[ID: {{result.id}}]</div>-->
+                    <div *ngIf="result.signature" class="signature" fxFlex="1 1 auto">{{result.signature}}</div>
+                    <div *ngIf="result.format" class="subject" fxFlex="1 1 auto">{{this.fileService.mimeTypeToSimpleForm(result.format)}}</div>
+<!--                    <div>[ID: {{result.id}}]</div>-->
                 </div>
                 <div class="arrow" fxHide.lt-sm="true">
                     <img class="forward-img" src="./assets/forward.png"/>

@@ -37,7 +37,7 @@ export class SearchResultsComponent implements OnInit {
     showFileType: boolean;
     showYear: boolean;
 
-    constructor(private router: Router, private apiService: ApiService, private file: File) {
+    constructor(private router: Router, private apiService: ApiService, private file: File, public fileService: File) {
     }
 
     ngOnInit() {

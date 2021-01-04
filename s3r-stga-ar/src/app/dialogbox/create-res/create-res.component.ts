@@ -20,7 +20,7 @@ export class CreateResComponent implements OnInit {
     fileUploadBorder: any;
     existingObject: boolean;
     existingObjectMessage: string = "Dieses Objekt existiert bereits! Ändern Sie den Titel, Autor oder die Jahreszahlen";
-    private static readonly DEFAULT_RIGHTS = "CC";
+    private static readonly DEFAULT_RIGHTS = "CC-BY-NC";
 
     constructor(private dialogRef: MatDialogRef<CreateResComponent>, @Inject(MAT_DIALOG_DATA) data,
                 private apiService: ApiService,
