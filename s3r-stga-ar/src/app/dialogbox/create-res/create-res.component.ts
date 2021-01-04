@@ -10,6 +10,9 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
     styleUrls: ["./create-res.component.css"]
 })
 export class CreateResComponent implements OnInit {
+    private static readonly DEFAULT_RIGHTS = "CC-BY-NC";
+    private static readonly MIN_YEAR = 1;
+    private static readonly MAX_YEAR = 9999;
     selectedFile = null;
     selectedFileSize: string;
     fileTypeList: string[];
@@ -19,8 +22,7 @@ export class CreateResComponent implements OnInit {
     submitted: boolean;
     fileUploadBorder: any;
     existingObject: boolean;
-    existingObjectMessage: string = "Dieses Objekt existiert bereits! Ändern Sie den Titel, Autor oder die Jahreszahlen";
-    private static readonly DEFAULT_RIGHTS = "CC-BY-NC";
+    existingObjectMessage = "Dieses Objekt existiert bereits! Ändern Sie den Titel, Autor oder die Jahreszahlen";
 
     constructor(private dialogRef: MatDialogRef<CreateResComponent>, @Inject(MAT_DIALOG_DATA) data,
                 private apiService: ApiService,
@@ -44,8 +46,8 @@ export class CreateResComponent implements OnInit {
             description: new FormControl("", []),
             publisher: new FormControl("", []),
             contributor: new FormControl("", []),
-            dateStart: new FormControl("", [Validators.required, Validators.min(1000), Validators.max(9999)]),
-            dateEnd: new FormControl("", [Validators.required, Validators.min(1000), Validators.max(9999)]),
+            dateStart: new FormControl("", [Validators.required, Validators.min(CreateResComponent.MIN_YEAR), Validators.max(CreateResComponent.MAX_YEAR)]),
+            dateEnd: new FormControl("", [Validators.required, Validators.min(CreateResComponent.MIN_YEAR), Validators.max(CreateResComponent.MAX_YEAR)]),
             format: new FormControl("", [Validators.required]),
             identifier: new FormControl("", [Validators.required]),
             language: new FormControl("", []),
@@ -133,37 +135,37 @@ export class CreateResComponent implements OnInit {
     }
 
     getErrorTitle(): string {
-        return this.form.get("title").hasError("required") ? "Titel muss eingegeben werden":
-            this.form.get("title").hasError("pattern") ? "Ungültiger Titel":
+        return this.form.get("title").hasError("required") ? "Titel muss eingegeben werden" :
+            this.form.get("title").hasError("pattern") ? "Ungültiger Titel" :
                 "";
     }
 
     getErrorDateStart(): string {
-        return this.form.get("dateStart").hasError("required") ? "Ungültiges Anfangsjahr":
-            this.form.get("dateStart").hasError("min") ? "Mindestjahr ist 1000":
-                this.form.get("dateStart").hasError("max") ? "Ungültiges Anfangsjahr":
+        return this.form.get("dateStart").hasError("required") ? "Ungültiges Anfangsjahr" :
+            this.form.get("dateStart").hasError("min") ? `Mindestjahr ist ${CreateResComponent.MIN_YEAR}` :
+                this.form.get("dateStart").hasError("max") ? "Ungültiges Anfangsjahr" :
                     "";
     }
 
     getErrorDateEnd(): string {
-        return this.form.get("dateEnd").hasError("required") ? "Ungültiges Endjahr":
-                this.form.get("dateEnd").hasError("min") ? "Mindestjahr ist 1000":
-                    this.form.get("dateEnd").hasError("max") ? "Ungültiges Endjahr":
+        return this.form.get("dateEnd").hasError("required") ? "Ungültiges Endjahr" :
+                this.form.get("dateEnd").hasError("min") ? `Mindestjahr ist ${CreateResComponent.MIN_YEAR}` :
+                    this.form.get("dateEnd").hasError("max") ? "Ungültiges Endjahr" :
                         "";
     }
 
     getErrorFormat(): string {
-        return this.form.get("format").hasError("required") ? "Bitte Format auswählen":
+        return this.form.get("format").hasError("required") ? "Bitte Format auswählen" :
                 "";
     }
 
     getErrorIdentifier(): string {
-        return this.form.get("identifier").hasError("required") ? "Identifikator muss eingegeben werden":
+        return this.form.get("identifier").hasError("required") ? "Identifikator muss eingegeben werden" :
                 "";
     }
 
     getErrorRights(): string {
-        return this.form.get("rights").hasError("required") ? "Rechte muss eingegeben werden":
+        return this.form.get("rights").hasError("required") ? "Rechte muss eingegeben werden" :
             "";
     }
 
