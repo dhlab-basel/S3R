@@ -90,8 +90,8 @@ export class SearchResultsComponent implements OnInit {
             (totals, p) => ({...totals, [p.creator]: (totals[p.creator] || 0) + 1 }), {}
         );
         this.authorList = Object.entries(author);
-        console.log(this.authorList);
-        this.authorList.sort((a, b) => a[1] > b[1] ? -1 : a[1] < b[1] ? 1 : 0);
+        // Sorts authors after the first char of the string  -> a[0](=full name)[0](=first char)
+        this.authorList.sort((a, b) => a[0][0] > b[0][0] ? 1 : a[0][0] < b[0][0] ? -1 : 0);
     }
 
     filterFileTypeUpdate() {
