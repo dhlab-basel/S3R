@@ -19,6 +19,7 @@ export class EditResComponent implements OnInit {
     resource: any;
     collections: any[];
     fileTypeList: string[];
+    languageList: {name: string, id: number}[];
     form: FormGroup;
     submitted: boolean;
     choseFile: boolean;
@@ -44,6 +45,10 @@ export class EditResComponent implements OnInit {
 
     ngOnInit() {
         this.resetExistingObject();
+        this.apiService.getLanguages()
+            .subscribe((data) => {
+                this.languageList = data.data;
+            });
         this.submitted = false;
         this.choseFile = false;
         this.id = this.resource["id"];
@@ -63,7 +68,7 @@ export class EditResComponent implements OnInit {
             dateEnd: new FormControl(this.resource["date_end"], [Validators.required, Validators.min(EditResComponent.MIN_YEAR), Validators.max(EditResComponent.MAX_YEAR)]),
             format: new FormControl(this.file.mimeTypeToSimpleForm(this.resource["format"]), [Validators.required]),
             identifier: new FormControl(this.resource["identifier"], [Validators.required]),
-            language: new FormControl(this.resource["language"] ? this.resource["language"] : "", []),
+            language: new FormControl(this.resource["language"] ? this.resource["language"] : "", [Validators.required]),
             rights: new FormControl(this.resource["rights"] ? this.resource["rights"] : "", [Validators.required]),
             signature: new FormControl(this.resource["signature"] ? this.resource["signature"] : "", []),
             isbn: new FormControl(this.resource["isbn"] ? this.resource["isbn"] : "", [])
@@ -186,6 +191,11 @@ export class EditResComponent implements OnInit {
 
     getErrorRights(): string {
         return this.form.get("rights").hasError("required") ? "Rechte muss eingegeben werden" :
+            "";
+    }
+
+    getErrorLanguage(): string {
+        return this.form.get("language").hasError("required") ? "Sprache muss ausgewählt werden" :
             "";
     }
 
