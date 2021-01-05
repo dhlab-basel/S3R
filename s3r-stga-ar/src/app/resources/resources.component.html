@@ -65,7 +65,7 @@
                         <div class="detail-item-value">{{this.data.identifier}}</div>
                         <div class="detail-item-name">Sammlung</div>
                         <div class="detail-item-value">
-                            <span *ngFor="let col of path" [routerLink]="['/collections', col['id']]"><a class="link">{{col["name"]}}> </a><br></span>
+                            <span *ngFor="let col of path" [routerLink]="['/collections', col['id']]"><a class="link">{{col["name"]}}> </a></span>
                         </div>
                     </div>
                     <div class="xml-export">
