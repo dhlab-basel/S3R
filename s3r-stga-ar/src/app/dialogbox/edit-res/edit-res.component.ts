@@ -68,7 +68,7 @@ export class EditResComponent implements OnInit {
             dateEnd: new FormControl(this.resource["date_end"], [Validators.required, Validators.min(EditResComponent.MIN_YEAR), Validators.max(EditResComponent.MAX_YEAR)]),
             format: new FormControl(this.file.mimeTypeToSimpleForm(this.resource["format"]), [Validators.required]),
             identifier: new FormControl(this.resource["identifier"], [Validators.required]),
-            language: new FormControl(this.resource["language"] ? this.resource["language"] : "", [Validators.required]),
+            language: new FormControl(this.resource["language"] ? this.resource["language"] : "", []),
             rights: new FormControl(this.resource["rights"] ? this.resource["rights"] : "", [Validators.required]),
             signature: new FormControl(this.resource["signature"] ? this.resource["signature"] : "", []),
             isbn: new FormControl(this.resource["isbn"] ? this.resource["isbn"] : "", [])
@@ -191,11 +191,6 @@ export class EditResComponent implements OnInit {
 
     getErrorRights(): string {
         return this.form.get("rights").hasError("required") ? "Rechte muss eingegeben werden" :
-            "";
-    }
-
-    getErrorLanguage(): string {
-        return this.form.get("language").hasError("required") ? "Sprache muss ausgewählt werden" :
             "";
     }
 

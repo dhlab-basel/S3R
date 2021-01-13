@@ -50,7 +50,7 @@ export class CreateResComponent implements OnInit {
             dateEnd: new FormControl("", [Validators.required, Validators.min(CreateResComponent.MIN_YEAR), Validators.max(CreateResComponent.MAX_YEAR)]),
             format: new FormControl("", [Validators.required]),
             identifier: new FormControl("", [Validators.required]),
-            language: new FormControl("", [Validators.required]),
+            language: new FormControl("", []),
             rights: new FormControl(CreateResComponent.DEFAULT_RIGHTS, [Validators.required]),
             signature: new FormControl("", []),
             isbn: new FormControl("", [])
@@ -166,11 +166,6 @@ export class CreateResComponent implements OnInit {
 
     getErrorRights(): string {
         return this.form.get("rights").hasError("required") ? "Rechte muss eingegeben werden" :
-            "";
-    }
-
-    getErrorLanguage(): string {
-        return this.form.get("language").hasError("required") ? "Sprache muss ausgewählt werden" :
             "";
     }
 

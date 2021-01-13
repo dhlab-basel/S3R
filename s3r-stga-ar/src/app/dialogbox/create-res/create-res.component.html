@@ -76,10 +76,9 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <mat-select placeholder="Sprache" [formControl]="form.get('language')" required>
+            <mat-select placeholder="Sprache" [formControl]="form.get('language')">
               <mat-option *ngFor="let language of languageList" [value]="language.name">{{language.name}}</mat-option>
             </mat-select>
-            <mat-error *ngIf="(submitted || form.get('language').touched) && form.get('language').invalid">{{getErrorLanguage()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
