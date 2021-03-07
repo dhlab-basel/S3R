@@ -22,7 +22,7 @@ export class ResourcesComponent implements OnInit {
     data: any;
     arkUrl: string;
     collection: string;
-    path: {id: number, name: string} [];
+    path: { id: number, name: string } [];
     fileSize: string;
     isLoggedIn: boolean;
 
@@ -45,11 +45,11 @@ export class ResourcesComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.getArkUrl();
+        this.getArkUrl();
     }
 
     setResourceData() {
-        this.apiService.getResource(this.id).subscribe( (data) => {
+        this.apiService.getResource(this.id).subscribe((data) => {
             this.data = data["data"];
             this.fileSize = this.fileService.evaluateFileSize(this.data.filesize);
             this.apiService.getCollection(data["data"]["collection_id"]["id"])
@@ -86,7 +86,7 @@ export class ResourcesComponent implements OnInit {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
-        this.loginDialog.open( LoginDialogComponent, dialogConfig);
+        this.loginDialog.open(LoginDialogComponent, dialogConfig);
         this.loginDialog.afterAllClosed
             .subscribe((data) => {
                 this.isLoggedIn = this.loginService.isLoggedIn();
@@ -147,12 +147,12 @@ export class ResourcesComponent implements OnInit {
     }
 
     getArkUrl(): void {
-      this.arkService.getArkId(this.id).subscribe(
-        ark_url_str => {
-          console.log('ARK:', ark_url_str);
-          this.arkUrl = ark_url_str;
-        }
-      );
+        this.arkService.getArkId(this.id).subscribe(
+            ark_url_str => {
+                console.log("ARK:", ark_url_str);
+                this.arkUrl = ark_url_str;
+            }
+        );
 
     }
 }
