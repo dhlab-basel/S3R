@@ -67,13 +67,13 @@ export class EditResComponent implements OnInit {
             dateStart: new FormControl(this.resource["date_start"], [Validators.required, Validators.min(EditResComponent.MIN_YEAR), Validators.max(EditResComponent.MAX_YEAR)]),
             dateEnd: new FormControl(this.resource["date_end"], [Validators.required, Validators.min(EditResComponent.MIN_YEAR), Validators.max(EditResComponent.MAX_YEAR)]),
             format: new FormControl(this.file.mimeTypeToSimpleForm(this.resource["format"]), [Validators.required]),
-            identifier: new FormControl(this.resource["identifier"], [Validators.required]),
             language: new FormControl(this.resource["language"] ? this.resource["language"] : "", []),
             rights: new FormControl(this.resource["rights"] ? this.resource["rights"] : "", [Validators.required]),
-            signature: new FormControl(this.resource["signature"] ? this.resource["signature"] : "", []),
+            signature: new FormControl(this.resource["signature"] ? this.resource["signature"] : "", [Validators.required]),
             isbn: new FormControl(this.resource["isbn"] ? this.resource["isbn"] : "", [])
 
             // Dublin Core Fields which are not used
+            // identifier: new FormControl(this.resource["identifier"], [Validators.required]),
             // source: new FormControl("", []),
             // relation: new FormControl("", []),
             // coverage: new FormControl("", []),
@@ -103,7 +103,6 @@ export class EditResComponent implements OnInit {
         fd.append("date_start", this.form.get("dateStart").value);
         fd.append("date_end", this.form.get("dateEnd").value);
         fd.append("format", this.file.simpleFormToMimeType(this.form.get("format").value));
-        fd.append("identifier", this.form.get("identifier").value);
         fd.append("language", this.form.get("language").value);
         fd.append("rights", this.form.get("rights").value);
         fd.append("signature", this.form.get("signature").value);
@@ -111,6 +110,7 @@ export class EditResComponent implements OnInit {
         fd.append("collection_id", this.form.get("collectionID").value);
 
         // Dublin Core Fields which are not used
+        fd.append("identifier", null);
         fd.append("source", null);
         fd.append("relation", null);
         fd.append("coverage", null);
@@ -183,8 +183,8 @@ export class EditResComponent implements OnInit {
             "";
     }
 
-    getErrorIdentifier(): string {
-        return this.form.get("identifier").hasError("required") ? "Identifikator muss eingegeben werden" :
+    getErrorSignature(): string {
+        return this.form.get("signature").hasError("required") ? "Signature muss eingegeben werden" :
             "";
     }
 

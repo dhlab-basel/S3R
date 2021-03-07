@@ -61,8 +61,8 @@
                         <div *ngIf="data.description" class="detail-item-value">{{this.data.description}}</div>
                         <div class="detail-item-name rights">Rechte</div>
                         <div class="detail-item-value">{{this.data.rights}}</div>
-                        <div class="detail-item-name identifier">Identifikator</div>
-                        <div class="detail-item-value">{{this.data.identifier}}</div>
+<!--                        <div class="detail-item-name identifier">Identifikator</div>-->
+<!--                        <div class="detail-item-value">{{this.data.identifier}}</div>-->
                         <div class="detail-item-name">Sammlung</div>
                         <div class="detail-item-value">
                             <span *ngFor="let col of path" [routerLink]="['/collections', col['id']]"><a class="link">{{col["name"]}}> </a></span>

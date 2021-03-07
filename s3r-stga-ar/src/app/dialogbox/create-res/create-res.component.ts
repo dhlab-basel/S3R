@@ -49,13 +49,13 @@ export class CreateResComponent implements OnInit {
             dateStart: new FormControl("", [Validators.required, Validators.min(CreateResComponent.MIN_YEAR), Validators.max(CreateResComponent.MAX_YEAR)]),
             dateEnd: new FormControl("", [Validators.required, Validators.min(CreateResComponent.MIN_YEAR), Validators.max(CreateResComponent.MAX_YEAR)]),
             format: new FormControl("", [Validators.required]),
-            identifier: new FormControl("", [Validators.required]),
             language: new FormControl("", []),
             rights: new FormControl(CreateResComponent.DEFAULT_RIGHTS, [Validators.required]),
-            signature: new FormControl("", []),
+            signature: new FormControl("(Stiftsbibliothek St.Gallen)", [Validators.required]),
             isbn: new FormControl("", [])
 
             // Dublin Core Fields which are not used
+            // identifier: new FormControl("", [Validators.required]),
             // source: new FormControl("", []),
             // relation: new FormControl("", []),
             // coverage: new FormControl("", []),
@@ -90,7 +90,6 @@ export class CreateResComponent implements OnInit {
         fd.append("date_start", this.form.get("dateStart").value);
         fd.append("date_end", this.form.get("dateEnd").value);
         fd.append("format", this.file.simpleFormToMimeType(this.form.get("format").value));
-        fd.append("identifier", this.form.get("identifier").value);
         fd.append("language", this.form.get("language").value);
         fd.append("rights", this.form.get("rights").value);
         fd.append("signature", this.form.get("signature").value);
@@ -98,6 +97,7 @@ export class CreateResComponent implements OnInit {
         fd.append("collection_id", this.data["colID"]);
 
         // Dublin Core Fields which are not used
+        fd.append("identifier", null);
         fd.append("source", null);
         fd.append("relation", null);
         fd.append("coverage", null);
@@ -159,8 +159,8 @@ export class CreateResComponent implements OnInit {
                 "";
     }
 
-    getErrorIdentifier(): string {
-        return this.form.get("identifier").hasError("required") ? "Identifikator muss eingegeben werden" :
+    getErrorSignature(): string {
+        return this.form.get("signature").hasError("required") ? "Signature muss eingegeben werden" :
                 "";
     }
 

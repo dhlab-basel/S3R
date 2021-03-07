@@ -65,7 +65,8 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput formControlName="signature" placeholder="Signatur">
+            <input matInput formControlName="signature" placeholder="Signatur" required>
+            <mat-error *ngIf="(submitted || form.get('signature').touched) && form.get('signature').invalid">{{getErrorSignature()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
@@ -94,10 +95,10 @@
             <mat-error *ngIf="(submitted || form.get('rights').touched) && form.get('rights').invalid">{{getErrorRights()}}</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <input matInput formControlName="identifier" placeholder="Identifikator" required>
-            <mat-error *ngIf="(submitted || form.get('identifier').touched) && form.get('identifier').invalid">{{getErrorIdentifier()}}</mat-error>
-        </mat-form-field>
+<!--        <mat-form-field class="example-full-width">-->
+<!--            <input matInput formControlName="identifier" placeholder="Identifikator" required>-->
+<!--            <mat-error *ngIf="(submitted || form.get('identifier').touched) && form.get('identifier').invalid">{{getErrorIdentifier()}}</mat-error>-->
+<!--        </mat-form-field>-->
 
         <!--Dublin Core Fields which are not used-->
         <!--<mat-form-field class="example-full-width">-->

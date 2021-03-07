@@ -137,7 +137,7 @@ export class ResourcesComponent implements OnInit {
     createQuoteString(): string {
         const creator = this.data.creator ? this.data.creator + ":" : "";
         const publisher = this.data.publisher ? this.data.publisher + "," : "";
-        return `${creator} ${this.data.title}. ${publisher} ${this.convertDate(this.data.date_start, this.data.date_end)}. ${this.data.identifier}`;
+        return `${creator} ${this.data.title}. ${publisher} ${this.convertDate(this.data.date_start, this.data.date_end)}. ${this.data.signature}`;
     }
 
     getThumbnail(): string {
