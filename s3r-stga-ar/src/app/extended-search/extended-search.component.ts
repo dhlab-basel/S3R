@@ -22,20 +22,24 @@ export interface ComparisonOp {
 export class ExtendedSearchComponent implements OnInit {
     dublinCoreList: Dublincore[] = [
         {value: "title", viewValue: "Titel", disabled: false},
-        {value: "creator", viewValue: "Urheberin/ Urheber", disabled: false},
+        {value: "creator", viewValue: "Autor/Autorin", disabled: false},
+        {value: "contributor", viewValue: "Beteiligte", disabled: false},
+        {value: "date", viewValue: "Jahr", disabled: false},
+        {value: "publisher", viewValue: "Ort: Verlag", disabled: false},
+        {value: "isbn", viewValue: "ISBN", disabled: false},
+        {value: "signature", viewValue: "Signature", disabled: false},
+        {value: "language", viewValue: "Sprache", disabled: false},
         {value: "subject", viewValue: "Thema", disabled: false},
         {value: "description", viewValue: "Beschreibung", disabled: false},
-        {value: "publisher", viewValue: "Verlegerin / Verleger", disabled: false},
-        {value: "contributor", viewValue: "Mitwirkende / Mitwirkender", disabled: false},
-        {value: "date", viewValue: "Jahr", disabled: false},
-        {value: "type", viewValue: "Typ", disabled: false},
-        {value: "format", viewValue: "Format", disabled: false},
-        {value: "identifier", viewValue: "Identifikator", disabled: false},
-        {value: "source", viewValue: "Quelle", disabled: false},
-        {value: "language", viewValue: "Sprache", disabled: false},
-        {value: "relation", viewValue: "Beziehung", disabled: false},
-        {value: "coverage", viewValue: "Geltungsbereich", disabled: false},
         {value: "rights", viewValue: "Rechte", disabled: false},
+
+        // Dublin Core Fields which are not used
+        // {value: "type", viewValue: "Typ", disabled: false},
+        // {value: "format", viewValue: "Format", disabled: false},
+        // {value: "identifier", viewValue: "Identifikator", disabled: false},
+        // {value: "source", viewValue: "Quelle", disabled: false},
+        // {value: "relation", viewValue: "Beziehung", disabled: false},
+        // {value: "coverage", viewValue: "Geltungsbereich", disabled: false},
         // {value: "collection", viewValue: "Collection", disabled: false}
     ];
 
