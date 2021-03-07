@@ -18,7 +18,7 @@ export class CreateColComponent implements OnInit {
 
     ngOnInit() {
         this.form = new FormGroup({
-            name: new FormControl('', [Validators.required, Validators.pattern(/^\w+/)])
+            name: new FormControl("", [Validators.required, Validators.pattern(/^\w+/)])
         });
     }
 
@@ -37,7 +37,7 @@ export class CreateColComponent implements OnInit {
     }
 
     getErrorName(): string {
-        return this.form.get('name').hasError('required') ? "Bitte Namen eingeben":
-            this.form.get('name').hasError('pattern') ? "Ungültiger Name": '';
+        return this.form.get("name").hasError("required") ? "Bitte Namen eingeben" :
+            this.form.get("name").hasError("pattern") ? "Ungültiger Name" : "";
     }
 }
