@@ -366,12 +366,12 @@ function getThumbnailSize()
 
     local width
     if (thumbnailSquare) then
-        width = thumbnail[size].height
+        width = math.floor(thumbnail[size].height)
     else
-        width = thumbnail[size].height * 0.75
+        width = math.floor(thumbnail[size].height * 0.75)
     end
 
-    table1["resolution"] = {height = thumbnail[size].height, width }
+    table1["resolution"] = {height = thumbnail[size].height, width = width }
 
     server.setBuffer()
 
@@ -432,9 +432,9 @@ function getThumbnailSizeContent()
         typePath = "files/" .. serverFilename
     end
 
-    local succes, img = SipiImage.new(typePath)
+    local success, img = SipiImage.new(typePath)
 
-    if (not succes) then
+    if (not success) then
         print("fail")
         return
     end
@@ -448,9 +448,9 @@ function getThumbnailSizeContent()
 
     local width
     if (thumbnailSquare) then
-        width = thumbnail[size].height
+        width = math.floor(thumbnail[size].height)
     else
-        width = thumbnail[size].height * 0.75
+        width = math.floor(thumbnail[size].height * 0.75)
     end
 
     local imageRatio = dims.nx / dims.ny
@@ -458,7 +458,7 @@ function getThumbnailSizeContent()
 
     if (imageRatio < thumbnailRatio) then
         print("höher als Breite")
-        img.scale(img, thumbnail[size].width .. ",")
+        img.scale(img, width .. ",")
         local success, dims = img.dims(img)
         if success then
             local startY = (dims.ny - thumbnail[size].height) / 2
