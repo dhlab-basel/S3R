@@ -39,7 +39,6 @@ export class ResourcesComponent implements OnInit {
         route.params.subscribe(params => {
             this.id = params["id"];
             this.setResourceData();
-            console.log(`The ID is: ${this.id}`);
         });
         this.loginService.sub().subscribe(data => this.isLoggedIn = data);
     }
@@ -151,7 +150,6 @@ export class ResourcesComponent implements OnInit {
     getArkUrl(): void {
         this.arkService.getArkId(this.id).subscribe(
             ark_url_str => {
-                console.log("ARK:", ark_url_str);
                 this.arkUrl = ark_url_str;
             }
         );

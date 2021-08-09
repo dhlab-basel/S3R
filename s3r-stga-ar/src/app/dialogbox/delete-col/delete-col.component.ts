@@ -22,7 +22,6 @@ export class DeleteColComponent implements OnInit {
     delete() {
         this.apiService.deleteCollection(this.collection["id"])
             .subscribe((data) => {
-                console.log(data);
                 this.dialogRef.close({
                     success: true,
                     status: null

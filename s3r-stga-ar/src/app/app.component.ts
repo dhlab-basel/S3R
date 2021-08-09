@@ -37,7 +37,6 @@ export class AppComponent {
     }
 
     openLoginDialog() {
-        console.log("open login");
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;

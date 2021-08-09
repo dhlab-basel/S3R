@@ -33,7 +33,7 @@ export class LoginDialogComponent implements OnInit {
                     this.loginFailedMessage = "Falscher Name bzw. Passwort";
                 } else {
                     this.loginFailed = true;
-                    this.loginFailedMessage = 'Fehler mit dem Server!';
+                    this.loginFailedMessage = "Fehler mit dem Server!";
                 }
             });
     }
@@ -50,7 +50,7 @@ export class LoginDialogComponent implements OnInit {
     logout() {
         this.loginService.logout();
         this.logoutSuccess = true;
-        this.logoutSuccessMessage = "Sie haben sich erfolgreich ausgeloggt!"
+        this.logoutSuccessMessage = "Sie haben sich erfolgreich ausgeloggt!";
     }
 
 

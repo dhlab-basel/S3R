@@ -45,9 +45,8 @@ export class EditColComponent implements OnInit {
     }
 
     getErrorName(): string {
-        return this.form.get('name').hasError('required') ? "Bitte Namen eingeben":
-            this.form.get('name').hasError('pattern') ? "Ungültiger Name":
-                '';
+        return this.form.get("name").hasError("required") ? "Bitte Namen eingeben" :
+            this.form.get("name").hasError("pattern") ? "Ungültiger Name" : "";
     }
 
 }

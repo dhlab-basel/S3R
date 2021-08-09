@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {ApiService} from "./api.service";
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, Observable} from "rxjs/index";
+import {BehaviorSubject, Observable} from "rxjs";
 import {map} from "rxjs/internal/operators";
 
 @Injectable({
@@ -22,7 +22,7 @@ export class LoginService {
         return this.isLoggedIn() ? localStorage.getItem("name") : "Gast";
     }
 
-    login(name: string, pw: string):Observable<any> {
+    login(name: string, pw: string): Observable<any> {
         const fd = new FormData();
         fd.append("name", name);
         fd.append("password", pw);
@@ -33,7 +33,7 @@ export class LoginService {
                 localStorage.setItem("name", name);
                 this.loggedIn.next(true);
                 return result;
-            }))
+            }));
     }
 
     sub() {

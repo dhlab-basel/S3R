@@ -64,7 +64,6 @@ export class CollectionComponent implements OnInit {
             this.apiService.getCollectionResources(parseInt(params["id"]))
                 .subscribe((data) => {
                     this.resources = data["data"];
-                    console.log(this.resources);
                     this.containsRes = (this.resources.length !== 0);
                 });
         });
@@ -122,7 +121,6 @@ export class CollectionComponent implements OnInit {
     }
 
     createCol() {
-        console.log("create col");
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
@@ -152,8 +150,8 @@ export class CollectionComponent implements OnInit {
 
         dialogConfig.data = collection;
 
-        const bla = this.editColDialog.open(EditColComponent, dialogConfig);
-        bla.afterClosed().subscribe(() => {
+        const openedDialog = this.editColDialog.open(EditColComponent, dialogConfig);
+        openedDialog.afterClosed().subscribe(() => {
             this.apiService.getCollectionResources(parseInt(this.collectionID))
                 .subscribe((data) => {
                     this.resources = data["data"];
@@ -190,7 +188,6 @@ export class CollectionComponent implements OnInit {
                     this.apiService.getCollectionResources(parseInt(this.collectionID))
                         .subscribe((result) => {
                             this.resources = result["data"];
-                            console.log(this.resources);
                             this.containsRes = (this.resources.length !== 0);
                         });
                 } else {

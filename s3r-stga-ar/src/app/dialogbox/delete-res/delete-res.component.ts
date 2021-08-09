@@ -22,7 +22,6 @@ export class DeleteResComponent implements OnInit {
     delete() {
         this.apiService.deleteResource(this.resID)
             .subscribe((data) => {
-                console.log(data);
                 this.dialogRef.close();
                 this.location.back();
             }, (error) => console.log(error));

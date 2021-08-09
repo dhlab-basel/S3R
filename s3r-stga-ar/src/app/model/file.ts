@@ -22,7 +22,7 @@ export class File {
 
     simpleFormToMimeType(simpleForm: string): string | null {
         let mimeType = null;
-        for (let i of this.validMimeTypes) {
+        for (const i of this.validMimeTypes) {
             if (simpleForm === i[1]) {
                 mimeType = i[0];
                 break;
@@ -33,7 +33,7 @@ export class File {
 
     getAllSimpleForms(): string[] {
         let simpleForms = [];
-        for (let i of this.validMimeTypes) {
+        for (const i of this.validMimeTypes) {
             simpleForms.push(i[1]);
         }
         return simpleForms;

@@ -154,44 +154,37 @@ export class EditResComponent implements OnInit {
     }
 
     getErrorColID(): string {
-        return this.form.get("collectionID").hasError("required") ? "Sammlung muss ausgewählt werden" :
-            "";
+        return this.form.get("collectionID").hasError("required") ? "Sammlung muss ausgewählt werden" : "";
     }
 
     getErrorTitle(): string {
         return this.form.get("title").hasError("required") ? "Titel muss eingegeben werden" :
-            this.form.get("title").hasError("pattern") ? "Ungültiger Titel" :
-                "";
+            this.form.get("title").hasError("pattern") ? "Ungültiger Titel" : "";
     }
 
     getErrorDateStart(): string {
         return this.form.get("dateStart").hasError("required") ? "Ungültiges Anfangsjahr" :
             this.form.get("dateStart").hasError("min") ? `Mindestjahr ist ${EditResComponent.MIN_YEAR}` :
-                this.form.get("dateStart").hasError("max") ? "Ungültiges Anfangsjahr" :
-                    "";
+                this.form.get("dateStart").hasError("max") ? "Ungültiges Anfangsjahr" : "";
     }
 
     getErrorDateEnd(): string {
         return this.form.get("dateEnd").hasError("required") ? "Ungültiges Endjahr" :
             this.form.get("dateEnd").hasError("min") ? `Mindestjahr ist ${EditResComponent.MIN_YEAR}` :
-                this.form.get("dateEnd").hasError("max") ? "Ungültiges Endjahr" :
-                    "";
+                this.form.get("dateEnd").hasError("max") ? "Ungültiges Endjahr" : "";
     }
 
     getErrorFormat(): string {
-        return this.form.get("format").hasError("required") ? "Bitte Format auswählen" :
-            "";
+        return this.form.get("format").hasError("required") ? "Bitte Format auswählen" : "";
     }
 
     getErrorSignature(): string {
-        return this.form.get("signature").hasError("required") ? "Signature muss eingegeben werden" :
-            "";
+        return this.form.get("signature").hasError("required") ? "Signature muss eingegeben werden" : "";
     }
 
 
     getErrorRights(): string {
-        return this.form.get("rights").hasError("required") ? "Rechte muss eingegeben werden" :
-            "";
+        return this.form.get("rights").hasError("required") ? "Rechte muss eingegeben werden" : "";
     }
 
 }

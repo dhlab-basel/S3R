@@ -1,7 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../services/api.service";
-import {forEach} from "@angular/router/src/utils/collection";
 
 export interface FilterOptions {
     key: string;
@@ -54,7 +53,7 @@ export class SearchComponent implements OnInit {
 
     replaceSeparators(searchword: string): string {
         let correctedSearchWord = searchword;
-        for(let separator of SearchComponent.SEARCH_SEPARATORS) {
+        for (const separator of SearchComponent.SEARCH_SEPARATORS) {
             correctedSearchWord = correctedSearchWord.split(separator).join(" ");
         }
         return correctedSearchWord;
@@ -62,13 +61,11 @@ export class SearchComponent implements OnInit {
 
     startRequest(searchword: string) {
         this.apiService.fullSearch(`${searchword}`).subscribe((data) => {
-            console.log("api search", data);
             this.noResult = false;
 
             if (data["data"].length === 0) {
                 this.data = null;
                 this.noResult = true;
-                console.log(this.data);
             } else {
                 this.data = data["data"];
                 console.log("found more than 1 result");
