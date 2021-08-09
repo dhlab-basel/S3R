@@ -27,7 +27,7 @@ export class ExtendedSearchComponent implements OnInit {
         {value: "date", viewValue: "Jahr", disabled: false},
         {value: "publisher", viewValue: "Ort: Verlag", disabled: false},
         {value: "isbn", viewValue: "ISBN", disabled: false},
-        {value: "signature", viewValue: "Signature", disabled: false},
+        {value: "signature", viewValue: "Signatur", disabled: false},
         {value: "language", viewValue: "Sprache", disabled: false},
         {value: "subject", viewValue: "Thema", disabled: false},
         {value: "description", viewValue: "Beschreibung", disabled: false},
@@ -221,7 +221,6 @@ export class ExtendedSearchComponent implements OnInit {
     // }
 
     startExtendedSearch() {
-        console.log("hier");
         let queryParams: Params;
         queryParams = {filter: null};
 
@@ -324,7 +323,6 @@ export class ExtendedSearchComponent implements OnInit {
 
         this.apiService.extendedSearch(serverParams).subscribe((data) => {
              this.noResult = false;
-             console.log(data);
 
             if (data["data"].length === 0) {
                 this.data = null;
@@ -339,8 +337,6 @@ export class ExtendedSearchComponent implements OnInit {
     }
 
     updateSelection(dublinField: string) {
-        console.log("selection", this.dublinField1, this.dublinField2, this.dublinField3);
-        console.log("selection", this.compare1, this.compare2, this.compare3);
         for (const i of this.dublinCoreList) {
             switch (i.value) {
                 case (this.dublinField1): {
@@ -465,9 +461,4 @@ export class ExtendedSearchComponent implements OnInit {
 
         }
     }
-
-    test() {
-        console.log(this.compare2);
-    }
-
 }
