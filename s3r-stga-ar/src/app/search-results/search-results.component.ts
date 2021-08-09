@@ -24,7 +24,7 @@ export class SearchResultsComponent implements OnInit {
         {key: "title", value: "Titel"},
         {key: "creator", value: "Autor/Autorin"},
         {key: "date_start", value: "Jahr"},
-        {key: "identifier", value: "Identifikator"}
+        {key: "signature", value: "Signatur"}
     ];
 
     authorList: any[];
@@ -63,24 +63,19 @@ export class SearchResultsComponent implements OnInit {
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        console.log("ngOnChange", this.resultsOfSearch, this.sortedFilteredResults);
         if (changes["resultsOfSearch"]) {
-            console.log("change before resultsOfSearch", this.resultsOfSearch, this.sortedFilteredResults);
             this.sortedFilteredResults = this.resultsOfSearch.slice();
             this.filterAuthorUpdate();
             this.filterFileTypeUpdate();
             this.filterYearUpdate();
-            console.log("change after resultsOfSearch", this.resultsOfSearch, this.sortedFilteredResults);
             this.applySort(this.sort);
         }
 
         if (changes["sort"]) {
-            console.log("change of sort");
             this.applySort(this.sort);
         }
 
         if (changes["filter"]) {
-            console.log("change filter", this.filter);
             this.applyFilter();
         }
     }
@@ -105,7 +100,6 @@ export class SearchResultsComponent implements OnInit {
     filterYearUpdate() {
         const year = this.resultsOfSearch.reduce(
             (totals, p) => {
-                console.log(p.date_start, p.date_end);
                 if (p.date_start !== p.date_end) {
                     return ({...totals, [ `${p.date_start}-${p.date_end}`] : (totals[`${p.date_start}-${p.date_end}`] || 0) + 1 });
                 } else {
@@ -119,7 +113,6 @@ export class SearchResultsComponent implements OnInit {
 
     applyFilter() {
         if (this.filter) {
-            console.log("change of filter");
             const arr = this.filter.split("_");
             switch (arr[0]) {
                 case ("type"): {
@@ -149,7 +142,6 @@ export class SearchResultsComponent implements OnInit {
     }
 
     applySort(value: string) {
-        console.log("apply sort");
         if (value === "date") {
             // neues datum zuerst, deshalb andere sortierung
             this.sortedFilteredResults.sort((a, b) => a[this.sortSelected] > b[this.sortSelected] ? -1 : a[this.sortSelected] < b[this.sortSelected] ? 1 : 0);
@@ -199,7 +191,7 @@ export class SearchResultsComponent implements OnInit {
     }
 
     showTextAuthor(): string {
-        return this.showAuthor ? "Alle anzeigen": "Weniger anzeigen";
+        return this.showAuthor ? "Alle anzeigen" : "Weniger anzeigen";
     }
 
     showAllLessFileType() {
@@ -207,7 +199,7 @@ export class SearchResultsComponent implements OnInit {
     }
 
     showTextFileType(): string {
-        return this.showFileType ? "Alle anzeigen": "Weniger anzeigen";
+        return this.showFileType ? "Alle anzeigen" : "Weniger anzeigen";
     }
 
     showAllLessYear() {
@@ -215,7 +207,7 @@ export class SearchResultsComponent implements OnInit {
     }
 
     showTextYear(): string {
-        return this.showYear ? "Alle anzeigen": "Weniger anzeigen";
+        return this.showYear ? "Alle anzeigen" : "Weniger anzeigen";
     }
 
     mimeTypeToSimpleForm(mimeType: string): string {
