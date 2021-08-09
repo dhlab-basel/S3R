@@ -103,7 +103,7 @@ end
 -- @return  (string): generated file name
 -- @return  (errMsg): error if file name could not be generated
 function generateFileName(data)
-    local year, title, identifier, ending, dump, errMsg
+    local year, title, signature, ending, dump, errMsg
 
     if (data["date_start"] == data["date_end"]) then
         year = data["date_start"]
@@ -112,7 +112,7 @@ function generateFileName(data)
     end
 
     -- Replace space with "-"
-    identifier, dump = string.gsub(data["identifier"], " ", "-")
+    signature, dump = string.gsub(data["signature"], " ", "-")
     title, dump = string.gsub(data["title"], " ", "-")
     -- Eliminate "."
     title, dump = string.gsub(title, "%.", "")
@@ -131,5 +131,5 @@ function generateFileName(data)
         errMsg = 500
     end
 
-    return year .. "_" .. title ..  "_" .. identifier .. "." .. ending, errMsg
+    return year .. "_" .. title ..  "_" .. signature .. "." .. ending, errMsg
 end
