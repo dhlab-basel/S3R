@@ -97,10 +97,10 @@ export class CreateResComponent implements OnInit {
         fd.append("collection_id", this.data["colID"]);
 
         // Dublin Core Fields which are not used
-        fd.append("identifier", null);
-        fd.append("source", null);
-        fd.append("relation", null);
-        fd.append("coverage", null);
+        fd.append("identifier", "");
+        fd.append("source", "");
+        fd.append("relation", "");
+        fd.append("coverage", "");
 
         this.apiService.createResource(fd)
             .subscribe((result) => {
@@ -136,37 +136,31 @@ export class CreateResComponent implements OnInit {
 
     getErrorTitle(): string {
         return this.form.get("title").hasError("required") ? "Titel muss eingegeben werden" :
-            this.form.get("title").hasError("pattern") ? "Ungültiger Titel" :
-                "";
+            this.form.get("title").hasError("pattern") ? "Ungültiger Titel" : "";
     }
 
     getErrorDateStart(): string {
         return this.form.get("dateStart").hasError("required") ? "Ungültiges Anfangsjahr" :
             this.form.get("dateStart").hasError("min") ? `Mindestjahr ist ${CreateResComponent.MIN_YEAR}` :
-                this.form.get("dateStart").hasError("max") ? "Ungültiges Anfangsjahr" :
-                    "";
+                this.form.get("dateStart").hasError("max") ? "Ungültiges Anfangsjahr" : "";
     }
 
     getErrorDateEnd(): string {
         return this.form.get("dateEnd").hasError("required") ? "Ungültiges Endjahr" :
                 this.form.get("dateEnd").hasError("min") ? `Mindestjahr ist ${CreateResComponent.MIN_YEAR}` :
-                    this.form.get("dateEnd").hasError("max") ? "Ungültiges Endjahr" :
-                        "";
+                    this.form.get("dateEnd").hasError("max") ? "Ungültiges Endjahr" : "";
     }
 
     getErrorFormat(): string {
-        return this.form.get("format").hasError("required") ? "Bitte Format auswählen" :
-                "";
+        return this.form.get("format").hasError("required") ? "Bitte Format auswählen" : "";
     }
 
     getErrorSignature(): string {
-        return this.form.get("signature").hasError("required") ? "Signature muss eingegeben werden" :
-                "";
+        return this.form.get("signature").hasError("required") ? "Signature muss eingegeben werden" : "";
     }
 
     getErrorRights(): string {
-        return this.form.get("rights").hasError("required") ? "Rechte muss eingegeben werden" :
-            "";
+        return this.form.get("rights").hasError("required") ? "Rechte muss eingegeben werden" : "";
     }
 
 }
