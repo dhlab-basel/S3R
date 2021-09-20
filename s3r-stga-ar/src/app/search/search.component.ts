@@ -13,13 +13,12 @@ export interface FilterOptions {
     styleUrls: ["./search.component.css"]
 })
 export class SearchComponent implements OnInit {
+    private static readonly SEARCH_SEPARATORS = [" ", "+", ",", ";"];
     data: any[];
     noResult: boolean;
     sort: string;
     filter: string;
     searchword: string;
-
-    private static readonly SEARCH_SEPARATORS = [" ", "+", ",", ";"];
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
@@ -51,16 +50,16 @@ export class SearchComponent implements OnInit {
         this.router.navigate(["search", this.searchword], { queryParams: {filter: null} , queryParamsHandling : "merge"});
     }
 
-    replaceSeparators(searchword: string): string {
-        let correctedSearchWord = searchword;
+    replaceSeparators(searchWord: string): string {
+        let correctedSearchWord = searchWord;
         for (const separator of SearchComponent.SEARCH_SEPARATORS) {
             correctedSearchWord = correctedSearchWord.split(separator).join(" ");
         }
         return correctedSearchWord;
     }
 
-    startRequest(searchword: string) {
-        this.apiService.fullSearch(`${searchword}`).subscribe((data) => {
+    startRequest(searchWord: string) {
+        this.apiService.fullSearch(`${searchWord}`).subscribe((data) => {
             this.noResult = false;
 
             if (data["data"].length === 0) {
@@ -68,7 +67,6 @@ export class SearchComponent implements OnInit {
                 this.noResult = true;
             } else {
                 this.data = data["data"];
-                console.log("found more than 1 result");
             }
         }, (error) => console.log(error));
 

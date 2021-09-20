@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { EditColComponent } from './edit-col.component';
+import { EditColComponent } from "./edit-col.component";
 
-describe('EditColComponent', () => {
+describe("EditColComponent", () => {
   let component: EditColComponent;
   let fixture: ComponentFixture<EditColComponent>;
 
@@ -19,7 +19,7 @@ describe('EditColComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

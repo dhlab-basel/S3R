@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { DeleteResComponent } from './delete-res.component';
+import { DeleteResComponent } from "./delete-res.component";
 
-describe('DeleteResComponent', () => {
+describe("DeleteResComponent", () => {
   let component: DeleteResComponent;
   let fixture: ComponentFixture<DeleteResComponent>;
 
@@ -19,7 +19,7 @@ describe('DeleteResComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

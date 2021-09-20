@@ -110,8 +110,8 @@ export class ApiService {
         return this.httpClient.delete(`${ApiService.API_URL}/collections/${id}`, httpOptions);
     }
 
-    fullSearch(searchword: string): Observable<any> {
-        const params = { "searchword" : searchword};
+    fullSearch(searchWord: string): Observable<any> {
+        const params = { "searchword" : searchWord};
         return this.httpClient.get(`${ApiService.API_URL}/search/full`, {params: params});
     }
 

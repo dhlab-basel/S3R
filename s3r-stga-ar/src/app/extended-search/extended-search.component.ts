@@ -101,9 +101,6 @@ export class ExtendedSearchComponent implements OnInit {
 
         this.route.queryParams
             .subscribe((queryParams: Params) => {
-                console.log("change query params 1", queryParams["sw1"], queryParams["dc1"], queryParams["cp1"], this.searchWord1, this.sort, this.filter);
-                console.log("change query params 1", queryParams["sw2"], queryParams["dc2"], queryParams["cp2"], this.searchWord2, this.sort, this.filter);
-
                 let parSet1 = false;
                 let parSet2 = false;
                 let parSet3 = false;

@@ -11,7 +11,7 @@ export class File {
 
     mimeTypeToSimpleForm(mimeType: string): string | null {
         let simpleForm = null;
-        for (let i of this.validMimeTypes) {
+        for (const i of this.validMimeTypes) {
             if (mimeType === i[0]) {
                 simpleForm = i[1];
                 break;
@@ -32,7 +32,7 @@ export class File {
     }
 
     getAllSimpleForms(): string[] {
-        let simpleForms = [];
+        const simpleForms = [];
         for (const i of this.validMimeTypes) {
             simpleForms.push(i[1]);
         }
