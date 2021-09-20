@@ -40,7 +40,7 @@ export class ApiService {
     }
 
     getResourcePreview(id: number) {
-        return this.httpClient.get(`${ApiService.API_URL}/resources/${id}/preview/content`, {responseType: "blob", observe: "response"})
+        return this.httpClient.get(`${ApiService.API_URL}/resources/${id}/preview/content`, {responseType: "blob", observe: "response"});
     }
 
     getResPreviewURL(id: number): string {
