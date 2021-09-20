@@ -5,9 +5,7 @@
                 <img *ngIf="!menuIsOpen" class="hamburger" (click)="actionMenu()" fxFlexAlign="start" src="./assets/hamburger_white.png"/>
                 <img *ngIf="menuIsOpen" class="hamburger" (click)="actionMenu()" fxFlexAlign="start" src="./assets/close_white.png"/>
             </div>
-            <div class="container-logo" fxFlex=" 1 1 auto">
-                <img class="logo" src="./assets/dhlab-logo.png"/>
-            </div>
+            <div class="container-logo" fxFlex=" 1 1 auto"></div>
             <div fxShow.gt-xs="false">
                 <a (click)="openLoginDialog()">
                     <img class="login" fxFlexAlign="end" src="./assets/login_white.png"/>
