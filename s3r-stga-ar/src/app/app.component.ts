@@ -4,6 +4,7 @@ import {Subscription} from "rxjs";
 import {LoginService} from "./services/login.service";
 import {MatDialog, MatDialogConfig} from "@angular/material";
 import {LoginDialogComponent} from "./dialogbox/login-dialog/login-dialog.component";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: "app-root",
@@ -11,10 +12,13 @@ import {LoginDialogComponent} from "./dialogbox/login-dialog/login-dialog.compon
     styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
+    private static readonly TITLE = "Stiftsbibliothek";
     watcher: Subscription;
     menuIsOpen = false;
 
-    constructor(public media: ObservableMedia, private loginService: LoginService, private loginDialog: MatDialog,) {
+    constructor(public media: ObservableMedia, private loginService: LoginService, private loginDialog: MatDialog, private titleService: Title) {
+        titleService.setTitle(AppComponent.TITLE);
+
         this.watcher = media.subscribe((change: MediaChange) => {
             if (change.mqAlias !== "xs") {
                 this.menuIsOpen = true;
