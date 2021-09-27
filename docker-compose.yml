@@ -11,6 +11,10 @@ services:
     networks:
       - s3r-net
     container_name: stga
+    labels:
+      - traefik.backend=stga
+      - traefik.frontend.rule=Host:app.sw-zw-s3r-02.dhlab-basel.ch
+      - traefik.docker.network=s3r-net
 
   sipi:
     image: dhlabbasel/sipi:develop
@@ -29,6 +33,14 @@ services:
     restart: unless-stopped
     networks:
       - s3r-net
+    labels:
+      - traefik.backend=sipi
+      - traefik.frontend.rule=Host:sipi.sw-zw-s3r-02.dhlab-basel.ch
+      - traefik.docker.network=s3r-net
 
 networks:
   s3r-net:
+    external:
+      name: traefik_proxyNet
+      # when running this on your own machine, run 'docker network create --driver bridge traefik_proxyNet'.
+      # This creates the external network where the traefik container would reside on the deployment target.
