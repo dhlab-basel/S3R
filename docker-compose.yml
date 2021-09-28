@@ -13,8 +13,9 @@ services:
     container_name: stga
     labels:
       - traefik.backend=stga
-      - traefik.frontend.rule=Host:app.sw-zw-s3r-02.dhlab-basel.ch
+      - traefik.frontend.rule=Host:app.sw-zh-s3r-02.dhlab-basel.ch
       - traefik.docker.network=s3r-net
+      - traefik.port=8080
 
   sipi:
     image: dhlabbasel/sipi:develop
@@ -35,7 +36,7 @@ services:
       - s3r-net
     labels:
       - traefik.backend=sipi
-      - traefik.frontend.rule=Host:sipi.sw-zw-s3r-02.dhlab-basel.ch
+      - traefik.frontend.rule=Host:sipi.sw-zh-s3r-02.dhlab-basel.ch
       - traefik.docker.network=s3r-net
 
 networks:
